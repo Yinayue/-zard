@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UsersMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Users">
+		<id column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="phone_number" property="phoneNumber" />
+		<result column="email" property="email" />
+		<result column="status" property="status" />
+		<result column="password" property="password" />
+		<result column="delete_flag" property="deleteFlag" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, phone_number AS phoneNumber, email, status, password, delete_flag AS deleteFlag
+    </sql>
+
+
+	<select id="selectAll" resultType="com.example.demo.entity.Users">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM
+		users
+	</select>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.HousesMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="com.example.demo.entity.Houses">
+		<id column="id" property="id" />
+		<result column="seller_id" property="sellerId" />
+		<result column="launch_date" property="launchDate" />
+		<result column="address" property="address" />
+		<result column="size" property="size" />
+		<result column="price" property="price" />
+		<result column="has_been_sold" property="hasBeenSold" />
+		<result column="current_holder_id" property="currentHolderId" />
+		<result column="second_hand" property="secondHand" />
+		<result column="rooms_type" property="roomsType" />
+		<result column="floor" property="floor" />
+		<result column="age" property="age" />
+		<result column="decoration" property="decoration" />
+		<result column="house_type" property="houseType" />
+		<result column="property" property="property" />
+		<result column="face" property="face" />
+		<result column="remarks" property="remarks" />
+		<result column="delete_flag" property="deleteFlag" />
+	</resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, seller_id AS sellerId, launch_date AS launchDate, address, size, price, has_been_sold AS hasBeenSold, current_holder_id AS currentHolderId, second_hand AS secondHand, rooms_type AS roomsType, floor, age, decoration, house_type AS houseType, property, face, remarks, delete_flag AS deleteFlag
+    </sql>
+	
+	<select id="selectAll" resultType="com.example.demo.entity.Houses">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM
+		houses
+	</select>
+
+</mapper>
