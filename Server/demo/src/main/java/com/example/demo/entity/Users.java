@@ -29,6 +29,9 @@ public class Users extends Model<Users> {
 	@TableField("delete_flag")
 	private Integer deleteFlag;
 
+	public Users(){
+
+	}
 
 	public Integer getId() {
 		return id;

@@ -36,4 +36,66 @@
 		houses
 	</select>
 
+	<select id="select" resultType="com.example.demo.entity.Houses" parameterType="com.example.demo.entity.Houses">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM houses
+		<where>
+			<if test="sellerId!=null and sellerId!=''">
+				seller_id = #{sellerId}
+			</if>
+			<if test="id!=null and id!=''">
+				AND id = #{id}
+			</if>
+			<if test="launchDate!=null and launchDate!=''">
+				AND launch_date = #{launchDate}
+			</if>
+			<if test="address!=null and address!=''">
+				AND address = #{address}
+			</if>
+			<if test="size!=null and size!=''">
+				AND size = #{size}
+			</if>
+			<if test="price!=null and price!=''">
+				AND price = #{price}
+			</if>
+			<if test="hasBeenSold!=null and hasBeenSold!=''">
+				AND has_been_sold = #{hasBeenSold}
+			</if>
+			<if test="currentHolderId!=null and currentHolderId!=''">
+				AND current_holder_id = #{currentHolderId}
+			</if>
+			<if test="secondHand!=null and secondHand!=''">
+				AND second_hand = #{secondHand}
+			</if>
+			<if test="roomsType!=null and roomsType!=''">
+				AND rooms_type = #{roomsType}
+			</if>
+			<if test="floor!=null and floor!=''">
+				AND floor = #{floor}
+			</if>
+			<if test="age!=null and age!=''">
+				AND age = #{age}
+			</if>
+			<if test="decoration!=null and decoration!=''">
+				AND decoration = #{decoration}
+			</if>
+			<if test="houseType!=null and houseType!=''">
+				AND house_type = #{houseType}
+			</if>
+			<if test="property!=null and property!=''">
+				AND property = #{property}
+			</if>
+			<if test="face!=null and face!=''">
+				AND face = #{face}
+			</if>
+			<if test="remarks!=null and remarks!=''">
+				AND remarks = #{remarks}
+			</if>
+			<if test="deleteFlag!=null and deleteFlag!=''">
+				AND delete_flag = #{deleteFlag}
+			</if>
+		</where>
+	</select>
+
 </mapper>

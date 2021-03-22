@@ -37,7 +37,6 @@ public class CorsFilter implements Filter {
                 + "content-Type,origin,x-requested-with,content-type,accept,authorization,token,id,X-Custom-Header,X-Cookie,Connection,User-Agent,Cookie,*");
         response.setHeader("Access-Control-Request-Headers", "Authorization,Origin, X-Requested-With,content-Type,Accept");
         response.setHeader("Access-Control-Expose-Headers", "*");
-
         chain.doFilter(req, response);
     }
 

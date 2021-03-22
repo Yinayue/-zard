@@ -2,7 +2,8 @@ package com.example.demo.service;
 
 import com.example.demo.entity.Preference;
 import com.baomidou.mybatisplus.service.IService;
-import com.example.demo.entity.Users;
+
+import java.util.List;
 
 /**
  * <p>
@@ -10,7 +11,8 @@ import com.example.demo.entity.Users;
  * </p>
  *
  * @author Ye Suyuan
- * @since 2021-03-04
+ * @since 2021-03-17
  */
 public interface IPreferenceService extends IService<Preference> {
+	public List<Preference> select(Preference preference);
 }

@@ -6,15 +6,35 @@
 	<resultMap id="BaseResultMap" type="com.example.demo.entity.Preference">
 		<id column="id" property="id" />
 		<result column="buyer_id" property="buyerId" />
-		<result column="price" property="price" />
-		<result column="address" property="address" />
-		<result column="size" property="size" />
-		<result column="delete_flag" property="deleteFlag" />
+		<result column="house_id" property="houseId" />
+		<result column="score" property="score" />
 	</resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, buyer_id AS buyerId, price, address, size, delete_flag AS deleteFlag
+        id, buyer_id AS buyerId, house_id AS houseId, score
     </sql>
 
+	
+	<select id="select" resultType="com.example.demo.entity.Preference" parameterType="com.example.demo.entity.Preference">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM
+		preference
+		<where>
+			<if test="buyerId!=null and buyerId!=''">
+				buyer_id = #{buyerId}
+			</if>
+			<if test="houseId!=null and houseId!=''">
+				AND house_id = #{houseId}
+			</if>
+			<if test="score!=null and score!=''">
+				AND score = #{score}
+			</if>
+			<if test="id!=null and id!=''">
+				AND id = #{id}
+			</if>
+		</where>
+	</select>
+	
 </mapper>

@@ -18,4 +18,6 @@ import java.util.List;
 public interface IUsersService extends IService<Users> {
 	public boolean insertUser(Users user);
 	public List<Users> selectAll();
+	public List<Users> selectUsers(Users users);
+	public List<Users> login(String name, String password);
 }

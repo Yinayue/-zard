@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
+
 import com.baomidou.mybatisplus.enums.IdType;
-import java.math.BigDecimal;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.activerecord.Model;
@@ -13,7 +13,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author Ye Suyuan
- * @since 2021-03-04
+ * @since 2021-03-17
  */
 public class Preference extends Model<Preference> {
 
@@ -23,11 +23,9 @@ public class Preference extends Model<Preference> {
 	private Integer id;
 	@TableField("buyer_id")
 	private Integer buyerId;
-	private BigDecimal price;
-	private String address;
-	private Double size;
-	@TableField("delete_flag")
-	private Integer deleteFlag;
+	@TableField("house_id")
+	private Integer houseId;
+	private Integer score;
 
 
 	public Integer getId() {
@@ -48,39 +46,21 @@ public class Preference extends Model<Preference> {
 		return this;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public Integer getHouseId() {
+		return houseId;
 	}
 
-	public Preference setPrice(BigDecimal price) {
-		this.price = price;
+	public Preference setHouseId(Integer houseId) {
+		this.houseId = houseId;
 		return this;
 	}
 
-	public String getAddress() {
-		return address;
+	public Integer getScore() {
+		return score;
 	}
 
-	public Preference setAddress(String address) {
-		this.address = address;
-		return this;
-	}
-
-	public Double getSize() {
-		return size;
-	}
-
-	public Preference setSize(Double size) {
-		this.size = size;
-		return this;
-	}
-
-	public Integer getDeleteFlag() {
-		return deleteFlag;
-	}
-
-	public Preference setDeleteFlag(Integer deleteFlag) {
-		this.deleteFlag = deleteFlag;
+	public Preference setScore(Integer score) {
+		this.score = score;
 		return this;
 	}
 

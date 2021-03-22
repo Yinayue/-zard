@@ -15,4 +15,5 @@ import java.util.List;
  */
 public interface IHousesService extends IService<Houses> {
 	public List<Houses> selectAll();
+	public List<Houses> select(Houses houses);
 }

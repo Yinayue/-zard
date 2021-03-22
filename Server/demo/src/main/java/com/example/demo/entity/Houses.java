@@ -25,7 +25,7 @@ public class Houses extends Model<Houses> {
 	@TableField("seller_id")
 	private Integer sellerId;
 	@TableField("launch_date")
-	private Date launchDate;
+	private String launchDate;
 	private String address;
 	private Double size;
 	private BigDecimal price;
@@ -67,11 +67,11 @@ public class Houses extends Model<Houses> {
 		return this;
 	}
 
-	public Date getLaunchDate() {
+	public String getLaunchDate() {
 		return launchDate;
 	}
 
-	public Houses setLaunchDate(Date launchDate) {
+	public Houses setLaunchDate(String launchDate) {
 		this.launchDate = launchDate;
 		return this;
 	}

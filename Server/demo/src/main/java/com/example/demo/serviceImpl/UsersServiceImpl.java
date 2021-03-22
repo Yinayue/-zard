@@ -38,4 +38,16 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
     public List<Users> selectAll() {
         return usersMapper.selectAll();
     }
+
+    @Override
+    public List<Users> selectUsers(Users users) {
+        return usersMapper.selectUsers(users);
+    }
+
+    @Override
+    public List<Users> login(String name, String password) {
+        return usersMapper.login(name,password);
+    }
+
+
 }

@@ -27,4 +27,12 @@ public class HousesServiceImpl extends ServiceImpl<HousesMapper, Houses> impleme
     public List<Houses> selectAll() {
         return housesMapper.selectAll();
     }
+
+    @Override
+    public List<Houses> select(Houses houses) {
+        return housesMapper.select(houses);
+    }
+
+
+
 }
