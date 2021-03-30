@@ -1,0 +1,82 @@
+﻿<style>
+    span{display: inline-block;
+        cursor: pointer; padding: 8px; border: 1px solid #999;}
+    span.active{
+        background-color: #c14d00;
+    }
+</style>
+
+<div id="direction">
+    <strong>方向：</strong>
+    <span class="active">全部</span>
+    <span>前端</span>
+    <span>后台</span>
+    <span>数据库</span>
+    <span>UI设计</span>
+</div>
+<div id="category">
+    <strong>分类：</strong>
+    <span class="active">全部</span>
+    <span>HTML/CSS</span>
+    <span>JavaScript</span>
+    <span>jQuery</span>
+    <span>Python</span>
+    <span>Java</span>
+    <span>AngularJS</span>
+</div>
+<div id="type">
+    <strong>类型：</strong>
+    <span class="active">全部</span>
+    <span>基础</span>
+    <span>案例</span>
+    <span>框架</span>
+    <span>工具</span>
+</div>
+<strong>返回值：</strong>
+<p id="Res"></p>
+
+<script>
+    var dSpan = document.getElementById('direction').getElementsByTagName('span');
+    var cSpan = document.getElementById('category').getElementsByTagName('span');
+    var tSpan = document.getElementById('type').getElementsByTagName('span');
+    var aSpan = document.getElementsByTagName('span');
+    var oDirection = document.getElementById('direction');
+    var oCategory = document.getElementById('category');
+    var oType = document.getElementById('type');
+    var oRes = document.getElementById('Res');
+    dSpan[0].className = 'active';
+    cSpan[0].className = 'active';
+    tSpan[0].className = 'active';
+    for(var i=0; i<aSpan.length; i++){
+        aSpan[i].onclick = function(){
+            var siblings = this.parentNode.children;
+            for(var j=0; j<siblings.length; j++){
+                siblings[j].className = '';
+            }
+            this.className = 'active';
+            if(this.parentNode == oDirection || this.parentNode == oCategory || this.parentNode == oType){
+                returnRes();
+            }
+        }
+    }
+
+    function returnRes(){
+        var o1 = 0, o2 = 0, o3 = 0;
+        for(var i=0; i<dSpan.length; i++){
+            if(dSpan[i].className == 'active'){
+                o1 = i;
+            }
+        }
+        for(var i=0; i<cSpan.length; i++){
+            if(cSpan[i].className == 'active'){
+                o2 = i;
+            }
+        }
+        for(var i=0; i<tSpan.length; i++){
+            if(tSpan[i].className == 'active'){
+                o3 = i;
+            }
+        }
+        oRes.innerHTML = (dSpan[o1].innerHTML + "," + cSpan[o2].innerHTML + "," + tSpan[o3].innerHTML);
+    }
+</script>

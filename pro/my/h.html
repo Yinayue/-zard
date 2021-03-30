@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="../post.js"></script>
+    <script src="../myAjax2.js"></script>
+    <script type="text/javascript" src="jquery-3.5.1.min.js"> </script>
+    <script>
+        $(document).ready(function(){
+          $("button").unbind("click").click(function(){
+              ajax({
+                    url:"http://175.24.51.64:8081/users/register",
+                    data:{  "name":"saw",
+                            "phoneNumber":"121233",
+                            "email":"71@qq.com",
+                            "password":"1",
+                            "status":1,
+                            "deleteFlag":1
+
+                    },type:"POST",
+                    timeout:3000,
+                    success:function (xhr) {
+                        console.log("hao");
+                    },
+                    error:function (xhr) {
+                        alert("shiba")
+                    }
+              })
+          });
+});
+
+    </script>
+</head>
+<body>
+<div id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+<button type="button" id="but">修改内容</button>
+{% if error %}
+    <p id="error" class="text-danger">{{ error.data }}</p>
+{% endif %}
+
+</body>
+
+</html>
