@@ -51,6 +51,12 @@ public class JsonResult<T> {
         return result.toJSONString();
     }
 
+    public static String error(String msg){
+        result.put("code",400);
+        result.put("msg",msg);
+        return result.toJSONString();
+    }
+
     /**
      * 失败返回结果
      */
