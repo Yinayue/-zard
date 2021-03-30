@@ -2,15 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Houses;
 import com.example.demo.service.IHousesService;
-import com.example.demo.util.JsonResult;
+import com.example.demo.util.basic.JsonResult;
+import com.example.demo.util.search.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,6 +70,28 @@ public class HousesController {
     public String update(Houses houses){
         try{
             return JsonResult.success(iHousesService.updateById(houses));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @RequestMapping(value = "search",method = RequestMethod.POST)
+    public String search(String queryStr){
+        try{
+            Operation operation = new Operation();
+            operation.buildIndex();
+            String[] query=queryStr.split(",");
+            List<String> addresses = operation.getAddresses(query);
+            List<List<Houses>> result = new ArrayList<>();
+            for(String address : addresses){
+                Houses temp = new Houses();
+                temp.setAddress(address);
+                result.add(iHousesService.select(temp));
+            }
+            //在这里定义一下要search的query，数组形式
+            return JsonResult.success(result);
+
         }catch (Exception e){
             e.printStackTrace();
             return JsonResult.error();
