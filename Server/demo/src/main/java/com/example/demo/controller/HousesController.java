@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Houses;
+import com.example.demo.entity.Users;
 import com.example.demo.service.IHousesService;
+import com.example.demo.service.IUsersService;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.search.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class HousesController {
     @Autowired
     IHousesService iHousesService;
 
+    @Autowired
+    IUsersService iUsersService;
+
     @RequestMapping(value="/selectAll", method= RequestMethod.GET)
     public String select(){
         try {
@@ -48,7 +53,19 @@ public class HousesController {
             Date date = new Date(System.currentTimeMillis());
             houses.setLaunchDate(formatter.format(date));
             houses.setDeleteFlag(0);
+
+            //get seller
+            Users temp = new Users();
+            temp.setId(houses.getId());
+            Users seller = iUsersService.selectUsers(temp).get(0);
+            //check score
+            if(seller.getScore()>=5){//have enough score
+                seller.setScore(seller.getScore()-5);
+            }else{
+                return JsonResult.error("积分不足");
+            }
             iHousesService.insert(houses);
+            iUsersService.updateById(seller);
             return JsonResult.success("success");
         }catch (Exception e){
             e.printStackTrace();

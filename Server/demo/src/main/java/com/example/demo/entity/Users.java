@@ -28,6 +28,7 @@ public class Users extends Model<Users> {
 	private String password;
 	@TableField("delete_flag")
 	private Integer deleteFlag;
+	private Integer score;
 
 	public Users(){
 
@@ -94,6 +95,14 @@ public class Users extends Model<Users> {
 	public Users setDeleteFlag(Integer deleteFlag) {
 		this.deleteFlag = deleteFlag;
 		return this;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
 	}
 
 	@Override

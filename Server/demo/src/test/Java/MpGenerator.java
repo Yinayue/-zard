@@ -98,7 +98,7 @@ public class MpGenerator {
         pc.setParent("com.example");
         pc.setModuleName("demo");
         pc.setController("controler");
-        pc.setEntity("com/example/demo/entity");
+        pc.setEntity("entity");
         pc.setMapper("mapper");
         pc.setService("service");
         pc.setServiceImpl("serviceImpl");
