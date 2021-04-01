@@ -102,17 +102,17 @@
             <version>2.2.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>IK-Analyzer</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>IK-Analyzer</artifactId>-->
+<!--            <version>0.0.1</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers</artifactId>
-            <version>8.8.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.lucene</groupId>-->
+<!--            <artifactId>lucene-analyzers</artifactId>-->
+<!--            <version>8.8.1</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.lucene</groupId>
