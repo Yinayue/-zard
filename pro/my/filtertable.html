@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html class="no-js" lang="">
 
 <head>
@@ -11,6 +11,8 @@
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
     <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -73,6 +75,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -319,108 +322,113 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="nk-int-mk sl-dp-mn">
-                                <h2>Basic Example</h2>
+                                <h2>Address</h2>
                             </div>
                             <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <option>Drama</option>
-                                    <option>Cariska</option>
-                                    <option>Cheriska</option>
-                                    <option>Malias</option>
-                                    <option>Kamines</option>
-                                    <option>Austranas</option>
+                                <select class="selectpicker" id="filterregion">
+                                    <option value="r1">密云区</option>
+                                    <option value="r2">延庆区</option>
+                                    <option value="r3">朝阳区</option>
+                                    <option value="r4">丰台区</option>
+                                    <option value="r5">石景山区</option>
+                                    <option value="r6">海淀区</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
-                                <h2>Option Groups</h2>
+                            <div class="nk-int-mk sl-dp-mn">
+                                <h2>RoomsType</h2>
                             </div>
                             <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <optgroup label="Picnic">
-                                        <option>Drama</option>
-                                        <option>Cariska</option>
-                                        <option>Cheriska</option>
-                                    </optgroup>
-                                    <optgroup label="Camping">
-                                        <option>Malias</option>
-                                        <option>Kamines</option>
-                                        <option>Austranas</option>
-                                    </optgroup>
+                                <select class="selectpicker" id="filterroomtype">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
-                                <h2>Disabled Options</h2>
+                            <div class="nk-int-mk sl-dp-mn">
+                                <h2>Floor</h2>
                             </div>
-                            <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <option disabled="disabled">Drama</option>
-                                    <option>Cariska</option>
-                                    <option>Kamines</option>
-                                    <option disabled="disabled">Malias</option>
-                                    <option>Cheriska</option>
+                            <div class="chosen-select-act fm-cmp-mg">
+                                <select class="chosen" id="filterfloor" data-placeholder="Choose a Floor...">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="11">11</option>
+                                    <option value="12">12</option>
+                                    <option value="13">13</option>
+                                    <option value="14">14</option>
+                                    <option value="15">15</option>
+                                    <option value="16">16</option>
+                                    <option value="17">17</option>
+                                    <option value="18">18</option>
+                                    <option value="19">19</option>
+                                    <option value="20">20</option>
+                                    <option value="21">21</option>
+                                    <option value="22">22</option>
+                                    <option value="23">23</option>
+                                    <option value="24">24</option>
+                                    <option value="25">25</option>
+                                    <option value="26">26</option>
+                                    <option value="27">27</option>
+                                    <option value="28">28</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
-                                <h2>Disabled Options</h2>
+                            <div class="nk-int-mk sl-dp-mn">
+                                <h2>Age</h2>
                             </div>
                             <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <option disabled="disabled">Drama</option>
-                                    <option>Cariska</option>
-                                    <option>Kamines</option>
-                                    <option disabled="disabled">Malias</option>
-                                    <option>Cheriska</option>
+                                <select class="selectpicker" id="filterage">
+                                    <option value="0">New</option>
+                                    <option value="2">Under 2 years</option>
+                                    <option value="5">2-5 years</option>
+                                    <option value="10">More than 5 years</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                    <br>
+                        <br>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="nk-int-mk sl-dp-mn">
-                                <h2>Basic Example</h2>
+                                <h2>Decoration</h2>
                             </div>
                             <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <option>Drama</option>
-                                    <option>Cariska</option>
-                                    <option>Cheriska</option>
-                                    <option>Malias</option>
-                                    <option>Kamines</option>
-                                    <option>Austranas</option>
+                                <select class="selectpicker" id="filterdecoration">
+                                    <option value="1">Ordinary</option>
+                                    <option value="2">Refined</option>
+                                    <option value="3">Luxurious</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                            <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
-                                <h2>Option Groups</h2>
+                            <div class="nk-int-mk sl-dp-mn">
+                                <h2>HouseType</h2>
                             </div>
                             <div class="bootstrap-select fm-cmp-mg">
-                                <select class="selectpicker">
-                                    <optgroup label="Picnic">
-                                        <option>Drama</option>
-                                        <option>Cariska</option>
-                                        <option>Cheriska</option>
-                                    </optgroup>
-                                    <optgroup label="Camping">
-                                        <option>Malias</option>
-                                        <option>Kamines</option>
-                                        <option>Austranas</option>
-                                    </optgroup>
+                                <select class="selectpicker" id="filterhousetype">
+                                    <option value="1">Bungalow</option>
+                                    <option value="2">Villa</option>
+                                    <option value="3">Apartment</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div class="nk-int-mk sl-dp-mn sm-res-mg-t-10">
                                 <h2>Disabled Options</h2>
@@ -437,35 +445,35 @@
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                             <div >
-                                <button class="btn btn-default btn-icon-notika" style="width:220px;height:60px" id="fsearch" onclick="f()"><i class="notika-icon notika-search"></i> Search</button>
+                                <button class="btn btn-default btn-icon-notika" style="width:220px;height:60px" id="fsearch" onclick="filtersearch()"><i class="notika-icon notika-search"></i> Search</button>
 
                             </div>
                         </div>
 
                     </div>
-<!--                    <div class="basic-tb-hd">-->
-<!--&lt;!&ndash;                        <h2>Basic Example</h2>&ndash;&gt;-->
+                    <!--                    <div class="basic-tb-hd">-->
+                    <!--&lt;!&ndash;                        <h2>Basic Example</h2>&ndash;&gt;-->
 
-<!--                        <div class="chosen-select-act fm-cmp-mg">-->
-<!--                            <select class="chosen" multiple data-placeholder="Choose some Tags...">-->
-<!--                                <option value="United States">Ordinary decoration</option>-->
-<!--                                <option value="United Kingdom">Refined decoration</option>-->
-<!--                                <option value="Afghanistan">Luxurious decoration</option>-->
-<!--                                <option value="Aland Islands">bungalow</option>-->
-<!--                                <option value="Albania">villa</option>-->
-<!--                                <option value="Algeria">apartment</option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-
-
+                    <!--                        <div class="chosen-select-act fm-cmp-mg">-->
+                    <!--                            <select class="chosen" multiple data-placeholder="Choose some Tags...">-->
+                    <!--                                <option value="United States">Ordinary decoration</option>-->
+                    <!--                                <option value="United Kingdom">Refined decoration</option>-->
+                    <!--                                <option value="Afghanistan">Luxurious decoration</option>-->
+                    <!--                                <option value="Aland Islands">bungalow</option>-->
+                    <!--                                <option value="Albania">villa</option>-->
+                    <!--                                <option value="Algeria">apartment</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
 
 
-<!--                        </div>-->
+
+
+                    <!--                        </div>-->
                     <div class="table-responsive">
                         <table id="data-table-basic" class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Type</th>
+<!--                                <th>Type</th>-->
                                 <th>Address</th>
                                 <th>Age</th>
                                 <th>Start date</th>
@@ -474,33 +482,23 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Beijing Lingxu</td>
-                                <td>central</td>
-                                <td>5 years</td>
-                                <td>2021/01/25</td>
-                                <td>$320,800</td>
-                                <th>123</th>
-                            </tr>
-                            <tr>
-                                <td>Beijing Pingxu</td>
-                                <td>countryside</td>
-                                <td>1 year</td>
-                                <td>2019/04/25</td>
-                                <td>$720,800</td>
-                                <th>223</th>
-                            </tr>
+<!--                            <tr>-->
+<!--                                <td>Beijing Lingxu</td>-->
+<!--                                <td>central</td>-->
+<!--                                <td>5 years</td>-->
+<!--                                <td>2021/01/25</td>-->
+<!--                                <td>$320,800</td>-->
+<!--                                <th>123</th>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>Beijing Pingxu</td>-->
+<!--                                <td>countryside</td>-->
+<!--                                <td>1 year</td>-->
+<!--                                <td>2019/04/25</td>-->
+<!--                                <td>$720,800</td>-->
+<!--                                <th>223</th>-->
+<!--                            </tr>-->
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Price</th>
-                                <th>Square metres</th>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -522,127 +520,55 @@
     </div>
 </div>
 <script>
-    window.onload=function(ev){
-        $.ajax({
-
-            type: "GET",
-            // 175.24.51.64:8081/users/login?name=Pw&password=12
-            url:"http://175.24.51.64:8081/houses/selectAll",
-
-            datatype : "json",
-            success: function(msg){
-                var data = JSON.parse(msg);
-                $.each(data['data'], function(i, item) {
-                    var houseType = item.houseType;
-                    var address = item.address;
-                    var age = item.age;
-                    var launchDate = item.launchDate;
-                    var price = item.price;
-                    var size = item.size;
-                    $("#data-table-basic").append(
-                        "<tr>"+
-                        "<td>"
-                        + houseType
-                        + "<td>"
-                        + address
-                        + "<td>"
-                        + age
-                        + "<td>"
-                        + launchDate
-                        + "<td>"
-                        + "$"+price
-                        + "<td>"
-                        + size
-                        + "<td>"
-                        + "</tr>"
-                    );
-                });
-
-
-            },
-            error:function (msg) {
-
-                console.log( );
-
+    function filtersearch() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
-
         });
-    }
-</script>
-<script>
-    function f(){
+        var floorobj = document.getElementById("filterfloor"); //定位id
+        var floorindex = floorobj.selectedIndex; // 选中索引
+        var floor = floorobj.options[floorindex].value; // 选中值
 
-        var address = document.getElementById("regist_user").value;
+        var roomtypeobj = document.getElementById("filterroomtype"); //定位id
+        var roomtypeindex = roomtypeobj.selectedIndex; // 选中索引
+        var roomsType = roomtypeobj.options[roomtypeindex].value; // 选中值
 
-        if(address!=""){
-            address="address="+address
-        }
-        $.ajax({
+        var addressobj = document.getElementById("filterregion"); //定位id
+        var addressindex = addressobj.selectedIndex; // 选中索引
+        var address = addressobj.options[addressindex].value; // 选中值
 
-            type: "POST",
-            // 175.24.51.64:8081/users/login?name=Pw&password=12
-            url:"http://175.24.51.64:8081/houses/select",
+        var houseTypeobj = document.getElementById("filterhousetype"); //定位id
+        var houseTypeindex = houseTypeobj.selectedIndex; // 选中索引
+        var houseType = houseTypeobj.options[houseTypeindex].value; // 选中值\
 
-            data: address,
-            datatype : "json",
-            success: function(msg){
-                var data = JSON.parse(msg);
-                $.each(data['data'], function(i, item) {
-                    var houseType = item.houseType;
-                    var address = item.address;
-                    var age = item.age;
-                    var launchDate = item.launchDate;
-                    var price = item.price;
-                    var size = item.size;
-                    $("#data-table-basic").append(
-                        "<tr>"+
-                        "<td>"
-                        + houseType
-                        + "<td>"
-                        + address
-                        + "<td>"
-                        + age
-                        + "<td>"
-                        + launchDate
-                        + "<td>"
-                        + "$"+price
-                        + "<td>"
-                        + size
-                        + "<td>"
-                        + "</tr>"
-                    );
-                    console.log("1")
-                });
+        var decorationobj = document.getElementById("filterdecoration"); //定位id
+        var decorationindex = decorationobj.selectedIndex; // 选中索引
+        var decoration = decorationobj.options[decorationindex].value; // 选中值
 
-                console.log( "Data Saved: " + data );
-                if(data['msg']==='failed'){
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-                else{
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
+        var ageobj = document.getElementById("filterage"); //定位id
+        var ageindex = ageobj.selectedIndex; // 选中索引
+        var age = decorationobj.options[ageindex].value; // 选中值
+        var table = $('#data-table-basic').DataTable();
+        console.log("address=" + address+
+            "&roomsType=" + roomsType
+            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType);
+        var str= "address=" + address+
+            "&roomsType=" + roomsType
+            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType;
+        table.ajax.url("http://175.24.51.64:8081/houses/select?"+str).load();
 
-            },
-            error:function (msg) {
 
-                console.log( );
 
-            }
 
-        });
 
     }
-
 </script>
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
 <!-- bootstrap JS
@@ -734,7 +660,10 @@
     ============================================ -->
 <script src="../js/main.js"></script>
 
-
+<!-- Data Table JS
+       ============================================ -->
+<script src="../js/data-table/jquery.dataTables.min.js"></script>
+<script src="../js/data-table/data-table-act.js"></script>
 </body>
 
 </html>

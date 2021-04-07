@@ -9,8 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
 		============================================ -->
-    <!-- Google Fonts
-		============================================ -->
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
@@ -23,7 +21,7 @@
 
     <!-- font awesome CSS
 		============================================ -->
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
+<!--    <link rel="stylesheet" href="../css/font-awesome.min.css">-->
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/owl.carousel.css">
@@ -39,9 +37,6 @@
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/normalize.css">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- Notika icon CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/notika-custom-icon.css">
@@ -57,12 +52,11 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="style.css">
-    <!-- responsive CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/responsive.css">
+
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -303,60 +297,144 @@
                                             <div class="cp-img-anal">
                                                 <!--Select begin-->
                                                 <div class="row">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2> Choose your house type:</h2>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <div class="nk-int-mk sl-dp-mn">
+                                                            <h2>Address</h2>
+                                                        </div>
+                                                        <div class="bootstrap-select fm-cmp-mg">
+                                                            <select class="selectpicker" id="address">
+<!--                                                                密云区，延庆区，朝阳区，丰台区，石景山区，海淀区，门头沟区，房山区，通州区，顺义区，昌平区，大兴区，怀柔区，平谷区，东城区，西城区-->
+                                                                <option value="r1">密云区</option>
+                                                                <option value="r2">延庆区</option>
+                                                                <option value="r3">朝阳区</option>
+                                                                <option value="r4">丰台区</option>
+                                                                <option value="r5">石景山区</option>
+                                                                <option value="r6">海淀区</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <div class="nk-int-mk sl-dp-mn">
+                                                        <h2>Size</h2>
+                                                    </div>
+                                                        <div class="form-group ic-cmp-int form-elet-mg">
+                                                            <div class="form-ic-cmp">
+                                                                <i class="notika-icon notika-credit-card"></i>
+                                                            </div>
+                                                            <div class="nk-int-st">
+                                                                <input type="number" class="form-control" placeholder="Size" id="size">
+                                                            </div>
+                                                        </div>
                                                 </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Bungalow</option>
-                                                        <option>Villa</option>
-                                                        <option>Apartment</option>
-                                                    </select>
-                                                </div>
-
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Decoration:</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Ordinary</option>
-                                                        <option>Refined</option>
-                                                        <option>Luxurious</option>
-                                                    </select>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <div class="nk-int-mk sl-dp-mn">
+                                                            <h2>Price</h2>
+                                                        </div>
+                                                        <div class="form-group ic-cmp-int form-elet-mg">
+                                                            <div class="form-ic-cmp">
+                                                                <i class="notika-icon notika-credit-card"></i>
+                                                            </div>
+                                                            <div class="nk-int-st">
+                                                                <input type="number" class="form-control"  placeholder="Price" id="price">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <div class="nk-int-mk sl-dp-mn">
+                                                        <h2>RoomsType</h2>
+                                                    </div>
+                                                    <div class="bootstrap-select fm-cmp-mg">
+                                                        <select class="selectpicker" id="roomtype">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                                 </div>
                                                 <div class="row">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Ages:</h2>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <div class="nk-int-mk sl-dp-mn">
+                                                            <h2>Floor</h2>
+                                                        </div>
+                                                        <div class="chosen-select-act fm-cmp-mg">
+                                                            <select class="chosen" id="floor" data-placeholder="Choose a Floor...">
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                                <option value="6">6</option>
+                                                                <option value="7">7</option>
+                                                                <option value="8">8</option>
+                                                                <option value="9">9</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="14">14</option>
+                                                                <option value="15">15</option>
+                                                                <option value="16">16</option>
+                                                                <option value="17">17</option>
+                                                                <option value="18">18</option>
+                                                                <option value="19">19</option>
+                                                                <option value="20">20</option>
+                                                                <option value="21">21</option>
+                                                                <option value="22">22</option>
+                                                                <option value="23">23</option>
+                                                                <option value="24">24</option>
+                                                                <option value="25">25</option>
+                                                                <option value="26">26</option>
+                                                                <option value="27">27</option>
+                                                                <option value="28">28</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <div class="nk-int-mk sl-dp-mn">
+                                                            <h2>Age</h2>
+                                                        </div>
+                                                        <div class="bootstrap-select fm-cmp-mg">
+                                                            <select class="selectpicker" id="age">
+                                                                <option value="0">New</option>
+                                                                <option value="2">Under 2 years</option>
+                                                                <option value="5">2-5 years</option>
+                                                                <option value="10">More than 5 years</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <div class="nk-int-mk sl-dp-mn">
+                                                            <h2>Decoration</h2>
+                                                        </div>
+                                                        <div class="bootstrap-select fm-cmp-mg">
+                                                            <select class="selectpicker" id="decoration">
+                                                                <option value="1">Ordinary</option>
+                                                                <option value="2">Refined</option>
+                                                                <option value="3">Luxurious</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                    <div class="nk-int-mk sl-dp-mn">
+                                                        <h2>HouseType</h2>
+                                                    </div>
+                                                    <div class="bootstrap-select fm-cmp-mg">
+                                                        <select class="selectpicker" id="housetype">
+                                                            <option value="1">Bungalow</option>
+                                                            <option value="2">Villa</option>
+                                                            <option value="3">Apartment</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>in 1 year</option>
-                                                        <option>1-2 years</option>
-                                                        <option>2-5 years</option>
-                                                    </select>
-                                                </div>
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2> Square meters</h2>
-                                                </div>
-                                                <div class="nk-int-st">
-                                                    <input type="text" class="form-control" >
-                                                </div>
-                                                </div>
-                                                <div class="row">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Price per square meter</h2>
-                                                </div>
-                                                <div class="nk-int-st">
-                                                    <input type="text" class="form-control" >
                                                 </div>
 
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Price per square meter</h2>
-                                                </div>
-                                                <div class="nk-int-st">
-                                                    <input type="text" class="form-control" >
-                                                </div>
+                                                <br><br><br>
+                                                <div class="row">
+                                                    <div>
+                                                        <button class="btn btn-default btn-icon-notika" style="display:block;margin:0 auto"><i class="notika-icon notika-up-arrow" onclick="upload()">Upload</i></button>
+
+                                                    </div>
+
                                                 </div>
                                                 <!--Select end-->
 
@@ -387,51 +465,97 @@
     </div>
     <!-- End Footer area-->
     <script>
+
         // 175.24.51.64:8081/houses/insert/?
         // sellerId=1&address=1&size=1&price=1&hasBeenSold=1
         // &currentHolderId=1&secondHand=1&roomsType=1&floor=1&age=1&decoration=1&houseType=1&property=1&face=1&remarks=1
         function upload() {
-            var login_username = document.getElementById("login_user").value;
-            var login_password = document.getElementById("login_pas").value;
-            console.log("login_username"+login_username);
-            $.ajax({
-
-                type: "POST",
-
-                url: "http://175.24.51.64:8081/houses/insert",
-
-                data: "sellerId=" + sellerId +"&address=" + address+
-                    "&price=" + price+"&currentHolderId=" + currentHolderId+"&secondHand=" + 1+"&roomsType=" + roomsType
-                    +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
-                    +"&property=" + 1+"&face=" + face+"&remarks=" + 1
-                ,
-
-                success: function(msg){
-                    var data = JSON.parse(msg)
-                    if(data['msg']==='failed'){
-                        Toast.fire({
-                            icon: 'error',
-                            title: 'Sign in unsuccessfully'
-                        })
-                    }
-                    else{
-                        Toast.fire({
-                            icon: 'success',
-                            title: 'Sign in successfully'
-                        });
-                        window.location.href="home_buyer.html";
-                    }
-
-                },
-                error: function (msg) {
-                    console.log("Data not Saved: " + msg);
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
                 }
-
             });
+            var floorobj = document.getElementById("floor"); //定位id
+            var floorindex = floorobj.selectedIndex; // 选中索引
+            var floor = floorobj.options[floorindex].value; // 选中值
+
+            var roomtypeobj = document.getElementById("roomtype"); //定位id
+            var roomtypeindex = roomtypeobj.selectedIndex; // 选中索引
+            var roomsType = roomtypeobj.options[roomtypeindex].value; // 选中值
+
+            var addressobj = document.getElementById("address"); //定位id
+            var addressindex = addressobj.selectedIndex; // 选中索引
+            var address = addressobj.options[addressindex].value; // 选中值
+
+            var houseTypeobj = document.getElementById("housetype"); //定位id
+            var houseTypeindex = houseTypeobj.selectedIndex; // 选中索引
+            var houseType = houseTypeobj.options[houseTypeindex].value; // 选中值\
+
+            var decorationobj = document.getElementById("decoration"); //定位id
+            var decorationindex = decorationobj.selectedIndex; // 选中索引
+            var decoration = decorationobj.options[decorationindex].value; // 选中值
+
+            var ageobj = document.getElementById("age"); //定位id
+            var ageindex = ageobj.selectedIndex; // 选中索引
+            var age = decorationobj.options[ageindex].value; // 选中值
+
+            var price = document.getElementById("price").value;
+            var size = document.getElementById("size").value;
+            if(price==null||size==null){
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Fill all information'
+                })
+            }
+            else{
+                console.log("sellerId=" + 1 +"&address=" + address+ "&size="+size+
+                    "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 'currentHolderId'+"&secondHand=" + 1+"&roomsType=" + roomsType
+                    +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
+                    +"&property=" + 1+"&face=" +1+"&remarks=" + 1);
+                $.ajax({
+
+                    type: "POST",
+
+                    url: "http://175.24.51.64:8081/houses/insert",
+
+                    data: "sellerId=" + 1 +"&address=" + address+ "&size="+size+
+                        "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 1+"&secondHand=" + 1+"&roomsType=" + roomsType
+                        +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
+                        +"&property=" + 1+"&face=" +1+"&remarks=" + 1
+                    ,
+
+                    success: function(msg){
+                        var data = JSON.parse(msg);
+                        if(data['msg']==='failed'){
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Upload unsuccessfully'
+                            })
+                        }
+                        else{
+                            Toast.fire({
+                                icon: 'success',
+                                title: 'Upload successfully'
+                            });
+                            window.location.href="home_seller.html";
+                        }
+
+                    },
+                    error: function (msg) {
+                        console.log("Data not Saved: " + msg);
+                    }
+
+                });
+            }
+
         }
     </script>
-    <!-- jquery
-		============================================ -->
     <script src="../js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
 		============================================ -->
@@ -456,35 +580,22 @@
     <script src="../js/counterup/jquery.counterup.min.js"></script>
     <script src="../js/counterup/waypoints.min.js"></script>
     <script src="../js/counterup/counterup-active.js"></script>
-    <!-- mCustomScrollbar JS
-		============================================ -->
-    <script src="../js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     <!-- sparkline JS
 		============================================ -->
     <script src="../js/sparkline/jquery.sparkline.min.js"></script>
     <script src="../js/sparkline/sparkline-active.js"></script>
-
     <!-- knob JS
 		============================================ -->
     <script src="../js/knob/jquery.knob.js"></script>
     <script src="../js/knob/jquery.appear.js"></script>
     <script src="../js/knob/knob-active.js"></script>
-
-    <!--  wave JS
+    <!-- Input Mask JS
 		============================================ -->
-    <script src="../js/wave/waves.min.js"></script>
-    <script src="../js/wave/wave-active.js"></script>
-
-    <!--  todo JS
+    <script src="../js/jasny-bootstrap.min.js"></script>
+    <!-- icheck JS
 		============================================ -->
-    <script src="../js/todo/jquery.todo.js"></script>
-    <!-- plugins JS
-		============================================ -->
-    <script src="../js/plugins.js"></script>
-    <!-- main JS
-		============================================ -->
-    <script src="../js/main.js"></script>
-
+    <script src="../js/icheck/icheck.min.js"></script>
+    <script src="../js/icheck/icheck-active.js"></script>
     <!-- rangle-slider JS
 		============================================ -->
     <script src="../js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
@@ -501,6 +612,33 @@
 		============================================ -->
     <script src="../js/color-picker/farbtastic.min.js"></script>
     <script src="../js/color-picker/color-picker.js"></script>
+    <!--  notification JS
+		============================================ -->
+    <script src="../js/notification/bootstrap-growl.min.js"></script>
+    <script src="../js/notification/notification-active.js"></script>
+    <!--  summernote JS
+		============================================ -->
+    <script src="../js/summernote/summernote-updated.min.js"></script>
+    <script src="../js/summernote/summernote-active.js"></script>
+    <!-- dropzone JS
+		============================================ -->
+    <script src="../js/dropzone/dropzone.js"></script>
+    <!--  wave JS
+		============================================ -->
+    <script src="../js/wave/waves.min.js"></script>
+    <script src="../js/wave/wave-active.js"></script>
+    <!--  chosen JS
+		============================================ -->
+    <script src="../js/chosen/chosen.jquery.js"></script>
+    <!--  todo JS
+		============================================ -->
+    <script src="../js/todo/jquery.todo.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="../js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
