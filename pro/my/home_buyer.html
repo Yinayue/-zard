@@ -63,9 +63,9 @@
                 showCancelButton: true,
                 progressSteps: ['1', '2', '3'],
                 inputOptions: {
-                    bungalow: 'bungalow',
-                    villa: 'villa',
-                    apartment: 'apartment'
+                    bungalow: 'Bungalow',
+                    villa: 'Villa',
+                    apartment: 'Apartment'
                 },
             }).queue([
                 {
@@ -118,7 +118,7 @@
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="logo-area">
-                    <!--                        <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
+<!--                                            <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -133,6 +133,21 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-star"></i></i></span></a>
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-support"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>20</span></div></a>
+                            <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+                                <ul>
+                                    <li><a href="login-register.html">Login</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                         <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                 <div class="hd-mg-tt">
@@ -142,22 +157,16 @@
                                     <i class="notika-icon notika-left-arrow"></i>
                                     <input type="text" placeholder="Search People" />
                                 </div>
+                                <div class="hd-message-info">
 
+                                </div>
                                 <div class="hd-mg-va">
                                     <a href="#">View All</a>
                                 </div>
                             </div>
                         </li>
-
-                        <li class="nav-item" ><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" ><span><i class="notika-icon notika-support"></i></span></a>
-
-                            <ul class="dropdown-menu triger-fadeIn-dp">
-                                <li><a href="login-register.html">Login</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -177,9 +186,9 @@
                     </li>
                     <li><a  href="data.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
+                    <li><a  onclick="t()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
                     </li>
-                    <li><a><i class="notika-icon notika-support"></i>Chatbox</a>
+                    <li><a onclick="f()"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
                 </ul>
                 <div class="tab-content custom-menu-content">
@@ -384,6 +393,85 @@
     </div>
 </div>
 <!-- End Footer area-->
+<script>
+    async function t() {
+            const { value: password } =  await swal.fire({
+            text: 'Please input activation code:',
+            input: 'text',
+            inputAttributes: {
+                id: 'myInput',
+            },
+            inputPlaceholder:"0000-0000-0000",
+            didOpen: function(el) {
+                var container = $(el);
+                container.find('#myInput').mask('0000-0000-0000');
+            }
+
+    });
+        if(password) {
+            console.log(password+"password");
+            if (password == "0000-0000-0000") {
+                Swal.fire(
+                    'Successful!',
+                    'Check your points.',
+                    'success'
+                )
+            } else {
+                Swal.fire(
+                    'Unsuccessful!',
+                    'Your problem has been uploaded',
+                    'error'
+                )
+            }
+        }
+    }
+    function f() {
+
+        Swal.fire({
+            title: 'Not enough points.',
+            width: 600,
+            padding: '3em',
+            showCancelButton: true,
+            background: '#fff url(/images/trees.png)',
+            backdrop: `
+    rgba(0,0,123,0.4)
+    url("img/cat.gif")
+    left top
+    no-repeat
+  `,confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Buy points!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Buy!',
+                    imageUrl: "img/charge.jpg",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ok!',
+                    cancelButtonText: 'Something Wrong!',
+                    reverseButtons: true
+                }).then((result2) => {
+                    if (result2.isConfirmed) {
+                        Swal.fire(
+                            'Success!',
+                            'Check your points.',
+                            'success'
+                        )
+                    } else if (
+                        result2.dismiss === Swal.DismissReason.cancel
+                    ) {
+                        Swal.fire(
+                            'Something Wrong!',
+                            'Your problem has been uploaded',
+                            'error'
+                        )
+                    }
+                });
+            }
+        });
+    }
+
+</script>
 <!-- jquery
     ============================================ -->
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
@@ -434,12 +522,15 @@
 <!-- plugins JS
     ============================================ -->
 <script src="../js/plugins.js"></script>
+
+<script src="../js/jasny-bootstrap.min.js"></script>
 <!-- main JS
     ============================================ -->
 <script src="../js/main.js"></script>
 <!-- tawk chat JS
     ============================================ -->
 <script src="../js/tawk-chat.js"></script>
+<script src="dialog/jquery.mask.js"></script>
 </body>
 
 </html>
