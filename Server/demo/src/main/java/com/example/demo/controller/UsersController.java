@@ -82,4 +82,25 @@ public class UsersController {
         }
     }
 
+    @RequestMapping(value = "score",method = RequestMethod.POST)
+    public String score(String username,int score){
+        try{
+            Users temp = new Users();
+            temp.setName(username);
+            List<Users> users = iUsersService.selectUsers(temp);
+            if(users.size()==1){
+                Users user = users.get(0);
+                user.setScore(user.getScore()+score);
+                return JsonResult.success(iUsersService.updateById(user));
+            }else {
+                return JsonResult.error("未查询到用户");
+            }
+
+        }catch (Exception e ){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+
 }
