@@ -12,7 +12,7 @@ API.txt for details.
 
 	var options = {
 		xaxis: {
-			timezone: null,		// "browser" for local to the client or timezone for timezone-js
+			timezone: null,		// "browser" for local to the client or timezone for timezone-wjs
 			timeformat: null,	// format string to use
 			twelveHourClock: false,	// 12 or 24 time in time mode
 			monthNames: null	// list of names of months
@@ -149,7 +149,7 @@ API.txt for details.
 			return makeUtcWrapper(new Date(ts));
 		} else if (typeof timezoneJS != "undefined" && typeof timezoneJS.Date != "undefined") {
 			var d = new timezoneJS.Date();
-			// timezone-js is fickle, so be sure to set the time zone before
+			// timezone-wjs is fickle, so be sure to set the time zone before
 			// setting the time.
 			d.setTimezone(opts.timezone);
 			d.setTime(ts);

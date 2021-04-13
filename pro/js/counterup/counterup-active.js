@@ -1,7 +1,7 @@
 (function ($) {
  "use strict";
 	/*----------------------------
-	counterUp js active
+	counterUp wjs active
 	------------------------------ */
 	  $('.counter').counterUp({
 		delay: 10,

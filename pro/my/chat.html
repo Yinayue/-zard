@@ -6,7 +6,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Widgets | Notika - Notika Admin Template</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -67,24 +66,73 @@
     <link rel="stylesheet" href="../css/main.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/responsive.css">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+    <script>
+        function touser(message) {
+            $("#" + message.id + " span").html('');
+            if ($("#privateuser").html() === 'Private chat') {
+                $("#privateuser").html("Private with 【" + message.textContent + "】");
+                $(".msg-" + message.textContent).prop("hidden", false);
+                return;
+            }
+            var patt1 = new RegExp(/【(.*?)】/g);
+            var tousername = patt1.exec($("#privateuser").html())[1];
+            if(message.class===tousername){
+                return;
+            }
+            $(".msg-" + tousername).prop("hidden", true);
+            $("#privateuser").html("Private with 【" + message.textContent + "】");
 
-    <title>Hello WebSocket</title>
-    <script src="/app.js"></script>
+            $(".msg-" + message.textContent).prop("hidden", false);
+        }
+        function hidetuser(){
+            if($("#user").is(":hidden")){
+                $("#user").show();
+            }else{
+                $("#user").hide();
+            }
+        }
+        function hidetprivate(){
+            if($("#private").is(":hidden")){
+                $("#private").show();
+                $("#privatechat +div").show();
+            }else{
+                $("#private").hide();
+                $("#privatechat +div").hide();
+            }
+        }
+        function hidetlobby(){
+            if($("#lobby").is(":hidden")){
+                $("#lobby").show();
+                $("#conversation +div").show();
+            }else{
+                $("#lobby").hide();
+                $("#conversation +div").hide();
+            }
+        }
+        $(document).ready(function () {
+            var div = document.getElementById('lobby');
+            div.scrollTop = div.scrollHeight;
+        });
+    </script>
+
+
+<!--    <script src="/app.wjs"></script>-->
 </head>
-<body>
-<div class="header-top-area">
+<body><div class="header-top-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="logo-area">
-                    <a href="#"><img src="../img/logo/logo.png" alt="" /></a>
+                    <!--                                            <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
                 </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -99,6 +147,21 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-star"></i></i></span></a>
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-support"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>20</span></div></a>
+                            <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+                                <ul>
+                                    <li><a href="login-register.html">Login</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
                         <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
                             <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                 <div class="hd-mg-tt">
@@ -108,22 +171,16 @@
                                     <i class="notika-icon notika-left-arrow"></i>
                                     <input type="text" placeholder="Search People" />
                                 </div>
+                                <div class="hd-message-info">
 
+                                </div>
                                 <div class="hd-mg-va">
                                     <a href="#">View All</a>
                                 </div>
                             </div>
                         </li>
-
-                        <li class="nav-item" ><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" ><span><i class="notika-icon notika-support"></i></span></a>
-
-                            <ul class="dropdown-menu triger-fadeIn-dp">
-                                <li><a href="login-register.html">Login</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -135,15 +192,17 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li ><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                    <li ><a href="commend.html"><i class="notika-icon notika-house"></i> Home</a>
                     </li>
                     <li><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
                     </li>
-                    <li><a  href="data.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
+                    <li ><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
-                    <li  ><a   data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
+                    <li><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
                     </li>
-                    <li class="active"><a ><i class="notika-icon notika-support"></i>Chatbox</a>
+                    <li><a  onclick="t()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
+                    </li>
+                    <li CLASS="active"><a onclick="f()"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
                 </ul>
                 <div class="tab-content custom-menu-content">
@@ -208,14 +267,17 @@
         <br/>
         <div class="row">
             <div class="col-md-12">
-                <form class="form-inline" action="/login" method="post">
+<!--                <form class="form-inline" action="/login" method="post">-->
+                <form class="form-inline" >
                     <div class="form-group">
-                        <label for="connect">用户名：</label>
+                        <label for="connect">Username：</label>
                         <div class="input-group">
-                            <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''">
+<!--                            <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''">-->
+                            <h2  id="username" class="form-control">Pw</h2>
                             <span class="input-group-btn">
-          <button id="connect" class="btn btn-default" type="submit">连接</button>
-          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">断开
+<!--          <button id="connect" class="btn btn-default" type="submit" onclick="unenoughpoints()">Connect</button>-->
+           <button id="connect" class="btn btn-default">Connect</button>
+          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
           </button></span> </div>
                     </div>
                 </form>
@@ -227,11 +289,14 @@
                 <table id="userlist" class="table">
                     <thead onclick='javascript:hidetuser()'>
                     <tr>
-                        <th>在线用户</th>
+                        <th>Users</th>
                     </tr>
                     </thead>
                     <tbody id="user" style="height:350px; overflow-y:auto;">
-                    <tr onclick='javascript:touser(this)' id="robbot" class="机器人"><td>机器人<span class="badge pull-right">1</span></td></tr>
+                    <tr onclick='javascript:touser(this)' id="robbot" class="机器人"><td>robot<span class="badge pull-right">1</span></td></tr>
+                    <tr onclick='javascript:touser(this)' id="robbot2" class="机器人2"><td>Ab<span class="badge pull-right">1</span></td></tr>
+                    <tr onclick='javascript:touser(this)' id="robbot3" class="机器人3"><td>Fred<span class="badge pull-right">10</span></td></tr>
+                    <tr onclick='javascript:touser(this)' id="robbot4" class="机器人4"><td>Jerry<span class="badge pull-right">3</span></td></tr>
                     </tbody>
                 </table>
             </div>
@@ -239,16 +304,17 @@
                 <table id="conversation" class="table">
                     <thead onclick='javascript:hidetlobby()'>
                     <tr>
-                        <th id="lobbys">大厅聊天   (单击收起/展开)</th>
+                        <th id="lobbys">chat room</th>
                     </tr>
+
                     </thead>
                     <tbody id="lobby" style="height:350px; overflow-y:auto; display:block">
                     </tbody>
                 </table>
                 <div class="input-group" style="height: 74px">
-                    <textarea id="content" class="form-control" rows="3" style="resize: none;" placeholder="说点什么吧...."></textarea>
+                    <textarea id="content" class="form-control" rows="3" style="resize: none;" placeholder="Say something...."></textarea>
                     <span class="input-group-btn">
-        <button id="send" class="btn btn-default" type="submit" disabled="disabled" style="height: 100%">发送</button>
+        <button id="send" class="btn btn-default" type="submit" disabled="disabled" style="height: 100%">Send</button>
         </span>
                 </div>
             </div>
@@ -256,17 +322,18 @@
                 <table id="privatechat" class="table">
                     <thead onclick='javascript:hidetprivate()'>
                     <tr>
-                        <th id="privateuser">私信聊天</th>
+                        <th id="privateuser">Private chat</th>
                     </tr>
                     </thead>
                     <tbody id="private" style="height:350px; overflow-y:auto; display:block; ">
-                    <tr class="msg-机器人" hidden><td>00-00 00:00【机器人】对你说：欢迎你来到ocly的聊天室</td></tr>
+                    <tr class="msg-机器人" ><td><img src="img/robot.jpg" height="30" width="30">00-00 00:00【robot】：Welcome to robot's converation</td></tr>
+                    <tr class="msg-机器人" ><td><img src="img/robot.jpg" height="30" width="30">00-00 00:00【robot】：How can I help you?</td></tr>
                     </tbody>
                 </table>
                 <div class="input-group" style="height: 74px">
-                    <textarea id="contentuser" class="form-control" rows="3" style="resize: none;" placeholder="单击一名在线用户，与其聊天吧...." ></textarea>
+                    <textarea id="contentuser" class="form-control" rows="3" style="resize: none;" placeholder="click a user，have a chat...." ></textarea>
                     <span class="input-group-btn">
-        <button id="sendtouser" class="btn btn-default" type="submit" disabled="disabled" style="height: 100%">发送</button>
+        <button id="sendtouser" class="btn btn-default" type="submit" disabled="disabled" style="height: 100%">Send</button>
         </span>
                 </div>
             </div>
@@ -275,6 +342,7 @@
     <br/>
     </div>
 </body>
+
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
 <!-- bootstrap JS
     ============================================ -->
@@ -368,5 +436,4 @@
 <!-- Data Table JS
        ============================================ -->
 <script src="../js/data-table/jquery.dataTables.min.js"></script>
-<script src="../js/data-table/data-table-act.js"></script>
 </html>

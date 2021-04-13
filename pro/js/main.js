@@ -71,23 +71,23 @@
 		 mCustomScrollbar
 		---------------------------- */	
 		$(window).on("load",function(){
-			$(".widgets-chat-scrollbar").mCustomScrollbar({
-				setHeight:460,
-				autoHideScrollbar: true,
-				scrollbarPosition: "outside",
-				theme:"light-1"
-			});
-			$(".notika-todo-scrollbar").mCustomScrollbar({
-				setHeight:445,
-				autoHideScrollbar: true,
-				scrollbarPosition: "outside",
-				theme:"light-1"
-			});
-			$(".comment-scrollbar").mCustomScrollbar({
-				autoHideScrollbar: true,
-				scrollbarPosition: "outside",
-				theme:"light-1"
-			});
+			// $(".widgets-chat-scrollbar").mCustomScrollbar({
+			// 	setHeight:460,
+			// 	autoHideScrollbar: true,
+			// 	scrollbarPosition: "outside",
+			// 	theme:"light-1"
+			// });
+			// $(".notika-todo-scrollbar").mCustomScrollbar({
+			// 	setHeight:445,
+			// 	autoHideScrollbar: true,
+			// 	scrollbarPosition: "outside",
+			// 	theme:"light-1"
+			// });
+			// $(".comment-scrollbar").mCustomScrollbar({
+			// 	autoHideScrollbar: true,
+			// 	scrollbarPosition: "outside",
+			// 	theme:"light-1"
+			// });
 		});
 	/*----------------------------
 	 jQuery MeanMenu
@@ -95,7 +95,7 @@
 	jQuery('nav#dropdown').meanmenu();
 	
 	/*----------------------------
-	 wow js active
+	 wow wjs active
 	------------------------------ */
 	 new WOW().init();
 	 

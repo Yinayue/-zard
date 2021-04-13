@@ -21,7 +21,7 @@
 
     <!-- font awesome CSS
 		============================================ -->
-<!--    <link rel="stylesheet" href="../css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" href="../wcss/font-awesome.min.wcss">-->
     <!-- owl.carousel CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/owl.carousel.css">
@@ -51,25 +51,25 @@
     <link rel="stylesheet" href="../css/main.css">
     <!-- style CSS
 		============================================ -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <!-- Start Header Top Area -->
-    <div class="header-top-area">
+    <!-- Start Header Top Area --><div class="header-top-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <!--                        <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
+                        <!--                                            <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -84,6 +84,21 @@
                                     </div>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-star"></i></i></span></a>
+
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-support"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>20</span></div></a>
+                                <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+                                    <ul>
+                                        <li><a href="login-register.html">Login</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
                                 <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -93,22 +108,16 @@
                                         <i class="notika-icon notika-left-arrow"></i>
                                         <input type="text" placeholder="Search People" />
                                     </div>
+                                    <div class="hd-message-info">
 
+                                    </div>
                                     <div class="hd-mg-va">
                                         <a href="#">View All</a>
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="nav-item" ><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" ><span><i class="notika-icon notika-support"></i></span></a>
-
-                                <ul class="dropdown-menu triger-fadeIn-dp">
-                                    <li><a href="login-register.html">Login</a></li>
-                                    <li><a href="#">Logout</a></li>
-                                </ul>
-                            </li>
-
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -224,16 +233,17 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li><a ><i class="notika-icon notika-edit"></i> My Houses</a>
+                        <li ><a href="commend.html"><i class="notika-icon notika-house"></i> Home</a>
                         </li>
-                        <li><a  href="data.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
+                        <li><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
+                        </li>
+                        <li><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                         </li>
                         <li class="active"><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-support"></i>Chatbox</a>
+                        <li><a  onclick="t()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
                         </li>
-
-                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-app"></i> Settings</a>
+                        <li><a href="chat.html"><i class="notika-icon notika-support"></i>Chatbox</a>
                         </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -282,7 +292,7 @@
                     <div class="image-cropper-wp">
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <img src="../img/cropper/1.jpg" alt="">
+                                    <img src="../images/img/cropper/1.jpg" alt="">
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="preview-img-pro-ad">
@@ -431,7 +441,9 @@
                                                 <br><br><br>
                                                 <div class="row">
                                                     <div>
-                                                        <button class="btn btn-default btn-icon-notika" style="display:block;margin:0 auto"><i class="notika-icon notika-up-arrow" onclick="upload()">Upload</i></button>
+
+                                                        <button class="btn btn-default btn-icon-notika"   onclick="info()"><i class="notika-icon notika-up-arrow" o></i> Info</button>
+                                                            <button class="btn btn-default btn-icon-notika"  onclick="upload()"><i class="notika-icon notika-up-arrow" o></i> Upload</button>
 
                                                     </div>
 
@@ -464,6 +476,24 @@
         </div>
     </div>
     <!-- End Footer area-->
+    <script>
+        function info() {
+
+            const { value: text } =  Swal.fire({
+                input: 'textarea',
+                inputLabel: 'Message',
+                inputPlaceholder: 'Your house details...',
+                inputAttributes: {
+                    'aria-label': 'Type your message here'
+                },
+                showCancelButton: true
+            })
+
+            if (text) {
+                Swal.fire(text)
+            }
+        }
+    </script>
     <script>
 
         // 175.24.51.64:8081/houses/insert/?
@@ -507,51 +537,100 @@
 
             var price = document.getElementById("price").value;
             var size = document.getElementById("size").value;
-            if(price==null||size==null){
+            console.log("price"+price+"size"+size);
+            if(price===""||size===""||price===null||size===null){
                 Toast.fire({
                     icon: 'error',
                     title: 'Fill all information'
-                })
+                });
+                console.log("price"+price+"size"+size);
             }
             else{
-                console.log("sellerId=" + 1 +"&address=" + address+ "&size="+size+
-                    "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 'currentHolderId'+"&secondHand=" + 1+"&roomsType=" + roomsType
-                    +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
-                    +"&property=" + 1+"&face=" +1+"&remarks=" + 1);
-                $.ajax({
-
-                    type: "POST",
-
-                    url: "http://175.24.51.64:8081/houses/insert",
-
-                    data: "sellerId=" + 1 +"&address=" + address+ "&size="+size+
-                        "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 1+"&secondHand=" + 1+"&roomsType=" + roomsType
-                        +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
-                        +"&property=" + 1+"&face=" +1+"&remarks=" + 1
-                    ,
-
-                    success: function(msg){
-                        var data = JSON.parse(msg);
-                        if(data['msg']==='failed'){
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'Upload unsuccessfully'
-                            })
-                        }
-                        else{
-                            Toast.fire({
-                                icon: 'success',
-                                title: 'Upload successfully'
-                            });
-                            window.location.href="home_seller.html";
-                        }
-
+                let timerInterval;
+                Swal.fire({
+                    title: 'Please wait',
+                    html: 'The suggested price is being calculated for you...<br><b></b> milliseconds.',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading();
+                        timerInterval = setInterval(() => {
+                            const content = Swal.getContent();
+                            if (content) {
+                                const b = content.querySelector('b');
+                                if (b) {
+                                    b.textContent = Swal.getTimerLeft()
+                                }
+                            }
+                        }, 100)
                     },
-                    error: function (msg) {
-                        console.log("Data not Saved: " + msg);
+                    willClose: () => {
+                        clearInterval(timerInterval)
                     }
-
-                });
+                }).then((result) => {
+                    /* Read more about handling dismissals below */
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        Swal.fire({
+                            title: 'House price',
+                            icon: 'warning',
+                            text:'Detected your housing information, the price is '+'price'+', there is a risk that the price is too low, the recommended price is 200 million dollars',
+                            input: 'range',
+                            inputLabel: 'Update price',
+                            inputAttributes: {
+                                min: 100,
+                                max: 300,
+                                step: 1
+                            },
+                            inputValue: 100
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: 'Success!',
+                                    icon: 'success',
+                                    confirmButtonText: 'Ok!',
+                                    reverseButtons: true
+                                })
+                            }
+                    })}
+                })
+                // console.log("sellerId=" + 1 +"&address=" + address+ "&size="+size+
+                //     "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 'currentHolderId'+"&secondHand=" + 1+"&roomsType=" + roomsType
+                //     +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
+                //     +"&property=" + 1+"&face=" +1+"&remarks=" + 1);
+                // $.ajax({
+                //
+                //     type: "POST",
+                //
+                //     url: "http://175.24.51.64:8081/houses/insert",
+                //
+                //     data: "sellerId=" + 1 +"&address=" + address+ "&size="+size+
+                //         "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 1+"&secondHand=" + 1+"&roomsType=" + roomsType
+                //         +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
+                //         +"&property=" + 1+"&face=" +1+"&remarks=" + 1
+                //     ,
+                //
+                //     success: function(msg){
+                //         var data = JSON.parse(msg);
+                //         if(data['msg']==='failed'){
+                //             Toast.fire({
+                //                 icon: 'error',
+                //                 title: 'Upload unsuccessfully'
+                //             })
+                //         }
+                //         else{
+                //             Toast.fire({
+                //                 icon: 'success',
+                //                 title: 'Upload successfully'
+                //             });
+                //             window.location.href="home_seller.html";
+                //         }
+                //
+                //     },
+                //     error: function (msg) {
+                //         console.log("Data not Saved: " + msg);
+                //     }
+                //
+                // });
             }
 
         }

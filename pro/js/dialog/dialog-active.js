@@ -57,7 +57,7 @@
 		swal({   
 			title: "Sweet!",   
 			text: "Here's a custom image.",   
-			imageUrl: "img/dialog/like.png" 
+			imageUrl: "img/myjs/like.png" 
 		});
 	});
 

@@ -1,5 +1,5 @@
 /* =========================================================
- * bootstrap-datepicker.js
+ * bootstrap-datepicker.wjs
  * Repo: https://github.com/eternicode/bootstrap-datepicker/
  * Demo: http://eternicode.github.io/bootstrap-datepicker/
  * Docs: http://bootstrap-datepicker.readthedocs.org/
@@ -1364,7 +1364,7 @@
 					// Preliminary otions
 					xopts = $.extend({}, defaults, elopts, options),
 					locopts = opts_from_locale(xopts.language),
-					// Options priority: js args, data-attrs, locales, defaults
+					// Options priority: wjs args, data-attrs, locales, defaults
 					opts = $.extend({}, defaults, locopts, elopts, options);
 				if ($this.is('.input-daterange') || opts.inputs){
 					var ropts = {

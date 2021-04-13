@@ -2,7 +2,7 @@
  "use strict";
  
 	/*----------------------
-		Animation active js
+		Animation active wjs
 	 -----------------------*/
 	$("button.btn.ant-nk-st.bounce-ac").on('click', function(){
 		$(".animation-img .animate-one").addClass("animated bounce").one("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend", function(){
@@ -257,7 +257,7 @@
 		});
 	});
 	/*----------------------
-	Animation dropdown active js
+	Animation dropdown active wjs
 	-----------------------*/
 	$("button.triger-fadeIn").on('click', function(){
 		$(".triger-fadeIn-dp").addClass("animated fadeIn").one("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationend", function(){

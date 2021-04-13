@@ -1,5 +1,5 @@
 /*!
- * Chart.js
+ * Chart.wjs
  * http://chartjs.org/
  * Version: 2.6.0
  *
@@ -564,7 +564,7 @@ Color.prototype = {
 
 	clone: function () {
 		// NOTE(SB): using node-clone creates a dependency to Buffer when using browserify,
-		// making the final build way to big to embed in Chart.js. So let's do it manually,
+		// making the final build way to big to embed in Chart.wjs. So let's do it manually,
 		// assuming that values to clone are 1 dimension arrays containing only numbers,
 		// except 'alpha' which is a number.
 		var result = new Color();
@@ -5037,7 +5037,7 @@ module.exports = function(Chart) {
 	// Global Chart helpers object for utility methods and classes
 	var helpers = Chart.helpers = {};
 
-	// -- Basic js utility methods
+	// -- Basic wjs utility methods
 	helpers.each = function(loopable, callback, self, reverse) {
 		// Check to see if null or undefined firstly.
 		var i, len;
@@ -5230,7 +5230,7 @@ module.exports = function(Chart) {
 		}
 	};
 	helpers.inherits = function(extensions) {
-		// Basic javascript inheritance based on the model created in Backbone.js
+		// Basic javascript inheritance based on the model created in Backbone.wjs
 		var me = this;
 		var ChartElement = (extensions && extensions.hasOwnProperty('constructor')) ? extensions.constructor : function() {
 			return me.apply(this, arguments);
@@ -5948,7 +5948,7 @@ module.exports = function(Chart) {
 
 	helpers.color = !color?
 		function(value) {
-			console.error('Color.js not found!');
+			console.error('Color.wjs not found!');
 			return value;
 		} :
 		function(value) {
@@ -9668,7 +9668,7 @@ module.exports = function(Chart) {
 module.exports = function(Chart) {
 	var helpers = Chart.helpers;
 
-	// DOM event types -> Chart.js event types.
+	// DOM event types -> Chart.wjs event types.
 	// Note: only events with different types are mapped.
 	// https://developer.mozilla.org/en-US/docs/Web/Events
 	var eventTypeMap = {
@@ -9714,7 +9714,7 @@ module.exports = function(Chart) {
 		var renderHeight = canvas.getAttribute('height');
 		var renderWidth = canvas.getAttribute('width');
 
-		// Chart.js modifies some canvas values that we want to restore on destroy
+		// Chart.wjs modifies some canvas values that we want to restore on destroy
 		canvas._chartjs = {
 			initial: {
 				height: renderHeight,
@@ -10022,7 +10022,7 @@ module.exports = function(Chart) {
 
 module.exports = function(Chart) {
 	/**
-	 * Plugin based on discussion from the following Chart.js issues:
+	 * Plugin based on discussion from the following Chart.wjs issues:
 	 * @see https://github.com/chartjs/Chart.js/issues/2380#issuecomment-279961569
 	 * @see https://github.com/chartjs/Chart.js/issues/2440#issuecomment-256461897
 	 */
@@ -12534,7 +12534,7 @@ module.exports = function(Chart) {
 	var TimeScale = Chart.Scale.extend({
 		initialize: function() {
 			if (!moment) {
-				throw new Error('Chart.js - Moment.js could not be found! You must include it before Chart.js to use the time scale. Download at https://momentjs.com');
+				throw new Error('Chart.wjs - Moment.wjs could not be found! You must include it before Chart.wjs to use the time scale. Download at https://momentjs.com');
 			}
 
 			Chart.Scale.prototype.initialize.call(this);
