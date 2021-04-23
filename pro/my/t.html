@@ -1,13 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="../js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="../js/data-table/jquery.dataTables.min.js"></script>
+    <script src="../js/data-table/data-table-act.js"></script>
+    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+    <style media="screen">
+        /** 展开按钮 **/
+        td.details-control {
+            background: url('../images/img/logo/favicon.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        /** 收起按钮 **/
+        tr.shown td.details-control {
+            background: url('../images/img/logo/favicon.png') no-repeat center center;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //表格初始化
+            var table = $('#myTable').DataTable({
+                "ajax": 'data.txt',
+                columns: [
+                    {
+                        "className":      'details-control',
+                        "orderable":      false,
+                        "data":           null,
+                        "defaultContent": ''
+                    },
+                    { data: 'id'},
+                    { data: 'name'},
+                    { data: 'birthday'}
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            //给每一行添加展开或收起的监听
+            $('#myTable').on('click', 'td', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row( tr );
+
+                if ( row.child.isShown() ) {
+                    //如果该行已经打开，则关闭
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    //关闭这已行
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            } );
+
+        });
+
+        /*根据条目数据返回需要显示的详情*/
+        function format ( d ) {
+            return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+                '<tr>'+
+                '<td>姓名:</td>'+
+                '<td>'+d.name+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>邮箱:</td>'+
+                '<td>'+d.email+'</td>'+
+                '</tr>'+
+                '<tr>'+
+                '<td>简介:</td>'+
+                '<td>'+d.info+'</td>'+
+                '</tr>'+
+                '</table>';
+        }
+    </script>
 </head>
 <body>
-<button onclick="t()">dddd</button>
+<table id="myTable" class="display">
+    <thead>
+    <tr>
+        <th></th>
+        <th>编号</th>
+        <th>姓名</th>
+        <th>出生日期</th>
+    </tr>
+    </thead>
+</table>
 </body>
-<script src="../js/myjs/pingjia.js"></script>
-
-<script src="s.js"></script>
 </html>

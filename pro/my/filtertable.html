@@ -158,7 +158,7 @@
                                     <li><a href="index-2.html">Dashboard Two</a></li>
                                     <li><a href="index-3.html">Dashboard Three</a></li>
                                     <li><a href="index-4.html">Dashboard Four</a></li>
-                                    <li><a href="analytics.html">Analytics</a></li>
+                                    <li><a href="ht/analytics.html">Analytics</a></li>
                                     <li><a href="widgets.html">Widgets</a></li>
                                 </ul>
                             </li>
@@ -236,7 +236,7 @@
                                     </li>
                                     <li><a href="login-register.html">Login Register</a>
                                     </li>
-                                    <li><a href="404.html">404 Page</a>
+                                    <li><a href="ht/404.html">404 Page</a>
                                     </li>
                                 </ul>
                             </li>
@@ -314,7 +314,7 @@
                         <ul class="notika-main-menu-dropdown">
                             <li><a href="contact.html">Contact</a>
                             </li>
-                            <li><a href="404.html">404 Page</a>
+                            <li><a href="ht/404.html">404 Page</a>
                             </li>
                         </ul>
                     </div>
@@ -531,57 +531,7 @@
         </div>
     </div>
 </div>
-<script>
-    function filtersearch() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
-        var floorobj = document.getElementById("filterfloor"); //定位id
-        var floorindex = floorobj.selectedIndex; // 选中索引
-        var floor = floorobj.options[floorindex].value; // 选中值
 
-        var roomtypeobj = document.getElementById("filterroomtype"); //定位id
-        var roomtypeindex = roomtypeobj.selectedIndex; // 选中索引
-        var roomsType = roomtypeobj.options[roomtypeindex].value; // 选中值
-
-        var addressobj = document.getElementById("filterregion"); //定位id
-        var addressindex = addressobj.selectedIndex; // 选中索引
-        var address = addressobj.options[addressindex].value; // 选中值
-
-        var houseTypeobj = document.getElementById("filterhousetype"); //定位id
-        var houseTypeindex = houseTypeobj.selectedIndex; // 选中索引
-        var houseType = houseTypeobj.options[houseTypeindex].value; // 选中值\
-
-        var decorationobj = document.getElementById("filterdecoration"); //定位id
-        var decorationindex = decorationobj.selectedIndex; // 选中索引
-        var decoration = decorationobj.options[decorationindex].value; // 选中值
-
-        var ageobj = document.getElementById("filterage"); //定位id
-        var ageindex = ageobj.selectedIndex; // 选中索引
-        var age = decorationobj.options[ageindex].value; // 选中值
-        var table = $('#data-table-basic').DataTable();
-        console.log("address=" + address+
-            "&roomsType=" + roomsType
-            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType);
-        var str= "address=" + address+
-            "&roomsType=" + roomsType
-            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType;
-        table.ajax.url("http://175.24.51.64:8081/houses/select?"+str).load();
-
-
-
-
-
-    }
-</script>
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
 <!-- bootstrap JS
     ============================================ -->
@@ -678,6 +628,81 @@
 <script src="../js/data-table/data-table-act.js"></script>
 
 <script src="../js/myjs/jquery.mask.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var table = $('#data-table-basic').DataTable();
+        //给每一行添加展开或收起的监听
+        table.on('click', 'td', function () {
+            // var tr = $(this).closest('tr');
+            $.ajax({
+                type : 'post',
+                url : "http://175.24.51.64:8081/houses/select",
+                async : true,
+                dataType : 'json',
+                error: "重新请求",
+                data:{
+                    'id':1
+                },
+
+        } );
+            console.log("sadasdsadasd")
+    });
+    });
+</script>
+<script>
+
+    function filtersearch() {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        });
+        var floorobj = document.getElementById("filterfloor"); //定位id
+        var floorindex = floorobj.selectedIndex; // 选中索引
+        var floor = floorobj.options[floorindex].value; // 选中值
+
+        var roomtypeobj = document.getElementById("filterroomtype"); //定位id
+        var roomtypeindex = roomtypeobj.selectedIndex; // 选中索引
+        var roomsType = roomtypeobj.options[roomtypeindex].value; // 选中值
+
+        var addressobj = document.getElementById("filterregion"); //定位id
+        var addressindex = addressobj.selectedIndex; // 选中索引
+        var address = addressobj.options[addressindex].value; // 选中值
+
+        var houseTypeobj = document.getElementById("filterhousetype"); //定位id
+        var houseTypeindex = houseTypeobj.selectedIndex; // 选中索引
+        var houseType = houseTypeobj.options[houseTypeindex].value; // 选中值\
+
+        var decorationobj = document.getElementById("filterdecoration"); //定位id
+        var decorationindex = decorationobj.selectedIndex; // 选中索引
+        var decoration = decorationobj.options[decorationindex].value; // 选中值
+
+        var ageobj = document.getElementById("filterage"); //定位id
+        var ageindex = ageobj.selectedIndex; // 选中索引
+        var age = decorationobj.options[ageindex].value; // 选中值
+        var table = $('#data-table-basic').DataTable();
+        console.log("address=" + address+
+            "&roomsType=" + roomsType
+            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType);
+        var str= "address=" + address+
+            "&roomsType=" + roomsType
+            +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType;
+        table.ajax.url("http://175.24.51.64:8081/houses/select?"+str).load();
+
+
+
+
+
+
+
+    }
+</script>
 </body>
 
 </html>

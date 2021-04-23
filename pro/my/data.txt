@@ -1,0 +1,25 @@
+{
+  "data": [
+            {
+               "id": "001",
+               "name": "张三",
+               "birthday": "2015-12-31",
+               "email": "open3@qq.com",
+               "info": "毕业于华东职业贸易技术学校。"
+            },
+            {
+               "id": "002",
+               "name": "李四",
+               "birthday": "2001-11-31",
+               "email": "lili4@qq.com",
+               "info": "小学毕业，现在家务农。"
+            },
+            {
+               "id": "003",
+               "name": "王五",
+               "birthday": "2011-12-31",
+               "email": "kingFive@qq.com",
+               "info": "李四的发小，住他家隔壁。"
+            }
+  ]
+}

@@ -3,24 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Image Cropper</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- favicon
-		============================================ -->
-    <!-- Google Fonts
-		============================================ -->
-    <!-- Bootstrap CSS
-		============================================ -->
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-select/bootstrap-select.css">
-    <link rel="stylesheet" href="../css/datapicker/datepicker3.css">
-    <link rel="stylesheet" href="../css/themesaller-forms.css">
-    <link rel="stylesheet" href="../css/color-picker/farbtastic.css">
-    <link rel="stylesheet" href="../css/chosen/chosen.css">
-    <link rel="stylesheet" href="../css/dropzone/dropzone.css">
-
     <!-- font awesome CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/font-awesome.min.css">
@@ -29,28 +14,24 @@
     <link rel="stylesheet" href="../css/owl.carousel.css">
     <link rel="stylesheet" href="../css/owl.theme.css">
     <link rel="stylesheet" href="../css/owl.transitions.css">
-    <link rel="stylesheet" href="../css/summernote/summernote.css">
     <!-- meanmenu CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/meanmenu/meanmenu.min.css">
+    <!-- Notika icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="../css/notika-custom-icon.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
     <!-- animate CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/animate.css">
     <!-- normalize CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/normalize.css">
-    <!-- mCustomScrollbar CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
-    <!-- Notika icon CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/notika-custom-icon.css">
     <!-- wave CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/wave/waves.min.css">
-    <!-- cropper CSS
-		============================================ -->
-    <link rel="stylesheet" href="../css/cropper/cropper.min.css">
     <!-- main CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/main.css">
@@ -60,6 +41,8 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/housebox.css">
+
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
@@ -74,9 +57,6 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <div class="logo-area">
-                    <!--                        <a href="#"><img src="../img/logo/logo.png" alt="" /></a>-->
-                </div>
             </div>
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 <div class="header-top-menu">
@@ -122,132 +102,47 @@
 </div>
 <!-- End Header Top Area -->
 
-<!-- Mobile Menu start -->
-<div class="mobile-menu-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="mobile-menu">
-                    <nav id="dropdown">
-                        <ul class="mobile-menu-nav">
-                            <li><a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
-                                <ul class="collapse dropdown-header-top">
-                                    <li><a href="index.html">Dashboard One</a></li>
-                                    <li><a href="index-2.html">Dashboard Two</a></li>
-                                    <li><a href="index-3.html">Dashboard Three</a></li>
-                                    <li><a href="index-4.html">Dashboard Four</a></li>
-                                    <li><a href="analytics.html">Analytics</a></li>
-                                    <li><a href="widgets.html">Widgets</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#demoevent" href="#">Email</a>
-                                <ul id="demoevent" class="collapse dropdown-header-top">
-                                    <li><a href="inbox.html">Inbox</a></li>
-                                    <li><a href="view-email.html">View Email</a></li>
-                                    <li><a href="compose-email.html">Compose Email</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>
-                                <ul id="democrou" class="collapse dropdown-header-top">
-                                    <li><a href="animations.html">Animations</a></li>
-                                    <li><a href="code-editor.html">Code Editor</a></li>
-                                    <li><a href="image-cropper.html">Images Cropper</a></li>
-                                    <li><a href="wizard.html">Wizard</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#demolibra" href="#">Charts</a>
-                                <ul id="demolibra" class="collapse dropdown-header-top">
-                                    <li><a href="flot-charts.html">Flot Charts</a></li>
-                                    <li><a href="bar-charts.html">Bar Charts</a></li>
-                                    <li><a href="line-charts.html">Line Charts</a></li>
-                                    <li><a href="area-charts.html">Area Charts</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#demodepart" href="#">Tables</a>
-                                <ul id="demodepart" class="collapse dropdown-header-top">
-                                    <li><a href="normal-table.html">Normal Table</a></li>
-                                    <li><a href="data-table.html">Data Table</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
-                                <ul id="demo" class="collapse dropdown-header-top">
-                                    <li><a href="form-elements.html">Form Elements</a></li>
-                                    <li><a href="form-components.html">Form Components</a></li>
-                                    <li><a href="form-examples.html">Form Examples</a></li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">App views</a>
-                                <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
-                                    <li><a href="notification.html">Notifications</a>
-                                    </li>
-                                    <li><a href="alert.html">Alerts</a>
-                                    </li>
-                                    <li><a href="modals.html">Modals</a>
-                                    </li>
-                                    <li><a href="buttons.html">Buttons</a>
-                                    </li>
-                                    <li><a href="tabs.html">Tabs</a>
-                                    </li>
-                                    <li><a href="accordion.html">Accordion</a>
-                                    </li>
-                                    <li><a href="dialog.html">Dialogs</a>
-                                    </li>
-                                    <li><a href="popovers.html">Popovers</a>
-                                    </li>
-                                    <li><a href="tooltips.html">Tooltips</a>
-                                    </li>
-                                    <li><a href="dropdown.html">Dropdowns</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
-                                <ul id="Pagemob" class="collapse dropdown-header-top">
-                                    <li><a href="contact.html">Contact</a>
-                                    </li>
-                                    <li><a href="invoice.html">Invoice</a>
-                                    </li>
-                                    <li><a href="typography.html">Typography</a>
-                                    </li>
-                                    <li><a href="color.html">Color</a>
-                                    </li>
-                                    <li><a href="login-register.html">Login Register</a>
-                                    </li>
-                                    <li><a href="404.html">404 Page</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Mobile Menu end -->
 <!-- Main Menu area start-->
 <div class="main-menu-area mg-tb-40">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li><a ><i class="notika-icon notika-edit"></i> My Houses</a>
+                    <li ><a ><i class="notika-icon notika-house"></i> Home</a>
                     </li>
-                    <li><a  href="data.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
+                    <li><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
                     </li>
-                    <li class="active"><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
+                    <li><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
-                    <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-support"></i>Chatbox</a>
+                    <li><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
                     </li>
-
-                    <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-app"></i> Settings</a>
+                    <li><a  onclick="unenoughpoints()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
+                    </li>
+                    <li><a href="chat.html"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
                 </ul>
                 <div class="tab-content custom-menu-content">
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 
                     </div>
+                    <div id="Houses" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <ul class="notika-main-menu-dropdown">
+                            <li><a href="data.html">Stared</a>
+                            </li>
+                            <li><a href="google-map.html">Sold</a>
+                            </li>
+                            <li><a href="data-map.html">Buying</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
+                            <li><a href="flot-charts.html">Flot Charts</a>
+                            </li>
+                            <li><a href="bar-charts.html">Bar Charts</a>
+                            </li>
+                            <li><a href="line-charts.html">Line Charts</a>
+                            </li>
                             <li><a href="area-charts.html">Area Charts</a>
                             </li>
                         </ul>
@@ -270,7 +165,46 @@
                             </li>
                         </ul>
                     </div>
-
+                    <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <ul class="notika-main-menu-dropdown">
+                            <li><a href="notification.html">Notifications</a>
+                            </li>
+                            <li><a href="alert.html">Alerts</a>
+                            </li>
+                            <li><a href="modals.html">Modals</a>
+                            </li>
+                            <li><a href="buttons.html">Buttons</a>
+                            </li>
+                            <li><a href="tabs.html">Tabs</a>
+                            </li>
+                            <li><a href="accordion.html">Accordion</a>
+                            </li>
+                            <li><a href="dialog.html">Dialogs</a>
+                            </li>
+                            <li><a href="popovers.html">Popovers</a>
+                            </li>
+                            <li><a href="tooltips.html">Tooltips</a>
+                            </li>
+                            <li><a href="dropdown.html">Dropdowns</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <ul class="notika-main-menu-dropdown">
+                            <li><a href="contact.html">Contact</a>
+                            </li>
+                            <li><a href="invoice.html">Invoice</a>
+                            </li>
+                            <li><a href="typography.html">Typography</a>
+                            </li>
+                            <li><a href="color.html">Color</a>
+                            </li>
+                            <li><a href="login-register.html">Login Register</a>
+                            </li>
+                            <li><a href="ht/404.html">404 Page</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -279,254 +213,345 @@
 <!-- Main Menu area End-->
 
 
-<!-- Image Cropper area Start-->
-
-<div class="images-cropper-area">
+<!-- Start Email Statistic area-->
+<div class="notika-email-post-area">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="image-cropper-wp">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <img src="../images/img/cropper/1.jpg" alt="">
+
+        <section class="ftco-section ftco-property-details">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-12">
+                        <div class="property-details">
+                            <div class="img" style="background-image: url(../images/wimages/work-1.jpg);">
+
+                            </div>
+                            <div class="text">
+                                <span class="subheading">Oakland</span>
+                                <h2>The Blue Sky Home</h2>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <div class="preview-img-pro-ad">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 pills">
+                        <div class="bd-example bd-example-tabs">
+                            <div class="d-flex">
+                                <ul class="nav  mb-3" id="pills-tab" role="tablist">
 
-                                <div class="image-crp-img">
-                                    <h4>Upload houses</h4>
-                                    <div class="btn-group images-cropper-pro">
-                                        <label title="Upload image file" for="inputImage" class="btn btn-primary img-cropper-cp">
-                                            <input type="file" accept="image/*" name="file" id="inputImage" class="hide"> Upload new image
-                                        </label>
-                                    </div>
-                                    <div class="cp-img-anal">
-                                        <!--Select begin-->
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Address</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Drama</option>
-                                                        <option>Cariska</option>
-                                                        <option>Cheriska</option>
-                                                        <option>Malias</option>
-                                                        <option>Kamines</option>
-                                                        <option>Austranas</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Size</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Drama</option>
-                                                        <option>Cariska</option>
-                                                        <option>Cheriska</option>
-                                                        <option>Malias</option>
-                                                        <option>Kamines</option>
-                                                        <option>Austranas</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Price</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Drama</option>
-                                                        <option>Cariska</option>
-                                                        <option>Cheriska</option>
-                                                        <option>Malias</option>
-                                                        <option>Kamines</option>
-                                                        <option>Austranas</option>
-                                                    </select>
-                                                </div>
-                                            </div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                            <div class="nk-int-mk sl-dp-mn">
-                                                <h2>RoomsType</h2>
-                                            </div>
-                                            <div class="bootstrap-select fm-cmp-mg">
-                                                <select class="selectpicker">
-                                                    <option>Drama</option>
-                                                    <option>Cariska</option>
-                                                    <option>Cheriska</option>
-                                                    <option>Malias</option>
-                                                    <option>Kamines</option>
-                                                    <option>Austranas</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Floor</h2>
-                                                </div>
-                                                <div class="chosen-select-act fm-cmp-mg">
-                                                    <select class="chosen" data-placeholder="Choose a Floor...">
-                                                        <option value="floor1">1</option>
-                                                        <option value="floor2">2</option>
-                                                        <option value="floor3">3</option>
-                                                        <option value="floor4">4</option>
-                                                        <option value="floor5">5</option>
-                                                        <option value="floor6">6</option>
-                                                        <option value="floor7">7</option>
-                                                        <option value="floor8">8</option>
-                                                        <option value="floor9">9</option>
-                                                        <option value="floor10">10</option>
-                                                        <option value="floor11">11</option>
-                                                        <option value="floor12">12</option>
-                                                        <option value="floor13">13</option>
-                                                        <option value="floor14">14</option>
-                                                        <option value="floor15">15</option>
-                                                        <option value="floor16">16</option>
-                                                        <option value="floor17">17</option>
-                                                        <option value="floor18">18</option>
-                                                        <option value="floor19">19</option>
-                                                        <option value="floor20">20</option>
-                                                        <option value="floor21">21</option>
-                                                        <option value="floor22">22</option>
-                                                        <option value="floor23">23</option>
-                                                        <option value="floor24">24</option>
-                                                        <option value="floor25">25</option>
-                                                        <option value="floor26">26</option>
-                                                        <option value="floor27">27</option>
-                                                        <option value="floor28">28</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Age</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Drama</option>
-                                                        <option>Cariska</option>
-                                                        <option>Cheriska</option>
-                                                        <option>Malias</option>
-                                                        <option>Kamines</option>
-                                                        <option>Austranas</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                                <div class="nk-int-mk sl-dp-mn">
-                                                    <h2>Decoration</h2>
-                                                </div>
-                                                <div class="bootstrap-select fm-cmp-mg">
-                                                    <select class="selectpicker">
-                                                        <option>Drama</option>
-                                                        <option>Cariska</option>
-                                                        <option>Cheriska</option>
-                                                        <option>Malias</option>
-                                                        <option>Kamines</option>
-                                                        <option>Austranas</option>
-                                                    </select>
-                                                </div>
-                                            </div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                            <div class="nk-int-mk sl-dp-mn">
-                                                <h2>HouseType</h2>
-                                            </div>
-                                            <div class="bootstrap-select fm-cmp-mg">
-                                                <select class="selectpicker">
-                                                    <option>Drama</option>
-                                                    <option>Cariska</option>
-                                                    <option>Cheriska</option>
-                                                    <option>Malias</option>
-                                                    <option>Kamines</option>
-                                                    <option>Austranas</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        </div>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="pills-description-tab" data-toggle="pill" href="#pills-description" role="tab" aria-controls="pills-description" aria-expanded="true">Features</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-manufacturer-tab" data-toggle="pill" href="#pills-manufacturer" role="tab" aria-controls="pills-manufacturer" aria-expanded="true">Description</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-expanded="true">Review</a>
+                                    </li>
+                                </ul>
+                            </div>
 
-                                        <br><br><br>
-                                        <div class="row">
-                                            <div>
-                                                <button class="btn btn-default btn-icon-notika" style="display:block;margin:0 auto"><i class="notika-icon notika-up-arrow">Upload</i></button>
-
-                                            </div>
-
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane  active" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <ul class="features">
+                                                <li class="check">Lot Area: 1,250 SQ FT</li>
+                                                <li class="check">Bed Rooms: 4</li>
+                                                <li class="check">Bath Rooms: 4</li>
+                                                <li class="check">Luggage</li>
+                                                <li class="check">Garage: 2</li>
+                                            </ul>
                                         </div>
-                                        <!--Select end-->
-
+                                        <div class="col-md-4">
+                                            <ul class="features">
+                                                <li class="check">Floor Area: 1,300 SQ FT</li>
+                                                <li class="check">Year Build:: 2019</li>
+                                                <li class="check">Water</li>
+                                                <li class="check">Stories: 2</li>
+                                                <li class="check">Roofing: New</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <ul class="features">
+                                                <li class="check">Floor Area: 1,300 SQ FT</li>
+                                                <li class="check">Year Build:: 2019</li>
+                                                <li class="check">Water</li>
+                                                <li class="check">Stories: 2</li>
+                                                <li class="check">Roofing: New</li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
 
+                                <div class="tab-pane fade " id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
+                                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+                                </div>
 
+                                <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h3 class="head">23 Reviews</h3>
+                                            <div class="review d-flex">
+                                                <div class="user-img" style="background-image: url(../images/wimages/person_1.jpg)"></div>
+                                                <div class="desc">
+                                                    <h4>
+                                                        <span class="text-left">Jacob Webb</span>
+                                                        <span class="text-right">14 March 2018</span>
+                                                    </h4>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+								   					</span>
+                                                        <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                    </p>
+                                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                                </div>
+                                            </div>
+                                            <div class="review d-flex">
+                                                <div class="user-img" style="background-image: url(../images/wimages/person_2.jpg)"></div>
+                                                <div class="desc">
+                                                    <h4>
+                                                        <span class="text-left">Jacob Webb</span>
+                                                        <span class="text-right">14 March 2018</span>
+                                                    </h4>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+								   					</span>
+                                                        <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                    </p>
+                                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                                </div>
+                                            </div>
+                                            <div class="review d-flex">
+                                                <div class="user-img" style="background-image: url(../images/wimages/person_3.jpg)"></div>
+                                                <div class="desc">
+                                                    <h4>
+                                                        <span class="text-left">Jacob Webb</span>
+                                                        <span class="text-right">14 March 2018</span>
+                                                    </h4>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+								   					</span>
+                                                        <span class="text-right"><a href="#" class="reply"><i class="fa fa-reply"></i></a></span>
+                                                    </p>
+                                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="rating-wrap">
+                                                <h3 class="head">Give a Review</h3>
+                                                <div class="wrap">
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					(98%)
+								   					</span>
+                                                        <span>20 Reviews</span>
+                                                    </p>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					(85%)
+								   					</span>
+                                                        <span>10 Reviews</span>
+                                                    </p>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					(70%)
+								   					</span>
+                                                        <span>5 Reviews</span>
+                                                    </p>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					(10%)
+								   					</span>
+                                                        <span>0 Reviews</span>
+                                                    </p>
+                                                    <p class="star">
+									   				<span>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					<i class="fa fa-star"></i>
+									   					(0%)
+								   					</span>
+                                                        <span>0 Reviews</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+
         </div>
+
+
+        <!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                <div class="blog-img">-->
+        <!--                    <img src="../images/wimages/work-1.jpg"  />-->
+        <!--                </div>-->
+        <!--                <div class="blog-ctn">-->
+        <!--                    <div class="blog-hd-sw">-->
+        <!--                        <h2> Beijing Lingxiu</h2>-->
+        <!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--                    </div>-->
+        <!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+        <!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                <div class="blog-img">-->
+        <!--                    <img src="../images/wimages/work-1.jpg"  />-->
+        <!--                </div>-->
+        <!--                <div class="blog-ctn">-->
+        <!--                    <div class="blog-hd-sw">-->
+        <!--                        <h2> Beijing Lingxiu</h2>-->
+        <!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--                    </div>-->
+        <!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+        <!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                <div class="blog-img">-->
+        <!--                    <img src="../images/wimages/work-1.jpg"  />-->
+        <!--                </div>-->
+        <!--                <div class="blog-ctn">-->
+        <!--                    <div class="blog-hd-sw">-->
+        <!--                        <h2> Beijing Lingxiu</h2>-->
+        <!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--                    </div>-->
+        <!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+        <!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--                    <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                        <div class="blog-img">-->
+        <!--                            <img src="../wait-100-ecoverde/wimages/work-2.jpg" alt="" height="390" width="790"/>-->
+        <!--                        </div>-->
+        <!--                        <div class="blog-ctn">-->
+        <!--                            <div class="blog-hd-sw">-->
+        <!--								<h2> The best viral website ideas!</h2>-->
+        <!--								<a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--							</div>-->
+        <!--                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>-->
+        <!--                            <a class="vw-at" href="#">View Article...</a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--                    <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                        <div class="blog-img">-->
+        <!--                            <img src="../wait-100-ecoverde/wimages/work-3.jpg.jpg" alt="" height="390" width="790"/>-->
+        <!--                        </div>-->
+        <!--                        <div class="blog-ctn">-->
+        <!--                            <div class="blog-hd-sw">-->
+        <!--								<h2> The best viral website ideas!</h2>-->
+        <!--								<a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--							</div>-->
+        <!--                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>-->
+        <!--                            <a class="vw-at" href="#">View Article...</a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--                    <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                        <div class="blog-img">-->
+        <!--                            <img src="../wait-100-ecoverde/wimages/work-4.jpg" height="390" width="790"/>-->
+        <!--                        </div>-->
+        <!--                        <div class="blog-ctn">-->
+        <!--                            <div class="blog-hd-sw">-->
+        <!--								<h2> The best viral website ideas!</h2>-->
+        <!--								<a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--							</div>-->
+        <!--                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>-->
+        <!--                            <a class="vw-at" href="#">View Article...</a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+        <!--                    <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+        <!--                        <div class="blog-img">-->
+        <!--                            <img src="../wait-100-ecoverde/wimages/work-5.jpg" alt="" height="390" width="790" />-->
+        <!--                        </div>-->
+        <!--                        <div class="blog-ctn">-->
+        <!--                            <div class="blog-hd-sw">-->
+        <!--								<h2> The best viral website ideas!</h2>-->
+        <!--								<a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+        <!--							</div>-->
+        <!--                            <p>Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>-->
+        <!--                            <a class="vw-at" href="#">View Article...</a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
     </div>
 </div>
-<!-- Image Cropper area End-->
+<!-- End Email Statistic area-->
+
 <!-- Start Footer area-->
 <div class="footer-copyright-area">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="footer-copy-right">
-                    <p>Copyright BLIZZARD</p>
+                    <p>Copyright BLIZARD</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!-- End Footer area-->
-<script>
-    // 175.24.51.64:8081/houses/insert/?
-    // sellerId=1&address=1&size=1&price=1&hasBeenSold=1
-    // &currentHolderId=1&secondHand=1&roomsType=1&floor=1&age=1&decoration=1&houseType=1&property=1&face=1&remarks=1
-    function upload() {
-        var login_username = document.getElementById("login_user").value;
-        var login_password = document.getElementById("login_pas").value;
-        console.log("login_username"+login_username);
-        $.ajax({
-
-            type: "POST",
-
-            url: "http://175.24.51.64:8081/houses/insert",
-
-            data: "sellerId=" + sellerId +"&address=" + address+
-                "&price=" + price+"&currentHolderId=" + currentHolderId+"&secondHand=" + 1+"&roomsType=" + roomsType
-                +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType
-                +"&property=" + 1+"&face=" + face+"&remarks=" + 1
-            ,
-
-            success: function(msg){
-                var data = JSON.parse(msg)
-                if(data['msg']==='failed'){
-                    Toast.fire({
-                        icon: 'error',
-                        title: 'Sign in unsuccessfully'
-                    })
-                }
-                else{
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Sign in successfully'
-                    });
-                    window.location.href="home_buyer.html";
-                }
-
-            },
-            error: function (msg) {
-                console.log("Data not Saved: " + msg);
-            }
-
-        });
-    }
-</script>
+<!-- jquery
+    ============================================ -->
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
 <!-- bootstrap JS
     ============================================ -->
@@ -551,73 +576,33 @@
 <script src="../js/counterup/jquery.counterup.min.js"></script>
 <script src="../js/counterup/waypoints.min.js"></script>
 <script src="../js/counterup/counterup-active.js"></script>
-<!-- mCustomScrollbar JS
-    ============================================ -->
-<script src="../js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 <!-- sparkline JS
     ============================================ -->
 <script src="../js/sparkline/jquery.sparkline.min.js"></script>
 <script src="../js/sparkline/sparkline-active.js"></script>
-<!-- flot JS
-    ============================================ -->
-<script src="../js/flot/jquery.flot.js"></script>
-<script src="../js/flot/jquery.flot.resize.js"></script>
-<script src="../js/flot/flot-active.js"></script>
 <!-- knob JS
     ============================================ -->
 <script src="../js/knob/jquery.knob.js"></script>
 <script src="../js/knob/jquery.appear.js"></script>
 <script src="../js/knob/knob-active.js"></script>
-<!-- Input Mask JS
+<!-- mCustomScrollbar JS
     ============================================ -->
-<script src="../js/jasny-bootstrap.min.js"></script>
-<!-- icheck JS
+<script src="../js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- flot JS
     ============================================ -->
-<script src="../js/icheck/icheck.min.js"></script>
-<script src="../js/icheck/icheck-active.js"></script>
-<!-- rangle-slider JS
-    ============================================ -->
-<script src="../js/rangle-slider/jquery-ui-1.10.4.custom.min.js"></script>
-<script src="../js/rangle-slider/jquery-ui-touch-punch.min.js"></script>
-<script src="../js/rangle-slider/rangle-active.js"></script>
-<!-- datapicker JS
-    ============================================ -->
-<script src="../js/datapicker/bootstrap-datepicker.js"></script>
-<script src="../js/datapicker/datepicker-active.js"></script>
-<!-- bootstrap select JS
-    ============================================ -->
-<script src="../js/bootstrap-select/bootstrap-select.js"></script>
-<!--  color-picker JS
-    ============================================ -->
-<script src="../js/color-picker/farbtastic.min.js"></script>
-<script src="../js/color-picker/color-picker.js"></script>
-<!--  notification JS
-    ============================================ -->
-<script src="../js/notification/bootstrap-growl.min.js"></script>
-<script src="../js/notification/notification-active.js"></script>
-<!--  summernote JS
-    ============================================ -->
-<script src="../js/summernote/summernote-updated.min.js"></script>
-<script src="../js/summernote/summernote-active.js"></script>
-<!-- dropzone JS
-    ============================================ -->
-<script src="../js/dropzone/dropzone.js"></script>
+<script src="../js/flot/flot-widget-anatic-active.js"></script>
+<script src="../js/flot/chart-tooltips.js"></script>
+<script src="../js/flot/flot-active.js"></script>
 <!--  wave JS
     ============================================ -->
 <script src="../js/wave/waves.min.js"></script>
 <script src="../js/wave/wave-active.js"></script>
-<!--  chosen JS
-    ============================================ -->
-<script src="../js/chosen/chosen.jquery.js"></script>
-<!--  Chat JS
-    ============================================ -->
-<script src="../js/chat/jquery.chat.js"></script>
-<!--  todo JS
-    ============================================ -->
-<script src="../js/todo/jquery.todo.js"></script>
 <!-- plugins JS
     ============================================ -->
 <script src="../js/plugins.js"></script>
+<!-- Google map JS
+    ============================================ -->
+<script src="../js/google.maps/google.maps-active.js"></script>
 <!-- main JS
     ============================================ -->
 <script src="../js/main.js"></script>
