@@ -53,8 +53,6 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="../post.js"></script>
-    <script src="../myAjax2.js"></script>
     <script type="text/javascript" src="../js/jquery-3.5.1.min.js"> </script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
@@ -186,54 +184,60 @@
               // }
 
 
-        function f() {
+  //       function f() {
+  //
+  //           Swal.fire({
+  //               title: 'Not enough points.',
+  //               width: 600,
+  //               padding: '3em',
+  //               showCancelButton: true,
+  //               background: '#fff url(/images/trees.png)',
+  //               backdrop: `
+  //   rgba(0,0,123,0.4)
+  //   url("img/cat.gif")
+  //   left top
+  //   no-repeat
+  // `,confirmButtonColor: '#3085d6',
+  //               cancelButtonColor: '#d33',
+  //               confirmButtonText: 'Buy points!'
+  //           }).then((result) => {
+  //               if (result.isConfirmed) {
+  //                   Swal.fire({
+  //                       title: 'Buy!',
+  //                       imageUrl: "img/charge.jpg",
+  //                       showCancelButton: true,
+  //                       confirmButtonText: 'Ok!',
+  //                       cancelButtonText: 'Something Wrong!',
+  //                       reverseButtons: true
+  //                   }).then((result2) => {
+  //                       if (result2.isConfirmed) {
+  //                           Swal.fire(
+  //                               'Success!',
+  //                               'Check your balance.',
+  //                               'success'
+  //                           )
+  //                       } else if (
+  //                           result2.dismiss === Swal.DismissReason.cancel
+  //                       ) {
+  //                           Swal.fire(
+  //                               'Something Wrong!',
+  //                               'Your problem has been uploaded',
+  //                               'error'
+  //                           )
+  //                       }
+  //                   });
+  //               }
+  //       });
+  //       }
 
-            Swal.fire({
-                title: 'Not enough points.',
-                width: 600,
-                padding: '3em',
-                showCancelButton: true,
-                background: '#fff url(/images/trees.png)',
-                backdrop: `
-    rgba(0,0,123,0.4)
-    url("img/cat.gif")
-    left top
-    no-repeat
-  `,confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Buy points!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: 'Buy!',
-                        imageUrl: "img/charge.jpg",
-                        showCancelButton: true,
-                        confirmButtonText: 'Ok!',
-                        cancelButtonText: 'Something Wrong!',
-                        reverseButtons: true
-                    }).then((result2) => {
-                        if (result2.isConfirmed) {
-                            Swal.fire(
-                                'Success!',
-                                'Check your balance.',
-                                'success'
-                            )
-                        } else if (
-                            result2.dismiss === Swal.DismissReason.cancel
-                        ) {
-                            Swal.fire(
-                                'Something Wrong!',
-                                'Your problem has been uploaded',
-                                'error'
-                            )
-                        }
-                    });
-                }
-        });
-        }
 
+function f() {
 
-
+        var index = 1;
+        var url = "house-image.html?index="+index;
+        window.location.href = url;
+        console.log("ssssssssssss")
+}
     </script>
 </head>
 <body>
