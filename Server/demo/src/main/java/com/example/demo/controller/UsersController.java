@@ -1,17 +1,25 @@
 package com.example.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.entity.EnSjz;
 import com.example.demo.entity.Houses;
 import com.example.demo.entity.Preference;
 import com.example.demo.entity.Users;
+import com.example.demo.service.IEnSjzService;
 import com.example.demo.service.IHousesService;
 import com.example.demo.service.IPreferenceService;
 import com.example.demo.service.IUsersService;
+import com.example.demo.serviceImpl.TokenService;
 import com.example.demo.util.basic.JsonResult;
+import com.example.demo.util.basic.TokenUtil;
+import com.example.demo.util.basic.UserLoginToken;
 import com.example.demo.util.recommend.BuyerSet;
 import com.example.demo.util.recommend.Start;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +44,12 @@ public class UsersController {
 
     @Autowired
     IHousesService iHousesService;
+
+    @Autowired
+    TokenService tokenService;
+
+    @Autowired
+    IEnSjzService iEnSjzService;
 
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
@@ -68,20 +82,20 @@ public class UsersController {
         }
     }
 
-    @RequestMapping(value="/login",method = RequestMethod.POST)
-    public String login(String name, String password){
-        List<Users> login = iUsersService.login(name,password);
-        try {
-            if (login.size() > 0) {
-                return JsonResult.success(login.get(0).getName());
-            } else {
-                return JsonResult.error();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return JsonResult.error();
-        }
-    }
+//    @RequestMapping(value="/login",method = RequestMethod.POST)
+//    public String login(String name, String password){
+//        List<Users> login = iUsersService.login(name,password);
+//        try {
+//            if (login.size() > 0) {
+//                return JsonResult.success(login.get(0).getName());
+//            } else {
+//                return JsonResult.error();
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return JsonResult.error();
+//        }
+//    }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
     public String update(Users users){
@@ -163,6 +177,61 @@ public class UsersController {
             e.printStackTrace();
             return JsonResult.error();
         }
+    }
+
+
+    @RequestMapping(value = "/login" ,method = RequestMethod.POST)
+    public Object login(Users user, HttpServletResponse response) {
+        try{
+            JSONObject jsonObject = new JSONObject();
+            //获取uid
+            Users idUser = new Users();
+            idUser.setName(user.getName());
+
+            //验证用
+            Users userForBase = new Users();
+            Users temp = iUsersService.selectUsers(idUser).get(0);
+            userForBase.setId(temp.getId());
+            userForBase.setName(temp.getName());
+            userForBase.setPassword(temp.getPassword());
+            if (!userForBase.getPassword().equals(user.getPassword())) {
+                return JsonResult.error("登陆失败,用户名或密码错误");
+                //jsonObject.put("message", "登录失败,密码错误");
+                //return jsonObject;
+            } else {
+                String token = tokenService.getToken(userForBase);
+                jsonObject.put("token", token);
+                jsonObject.put("userId",temp.getId());
+                Cookie cookie = new Cookie("token", token);
+                cookie.setPath("/");
+                response.addCookie(cookie);
+
+                return jsonObject;
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+
+    }
+
+    //@UserLoginToken
+    @RequestMapping(value = "/getUserDetail" ,method = RequestMethod.GET)
+    public String getMessage() {
+        int uid = -1;
+//        try{
+//            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return JsonResult.error("验证失败");
+//        }
+
+        //卖过的房子列表
+        EnSjz enSjz = new EnSjz();
+        enSjz.setSellerId(1);
+        List<EnSjz> houses = iEnSjzService.select(enSjz);
+        return JsonResult.success(houses.size());
     }
 
 
