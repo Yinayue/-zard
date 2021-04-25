@@ -1,14 +1,8 @@
 package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.entity.EnSjz;
-import com.example.demo.entity.Houses;
-import com.example.demo.entity.Preference;
-import com.example.demo.entity.Users;
-import com.example.demo.service.IEnSjzService;
-import com.example.demo.service.IHousesService;
-import com.example.demo.service.IPreferenceService;
-import com.example.demo.service.IUsersService;
+import com.example.demo.entity.*;
+import com.example.demo.service.*;
 import com.example.demo.serviceImpl.TokenService;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.basic.TokenUtil;
@@ -21,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -50,6 +46,12 @@ public class UsersController {
 
     @Autowired
     IEnSjzService iEnSjzService;
+
+    @Autowired
+    IMarkService iMarkService;
+
+    @Autowired
+    IOrderService iOrderService;
 
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
@@ -226,13 +228,33 @@ public class UsersController {
 //            e.printStackTrace();
 //            return JsonResult.error("验证失败");
 //        }
-
+        Map<String,Object> data = new HashMap<>();
         //卖过的房子列表
         EnSjz enSjz = new EnSjz();
         enSjz.setSellerId(1);
         List<EnSjz> houses = iEnSjzService.select(enSjz);
-        return JsonResult.success(houses.size());
+        data.put("sell",houses);
+        //收藏列表
+        Mark mark = new Mark();
+        mark.setUid(1);
+        List<Mark> marks = iMarkService.select(mark);
+        data.put("mark",marks);
+        //购买列表
+        Order order = new Order();
+        order.setBid(1);
+        List<Order> orders = iOrderService.select(order);
+        data.put("buy",orders);
+
+
+        return JsonResult.success(data);
     }
 
+    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
+    public String test(){
+        Mark mark = new Mark();
+        mark.setUid(1);
+        List<Mark> marks = iMarkService.select(mark);
+        return JsonResult.success(marks);
+    }
 
 }
