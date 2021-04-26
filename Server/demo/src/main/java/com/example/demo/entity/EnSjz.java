@@ -20,7 +20,7 @@ public class EnSjz extends Model<EnSjz> {
 
     private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 	@TableField("seller_id")
 	private Integer sellerId;
 	@TableField("launch_date")
@@ -39,11 +39,11 @@ public class EnSjz extends Model<EnSjz> {
 	private String deleteFlag;
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public EnSjz setId(Integer id) {
+	public EnSjz setId(Long id) {
 		this.id = id;
 		return this;
 	}

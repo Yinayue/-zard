@@ -10,6 +10,7 @@ import com.example.demo.util.basic.UserLoginToken;
 import com.example.demo.util.recommend.BuyerSet;
 import com.example.demo.util.recommend.Start;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -129,15 +130,27 @@ public class UsersController {
         }
     }
 
+    @UserLoginToken
     @RequestMapping(value = "reco",method = RequestMethod.POST)
-    public String recommend(String username){
+    public String recommend(){
+
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+
+
         try{
             //获取到用户信息
             Users temp = new Users();
-            temp.setName(username);
+            temp.setId((long)uid);
             List<Users> users = iUsersService.selectUsers(temp);
             if(users.size()==1){
                 Users user = users.get(0);
+                String username = user.getName();
                 List<Users> allUser = iUsersService.selectUsers(new Users());
                 BuyerSet buyerSet = new BuyerSet();
                 //获取每个user的评分
@@ -150,9 +163,9 @@ public class UsersController {
                         if(preferenceList.size()>0){
                             buyerSet.put(users1.getName()).create();
                             for(Preference preference: preferenceList){
-                                Houses t = new Houses();
-                                t.setId(preference.getHouseId());
-                                List<Houses> houses = iHousesService.select(t);
+                                EnSjz t = new EnSjz();
+                                t.setId((long)preference.getHouseId());
+                                List<EnSjz> houses = iEnSjzService.select(t);
                                 buyerSet.getUser(users1.getName()).set(houses.get(0).getAddress(),preference.getScore());
                             }
                         }else{
@@ -162,11 +175,11 @@ public class UsersController {
                 }
                 Start start = new Start();
                 List<String> recoResult = start.start2(buyerSet,username);
-                List<Houses> result = new ArrayList<>();
+                List<EnSjz> result = new ArrayList<>();
                 for(String s : recoResult){
-                    Houses tempHouse = new Houses();
+                    EnSjz tempHouse = new EnSjz();
                     tempHouse.setAddress(s);
-                    result.add(iHousesService.select(tempHouse).get(0));
+                    result.add(iEnSjzService.select(tempHouse).get(0));
                 }
                 return JsonResult.success(result);
                 //return JsonResult.success(buyerSet.getUser("b").list);
@@ -218,41 +231,95 @@ public class UsersController {
 
     }
 
-    //@UserLoginToken
-    @RequestMapping(value = "/getUserDetail" ,method = RequestMethod.GET)
-    public String getMessage() {
+    @UserLoginToken
+    @RequestMapping(value = "/sellDetail" ,method = RequestMethod.GET)
+    public String getSell() {
         int uid = -1;
-//        try{
-//            uid = Integer.parseInt(TokenUtil.getTokenUserId());
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return JsonResult.error("验证失败");
-//        }
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
         Map<String,Object> data = new HashMap<>();
         //卖过的房子列表
         EnSjz enSjz = new EnSjz();
-        enSjz.setSellerId(1);
+        enSjz.setSellerId(uid);
         List<EnSjz> houses = iEnSjzService.select(enSjz);
-        data.put("sell",houses);
+        //data.put("sell",houses);
+
+
+
+        return JsonResult.success(houses);
+    }
+
+    @UserLoginToken
+    @RequestMapping(value = "/markDetail", method = RequestMethod.GET)
+    public String getMark(){
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+        Map<String,Object> data = new HashMap<>();
         //收藏列表
         Mark mark = new Mark();
-        mark.setUid(1);
+        mark.setUid((long)uid);
         List<Mark> marks = iMarkService.select(mark);
         data.put("mark",marks);
-        //购买列表
-        Order order = new Order();
-        order.setBid(1);
-        List<Order> orders = iOrderService.select(order);
-        data.put("buy",orders);
+        //获取房子id
+        List<Long> hid = new ArrayList<>();
+        for(Mark m : marks){
+            hid.add(m.getHid());
+        }
+        //获取房子信息
+        List<EnSjz> houseList = new ArrayList<>();
+        for(long i: hid){
+            EnSjz temp = new EnSjz();
+            temp.setId(i);
+            houseList.add(iEnSjzService.select(temp).get(0));
+        }
 
-
-        return JsonResult.success(data);
+        return JsonResult.success(houseList);
     }
+
+//    @RequestMapping(value = "/buyDetail",method = RequestMethod.GET)
+//    public String getBuy(){
+//        int uid = -1;
+////        try{
+////            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+////        }catch (Exception e){
+////            e.printStackTrace();
+////            return JsonResult.error("验证失败");
+////        }
+//        Map<String,Object> data = new HashMap<>();
+//        //购买列表
+//        Orders order = new Orders();
+//        order.setBid(1);
+//        List<Orders> orders = iOrderService.select(order);
+//        List<Integer> hid = new ArrayList<>();
+//        //房子id
+//        for(Orders o : orders){
+//            hid.add(o.getHid());
+//        }
+//        //获取房子列表
+//        List<EnSjz> houseList = new ArrayList<>();
+//        for(int i: hid){
+//            EnSjz temp = new EnSjz();
+//            temp.setId(i);
+//            houseList.add(iEnSjzService.select(temp).get(0));
+//        }
+//
+//        return JsonResult.success(houseList);
+//    }
+
 
     @RequestMapping(value = "/test" ,method = RequestMethod.GET)
     public String test(){
         Mark mark = new Mark();
-        mark.setUid(1);
+        mark.setUid((long)1);
         List<Mark> marks = iMarkService.select(mark);
         return JsonResult.success(marks);
     }

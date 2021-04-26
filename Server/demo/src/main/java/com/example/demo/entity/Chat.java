@@ -16,38 +16,38 @@ public class Chat extends Model<Chat> {
 
     private static final long serialVersionUID = 1L;
 
-	private Integer id;
+	private Long id;
 	@TableField("user_id")
-	private Integer userId;
+	private Long userId;
 	@TableField("house_id")
-	private Integer houseId;
+	private Long houseId;
 	@TableField("delete_flag")
 	private Integer deleteFlag;
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public Chat setId(Integer id) {
+	public Chat setId(Long id) {
 		this.id = id;
 		return this;
 	}
 
-	public Integer getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public Chat setUserId(Integer userId) {
+	public Chat setUserId(Long userId) {
 		this.userId = userId;
 		return this;
 	}
 
-	public Integer getHouseId() {
+	public Long getHouseId() {
 		return houseId;
 	}
 
-	public Chat setHouseId(Integer houseId) {
+	public Chat setHouseId(Long houseId) {
 		this.houseId = houseId;
 		return this;
 	}

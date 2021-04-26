@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.EnSjz;
 import com.example.demo.entity.Houses;
 import com.example.demo.entity.Users;
+import com.example.demo.service.IEnSjzService;
 import com.example.demo.service.IHousesService;
 import com.example.demo.service.IUsersService;
 import com.example.demo.util.basic.JsonResult;
@@ -33,6 +35,9 @@ public class HousesController {
     IHousesService iHousesService;
 
     @Autowired
+    IEnSjzService iEnSjzService;
+
+    @Autowired
     IUsersService iUsersService;
 
     @RequestMapping(value="/selectAll", method= RequestMethod.GET)
@@ -47,16 +52,16 @@ public class HousesController {
     }
 
     @RequestMapping(value="/insert",method = RequestMethod.POST)
-    public String insert(Houses houses){
+    public String insert(EnSjz houses){
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(System.currentTimeMillis());
-            houses.setLaunchDate(formatter.format(date));
-            houses.setDeleteFlag(0);
+//            houses.setLaunchDate(formatter.format(date));
+            houses.setDeleteFlag(0+"");
 
             //get seller
             Users temp = new Users();
-            temp.setId(houses.getId());
+            temp.setId((long)houses.getSellerId());
             Users seller = iUsersService.selectUsers(temp).get(0);
             //check score
             if(seller.getScore()>=5){//have enough score
@@ -64,7 +69,7 @@ public class HousesController {
             }else{
                 return JsonResult.error("积分不足");
             }
-            iHousesService.insert(houses);
+            iEnSjzService.insert(houses);
             iUsersService.updateById(seller);
             return JsonResult.success("success");
         }catch (Exception e){
@@ -74,9 +79,9 @@ public class HousesController {
     }
 
     @RequestMapping(value = "select",method = RequestMethod.POST)
-    public String select(Houses houses){
+    public String select(EnSjz houses){
         try{
-            return JsonResult.success(iHousesService.select(houses));
+            return JsonResult.success(iEnSjzService.select(houses));
         }catch (Exception e){
             e.printStackTrace();
             return JsonResult.error();
@@ -84,9 +89,9 @@ public class HousesController {
     }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
-    public String update(Houses houses){
+    public String update(EnSjz houses){
         try{
-            return JsonResult.success(iHousesService.updateById(houses));
+            return JsonResult.success(iEnSjzService.updateById(houses));
         }catch (Exception e){
             e.printStackTrace();
             return JsonResult.error();
@@ -100,11 +105,11 @@ public class HousesController {
             operation.buildIndex();
             String[] query=queryStr.split(",");
             List<String> addresses = operation.getAddresses(query);
-            List<List<Houses>> result = new ArrayList<>();
+            List<List<EnSjz>> result = new ArrayList<>();
             for(String address : addresses){
-                Houses temp = new Houses();
+                EnSjz temp = new EnSjz();
                 temp.setAddress(address);
-                result.add(iHousesService.select(temp));
+                result.add(iEnSjzService.select(temp));
             }
             //在这里定义一下要search的query，数组形式
             return JsonResult.success(result);

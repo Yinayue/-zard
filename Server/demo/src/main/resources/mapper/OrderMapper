@@ -5,11 +5,11 @@
         id,bid,hid
     </sql>
 
-    <select id="select" resultType="com.example.demo.entity.Mark" parameterType="com.example.demo.entity.Mark">
+    <select id="select" resultType="com.example.demo.entity.Orders" parameterType="com.example.demo.entity.Orders">
         SELECT
         <include refid="Base_Column_List"></include>
         FROM
-        mark
+        orders
         <where>
             <if test="id!=null and id!=''">
                 id = #{id}
