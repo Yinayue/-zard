@@ -233,10 +233,7 @@
 
 function f() {
 
-        var index = 1;
-        var url = "house-image.html?index="+index;
-        window.location.href = url;
-        console.log("ssssssssssss")
+
 }
     </script>
 </head>
@@ -254,6 +251,8 @@ function f() {
 <table id="ul">
     <thead>
     <tr>
+
+        <th>ID</th>
         <th>Type</th>
         <th>Address</th>
         <th>Age</th>
@@ -263,14 +262,6 @@ function f() {
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>Beijing Lingxu</td>
-        <td>central</td>
-        <td>5 years</td>
-        <td>2021/01/25</td>
-        <td>$320,800</td>
-        <th>123</th>
-    </tr>
 </table>
 
 
@@ -287,20 +278,24 @@ function f() {
             },
             columns : [ //数据渲染，固定格式,下面每一个对应表格一个td
                 {
+                    // "name" : "decoration",
+                    "data" : "id"
+                },
+                {
                     // "name" : "address", //后台返回json数据 这是名
-                    "data" : "address"  //这是值，一定要对应
+                    "data" : "houseType"  //这是值，一定要对应
                 },
                 {
                     // "name" : "decoration",
-                    "data" : "decoration"
+                    "data" : "address"
                 },
                 {
                     // "name" : "floor",
-                    "data" : "floor"
+                    "data" : "age"
                 },
                 {
                     // "name" : "houseType",
-                    "data" : "houseType"
+                    "data" : "launchDate"
                 },
                 {
                     // "name" : "price",
@@ -308,13 +303,22 @@ function f() {
 
                 },
                 {
-                    // "name" : "size",
+                    // "name" : "price",
                     "data" : "size"
+
                 },]
         });
-
+        $('#ul').on('click', 'td', function () {
+            var tr = $(this).parent().children("td:first-child").text();
+            // var td = $(this).find("td");
+            // var data = td.eq(0).text();
+            var url = "house-image.html?index="+tr;
+            window.location.href = url;
+            console.log("ssssssssssss");
+        } );
 
     });
+
 
 </script>
 </body>
