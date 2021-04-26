@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.*;
+import com.example.demo.model.User;
 import com.example.demo.service.*;
 import com.example.demo.serviceImpl.TokenService;
 import com.example.demo.util.basic.JsonResult;
@@ -281,39 +282,68 @@ public class UsersController {
             temp.setId(i);
             houseList.add(iEnSjzService.select(temp).get(0));
         }
-
         return JsonResult.success(houseList);
     }
 
-//    @RequestMapping(value = "/buyDetail",method = RequestMethod.GET)
-//    public String getBuy(){
-//        int uid = -1;
-////        try{
-////            uid = Integer.parseInt(TokenUtil.getTokenUserId());
-////        }catch (Exception e){
-////            e.printStackTrace();
-////            return JsonResult.error("验证失败");
-////        }
-//        Map<String,Object> data = new HashMap<>();
-//        //购买列表
-//        Orders order = new Orders();
-//        order.setBid(1);
-//        List<Orders> orders = iOrderService.select(order);
-//        List<Integer> hid = new ArrayList<>();
-//        //房子id
-//        for(Orders o : orders){
-//            hid.add(o.getHid());
-//        }
-//        //获取房子列表
-//        List<EnSjz> houseList = new ArrayList<>();
-//        for(int i: hid){
-//            EnSjz temp = new EnSjz();
-//            temp.setId(i);
-//            houseList.add(iEnSjzService.select(temp).get(0));
-//        }
-//
-//        return JsonResult.success(houseList);
-//    }
+    @UserLoginToken
+    @RequestMapping(value = "/userCount",method = RequestMethod.GET)
+    public String getUserCount(){
+        //管理员认证
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+            Users temp = new Users();
+            temp.setId((long)uid);
+            temp = iUsersService.selectUsers(temp).get(0);
+            if(temp.getStatus()!=2){
+                return JsonResult.error("非管理员");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+
+
+
+        try {
+            Users user = new Users();
+            user.setDeleteFlag(0);
+            List<Users> users = iUsersService.selectUsers(user);
+            return JsonResult.success(users.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @UserLoginToken
+    @RequestMapping(value = "/houseCount",method = RequestMethod.GET)
+    public String getHouseCount(){
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+            Users temp = new Users();
+            temp.setId((long)uid);
+            temp = iUsersService.selectUsers(temp).get(0);
+            if(temp.getStatus()!=2){
+                return JsonResult.error("非管理员");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+
+        try{
+            EnSjz house = new EnSjz();
+            house.setDeleteFlag(0+"");
+            List<EnSjz> list = iEnSjzService.select(house);
+            return JsonResult.success(list.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
 
 
     @RequestMapping(value = "/test" ,method = RequestMethod.GET)
