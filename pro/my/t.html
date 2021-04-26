@@ -23,7 +23,11 @@
         $(document).ready(function() {
             //表格初始化
             var table = $('#myTable').DataTable({
-                "ajax": 'data.txt',
+                ajax : {
+                    url:"http://175.24.51.64:8081/houses/selectAll", //访问路径，返回Json数据
+
+                    type : "GET"   //设置请求类型
+                },
                 columns: [
                     {
                         "className":      'details-control',
@@ -32,8 +36,8 @@
                         "defaultContent": ''
                     },
                     { data: 'id'},
-                    { data: 'name'},
-                    { data: 'birthday'}
+                    { data: 'price'},
+                    { data: 'size'}
                 ],
                 "order": [[1, 'asc']]
             });
@@ -61,15 +65,15 @@
         function format ( d ) {
             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
                 '<tr>'+
-                '<td>姓名:</td>'+
+                '<td><button>s</button></td>'+
                 '<td>'+d.name+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                '<td>邮箱:</td>'+
+                '<td><button>s</button></td>'+
                 '<td>'+d.email+'</td>'+
                 '</tr>'+
                 '<tr>'+
-                '<td>简介:</td>'+
+                '<td><button>s</button></td>'+
                 '<td>'+d.info+'</td>'+
                 '</tr>'+
                 '</table>';
