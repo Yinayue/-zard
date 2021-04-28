@@ -7,18 +7,16 @@ import com.example.demo.service.IEnSjzService;
 import com.example.demo.service.IHousesEnService;
 import com.example.demo.service.IHousesService;
 import com.example.demo.service.IUsersService;
+import com.example.demo.util.predict.PMMLDemo;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.search.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -55,6 +53,100 @@ public class HousesController {
 
     }
 
+
+    /**
+     * 房价预测
+     *
+     *Region, Layout, Floor, Elevator, Renovation, Year, Size
+     *
+     */
+    @RequestMapping(value = "/predict",method = RequestMethod.POST)
+    public String predict(Housesen houses){
+        try{
+            String region = houses.getRegion();
+            int layout = houses.getLayout();
+            int floor = houses.getFloor();
+            String elevator = houses.getElevator();
+            String renovation = houses.getRenovation();
+            int year = houses.getYear();
+            if(year>2021){
+                return JsonResult.error("错误数据");
+            }
+            int size = houses.getSize();
+
+
+
+            HashMap<String, Integer> regionMap = new HashMap<>();
+            regionMap.put("Dongcheng",1);
+            regionMap.put("Xicheng",2);
+            regionMap.put("Chaoyang",3);
+            regionMap.put("Haidian",4);
+            regionMap.put("Fengtai",5);
+            regionMap.put("Shijingshan",6);
+            regionMap.put("Tongzhou",7);
+            regionMap.put("Changping",8);
+            regionMap.put("Daxing",9);
+            regionMap.put("Yizhuang",10);
+            regionMap.put("Shunyi",11);
+            regionMap.put("Fangshan",12);
+            regionMap.put("Mentougou",13);
+            regionMap.put("Pinggu",14);
+            regionMap.put("Huairou",15);
+            regionMap.put("Miyun",16);
+            regionMap.put("Yanqing",17);
+            regionMap.put("Yanjiao",18);
+            regionMap.put("Xianghe",19);
+
+
+            HashMap<String, Integer> renovationMap = new HashMap<>();
+            regionMap.put("Simple",0);
+            regionMap.put("High-Grade",1);
+            regionMap.put("Medium",2);
+
+
+            HashMap<String, Integer> elevatorMap = new HashMap<>();
+            regionMap.put("Yes",1);
+            regionMap.put("No",0);
+
+            try {
+
+
+                int regionNum = regionMap.get(region);
+                int renovationNum = renovationMap.get(renovation);
+                int elevatorNum = elevatorMap.get(elevator);
+
+
+                Map<String, Integer> predictMap = new HashMap<>();
+                predictMap.put("x1", regionNum);
+                predictMap.put("x2", layout);
+                predictMap.put("x3", floor);
+                predictMap.put("x4", elevatorNum);
+                predictMap.put("x5", renovationNum);
+                predictMap.put("x6", year);
+                predictMap.put("x7", size);
+
+                String path = System.getProperty("user.dir") + "\\src\\main\\resources\\Tpot_Model.pmml";
+
+                Double result = PMMLDemo.predict(predictMap, path);
+                return JsonResult.success(result);
+            }catch (Exception e){
+                e.printStackTrace();
+                return JsonResult.error("错误数据");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("操作失败");
+        }
+    }
+
+
+
+    /**
+     * 上传房子
+     * @param houses
+     * @return
+     */
     @RequestMapping(value="/insert",method = RequestMethod.POST)
     public String insert(Housesen houses){
         try {
