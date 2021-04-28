@@ -55,6 +55,9 @@ public class UsersController {
     @Autowired
     IOrderService iOrderService;
 
+    @Autowired
+    IHousesEnService iHousesEnService;
+
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
         try{
@@ -86,20 +89,6 @@ public class UsersController {
         }
     }
 
-//    @RequestMapping(value="/login",method = RequestMethod.POST)
-//    public String login(String name, String password){
-//        List<Users> login = iUsersService.login(name,password);
-//        try {
-//            if (login.size() > 0) {
-//                return JsonResult.success(login.get(0).getName());
-//            } else {
-//                return JsonResult.error();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return JsonResult.error();
-//        }
-//    }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
     public String update(Users users){
@@ -164,9 +153,9 @@ public class UsersController {
                         if(preferenceList.size()>0){
                             buyerSet.put(users1.getName()).create();
                             for(Preference preference: preferenceList){
-                                EnSjz t = new EnSjz();
+                                Housesen t = new Housesen();
                                 t.setId((long)preference.getHouseId());
-                                List<EnSjz> houses = iEnSjzService.select(t);
+                                List<Housesen> houses = iHousesEnService.select(t);
                                 buyerSet.getUser(users1.getName()).set(houses.get(0).getAddress(),preference.getScore());
                             }
                         }else{
@@ -176,11 +165,11 @@ public class UsersController {
                 }
                 Start start = new Start();
                 List<String> recoResult = start.start2(buyerSet,username);
-                List<EnSjz> result = new ArrayList<>();
+                List<Housesen> result = new ArrayList<>();
                 for(String s : recoResult){
-                    EnSjz tempHouse = new EnSjz();
+                    Housesen tempHouse = new Housesen();
                     tempHouse.setAddress(s);
-                    result.add(iEnSjzService.select(tempHouse).get(0));
+                    result.add(iHousesEnService.select(tempHouse).get(0));
                 }
                 return JsonResult.success(result);
                 //return JsonResult.success(buyerSet.getUser("b").list);
@@ -244,9 +233,9 @@ public class UsersController {
         }
         Map<String,Object> data = new HashMap<>();
         //卖过的房子列表
-        EnSjz enSjz = new EnSjz();
-        enSjz.setSellerId(uid);
-        List<EnSjz> houses = iEnSjzService.select(enSjz);
+        Housesen enSjz = new Housesen();
+        enSjz.setSid(uid);
+        List<Housesen> houses = iHousesEnService.select(enSjz);
         //data.put("sell",houses);
 
 
@@ -276,11 +265,11 @@ public class UsersController {
             hid.add(m.getHid());
         }
         //获取房子信息
-        List<EnSjz> houseList = new ArrayList<>();
+        List<Housesen> houseList = new ArrayList<>();
         for(long i: hid){
-            EnSjz temp = new EnSjz();
+            Housesen temp = new Housesen();
             temp.setId(i);
-            houseList.add(iEnSjzService.select(temp).get(0));
+            houseList.add(iHousesEnService.select(temp).get(0));
         }
         return JsonResult.success(houseList);
     }
@@ -334,9 +323,9 @@ public class UsersController {
         }
 
         try{
-            EnSjz house = new EnSjz();
-            house.setDeleteFlag(0+"");
-            List<EnSjz> list = iEnSjzService.select(house);
+            Housesen house = new Housesen();
+            house.setDeleteFlag(0);
+            List<Housesen> list = iHousesEnService.select(house);
             return JsonResult.success(list.size());
         }catch (Exception e){
             e.printStackTrace();
@@ -346,12 +335,12 @@ public class UsersController {
 
 
 
-    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
-    public String test(){
-        Mark mark = new Mark();
-        mark.setUid((long)1);
-        List<Mark> marks = iMarkService.select(mark);
-        return JsonResult.success(marks);
-    }
+//    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
+//    public String test(){
+//        Mark mark = new Mark();
+//        mark.setUid((long)1);
+//        List<Mark> marks = iMarkService.select(mark);
+//        return JsonResult.success(marks);
+//    }
 
 }
