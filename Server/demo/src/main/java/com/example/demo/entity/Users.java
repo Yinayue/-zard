@@ -29,6 +29,15 @@ public class Users extends Model<Users> {
 	@TableField("delete_flag")
 	private Integer deleteFlag;
 	private Integer score;
+	private int login;
+
+	public int getLogin() {
+		return login;
+	}
+
+	public void setLogin(int login) {
+		this.login = login;
+	}
 
 	public Users(){
 

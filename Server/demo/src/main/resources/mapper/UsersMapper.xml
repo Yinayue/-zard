@@ -15,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, phone_number AS phoneNumber, email, status, password, delete_flag AS deleteFlag, score
+        id, name, phone_number AS phoneNumber, email, status, password, delete_flag AS deleteFlag, score,login
     </sql>
 
 
@@ -55,6 +55,9 @@
 			</if>
 			<if test="score!=null and score!=''">
 				AND score = #{score}
+			</if>
+			<if test="login!=null and login!=''">
+				AND login = #{login}
 			</if>
 		</where>
 

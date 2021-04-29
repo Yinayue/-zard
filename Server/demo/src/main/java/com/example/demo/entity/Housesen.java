@@ -38,6 +38,43 @@ public class Housesen extends Model<Housesen> {
     private String launchTime;
     private String information;
 
+    private int startYear;
+    private int endYear;
+    private int startPrice;
+    private int endPrice;
+
+    public int getEndPrice() {
+        return endPrice;
+    }
+
+    public int getEndYear() {
+        return endYear;
+    }
+
+    public void setEndPrice(int endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public void setEndYear(int endYear) {
+        this.endYear = endYear;
+    }
+
+    public void setStartPrice(int startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public void setStartYear(int startYear) {
+        this.startYear = startYear;
+    }
+
+    public int getStartPrice() {
+        return startPrice;
+    }
+
+    public int getStartYear() {
+        return startYear;
+    }
+
     public String getLaunchTime() {
         return launchTime;
     }

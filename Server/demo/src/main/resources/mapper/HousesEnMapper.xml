@@ -60,6 +60,18 @@
             <if test="deleteFlag!=null and deleteFlag!=''">
                 AND delete_flag = #{deleteFlag}
             </if>
+            <if test="startPrice!=null and startPrice!=''">
+                AND price&gt;=#{startPrice}
+            </if>
+            <if test="endPrice!=null and endPrice!=''">
+                AND price&lt;=#{endPrice}
+            </if>
+            <if test="startYear!=null and startYear!=''">
+                AND year&gt;=#{startYear}
+            </if>
+            <if test="endYear!=null and endYear!=''">
+                AND year&lt;=#{endYear}
+            </if>
         </where>
     </select>
 

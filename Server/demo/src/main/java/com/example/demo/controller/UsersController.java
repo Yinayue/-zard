@@ -62,6 +62,7 @@ public class UsersController {
 	public String insertUser(Users user){
         try{
             user.setDeleteFlag(1);
+            user.setLogin(0);
             return JsonResult.success(iUsersService.insert(user));
         }catch (Exception e){
             e.printStackTrace();
@@ -210,7 +211,10 @@ public class UsersController {
                 Cookie cookie = new Cookie("token", token);
                 cookie.setPath("/");
                 response.addCookie(cookie);
-
+                if(temp.getLogin()==0){
+                    temp.setLogin(1);
+                    iUsersService.updateById(temp);
+                }
                 return jsonObject;
 
             }
@@ -274,23 +278,23 @@ public class UsersController {
         return JsonResult.success(houseList);
     }
 
-    @UserLoginToken
+    //@UserLoginToken
     @RequestMapping(value = "/userCount",method = RequestMethod.GET)
     public String getUserCount(){
         //管理员认证
-        int uid = -1;
-        try{
-            uid = Integer.parseInt(TokenUtil.getTokenUserId());
-            Users temp = new Users();
-            temp.setId((long)uid);
-            temp = iUsersService.selectUsers(temp).get(0);
-            if(temp.getStatus()!=2){
-                return JsonResult.error("非管理员");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return JsonResult.error("验证失败");
-        }
+//        int uid = -1;
+//        try{
+//            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+//            Users temp = new Users();
+//            temp.setId((long)uid);
+//            temp = iUsersService.selectUsers(temp).get(0);
+//            if(temp.getStatus()!=2){
+//                return JsonResult.error("非管理员");
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return JsonResult.error("验证失败");
+//        }
 
 
 
@@ -305,22 +309,22 @@ public class UsersController {
         }
     }
 
-    @UserLoginToken
+   // @UserLoginToken
     @RequestMapping(value = "/houseCount",method = RequestMethod.GET)
     public String getHouseCount(){
-        int uid = -1;
-        try{
-            uid = Integer.parseInt(TokenUtil.getTokenUserId());
-            Users temp = new Users();
-            temp.setId((long)uid);
-            temp = iUsersService.selectUsers(temp).get(0);
-            if(temp.getStatus()!=2){
-                return JsonResult.error("非管理员");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            return JsonResult.error("验证失败");
-        }
+//        int uid = -1;
+//        try{
+//            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+//            Users temp = new Users();
+//            temp.setId((long)uid);
+//            temp = iUsersService.selectUsers(temp).get(0);
+//            if(temp.getStatus()!=2){
+//                return JsonResult.error("非管理员");
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return JsonResult.error("验证失败");
+//        }
 
         try{
             Housesen house = new Housesen();
