@@ -2,12 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.HousesEnMapper">
 
-
-
-
-
     <sql id="Base_Column_List">
-        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,delete_flag AS deleteFlag
+        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, delete_flag AS deleteFlag
     </sql>
 
     <select id="select" parameterType="com.example.demo.entity.Housesen" resultType="com.example.demo.entity.Housesen">
@@ -55,8 +51,44 @@
             <if test="year!=null and year!=''">
                 AND year = #{year}
             </if>
+            <if test="information!=null and information!=''">
+                AND information = #{information}
+            </if>
+            <if test="launchTime!=null and launchTime!=''">
+                AND launch_time = #{launchTime}
+            </if>
             <if test="deleteFlag!=null and deleteFlag!=''">
                 AND delete_flag = #{deleteFlag}
+            </if>
+        </where>
+    </select>
+
+    <select id="year" resultType="com.example.demo.entity.Housesen" parameterType="com.example.demo.entity.Range">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        housesen
+        <where>
+            <if test="start!=null and start!=''">
+                year&gt;=#{start}
+            </if>
+            <if test="end!=null and end!=''">
+                AND year&lt;=#{end}
+            </if>
+        </where>
+    </select>
+
+    <select id="price" resultType="com.example.demo.entity.Housesen" parameterType="com.example.demo.entity.Range">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        housesen
+        <where>
+            <if test="start!=null and start!=''">
+                price&gt;=#{start}
+            </if>
+            <if test="end!=null and end!=''">
+                price&lt;=#{end}
             </if>
         </where>
     </select>

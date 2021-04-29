@@ -2,9 +2,14 @@ package com.example.demo.entity;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
+import java.sql.Date;
 
+@TableName("Housesen")
 public class Housesen extends Model<Housesen> {
 
     private static final long serialVersionUID = 1L;
@@ -13,7 +18,7 @@ public class Housesen extends Model<Housesen> {
     protected Serializable pkVal() {
         return this.id;
     }
-
+    @TableId(value="id", type= IdType.AUTO)
     private long id;
     private long sid;
     private String direction;
@@ -29,6 +34,27 @@ public class Housesen extends Model<Housesen> {
     private int year;
     @TableField("delete_flag")
     private int deleteFlag;
+    @TableField("launch_time")
+    private String launchTime;
+    private String information;
+
+    public String getLaunchTime() {
+        return launchTime;
+    }
+
+    public Housesen setInformation(String information) {
+        this.information = information;
+        return this;
+    }
+
+    public String getInformation() {
+        return information;
+    }
+
+    public Housesen setLaunchTime(String launchTime) {
+        this.launchTime = launchTime;
+        return this;
+    }
 
     public long getId() {
         return id;

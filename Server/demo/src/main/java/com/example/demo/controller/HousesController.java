@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entity.Housesen;
-import com.example.demo.entity.Users;
-import com.example.demo.service.IEnSjzService;
-import com.example.demo.service.IHousesEnService;
-import com.example.demo.service.IHousesService;
-import com.example.demo.service.IUsersService;
+import com.example.demo.entity.*;
+import com.example.demo.service.*;
 import com.example.demo.util.predict.PMMLDemo;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.search.Operation;
+import com.google.gson.JsonArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +38,12 @@ public class HousesController {
 
     @Autowired
     IHousesEnService iHousesEnService;
+
+    @Autowired
+    IMarkService iMarkService;
+
+    @Autowired
+    IOrderService iOrderService;
 
     @RequestMapping(value="/selectAll", method= RequestMethod.GET)
     public String select(){
@@ -214,5 +217,46 @@ public class HousesController {
             e.printStackTrace();
             return JsonResult.error();
         }
+    }
+
+    @RequestMapping(value = "mark", method = RequestMethod.POST)
+    public String mark(Mark mark){
+        try {
+            return JsonResult.success(iMarkService.insert(mark));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @RequestMapping(value = "order",method = RequestMethod.POST)
+    public String order(Orders orders){
+        try {
+            return JsonResult.success(iOrderService.insert(orders));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @RequestMapping(value = "year",method = RequestMethod.POST)
+    public String year(Range range){
+        try{
+            return JsonResult.success(iHousesEnService.year(range));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @RequestMapping(value = "price",method = RequestMethod.POST)
+    public String price(Range range){
+        try {
+            return JsonResult.success(iHousesEnService.price(range));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+
     }
 }

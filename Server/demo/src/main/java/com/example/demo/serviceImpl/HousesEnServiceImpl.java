@@ -2,6 +2,7 @@ package com.example.demo.serviceImpl;
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.example.demo.entity.Housesen;
+import com.example.demo.entity.Range;
 import com.example.demo.mapper.HousesEnMapper;
 import com.example.demo.service.IHousesEnService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,14 @@ public class HousesEnServiceImpl extends ServiceImpl<HousesEnMapper, Housesen> i
 
     public List<Housesen> select(Housesen housesEn){
         return housesEnMapper.select(housesEn);
+    }
+
+    public List<Housesen> year(Range range){
+        return housesEnMapper.year(range);
+    }
+
+    public List<Housesen> price(Range range){
+        return housesEnMapper.price(range);
     }
 
 }
