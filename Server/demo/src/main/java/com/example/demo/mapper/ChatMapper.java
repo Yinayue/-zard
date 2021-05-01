@@ -12,5 +12,4 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @since 2021-03-30
  */
 public interface ChatMapper extends BaseMapper<Chat> {
-
 }

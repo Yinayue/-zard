@@ -24,10 +24,11 @@ import org.springframework.web.socket.handler.WebSocketHandlerDecoratorFactory;
  */
 @Configuration
 @EnableWebSocketMessageBroker
+
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
   public JSONObject users =new JSONObject();
-
+  //SpringBoot自带Message格式
   @Autowired
   private SimpMessagingTemplate template;
   @Override

@@ -28,6 +28,9 @@ function login() {
     url: "/login",
     data: {username: name},
     success: function () {
+      //初始化一下用户的Message
+
+      //
       connect();
     },
     error: function () {
@@ -37,7 +40,10 @@ function login() {
 }
 
 function connect() {
+  //Endpoint 是 /gs-guide-websocket
   var socket = new SockJS('/gs-guide-websocket');
+
+  //表示使用STOMP来创建WebSocket客户端
   stompClient = Stomp.over(socket);
   stompClient.connect({}, function (frame) {
     setConnected(true);
@@ -91,7 +97,10 @@ function sendToUser() {
     $("#contentuser").val('');
   }
 }
+
+//点击列表发生事件
 function touser(message) {
+  console.log("Message\n" + message);
   $("#" + message.id + " span").html('');
   if ($("#privateuser").html() === '私信聊天') {
     $("#privateuser").html("私信聊天 与 【" + message.textContent + "】");
@@ -138,6 +147,7 @@ function showGreeting(message) {
   var div = document.getElementById('lobby');
   div.scrollTop = div.scrollHeight;
 }
+
 function showMessage(message, touser) {
   var patt1 = new RegExp(/【(.*?)】/g);
   var tousername='';
@@ -195,6 +205,31 @@ $(function () {
     sendToUser();
   });
 });
+
+//Offline user
+$(function () {
+  $.ajax({
+    type: "GET",
+    url: "/offline_userlist",
+    dataType: "json",
+    success: function (json) {
+      for (var p in json) {//遍历json对象的每个key/value对,p为key
+        showUser(json[p], p);
+      }
+    }
+  });
+  $("form").on('submit', function (e) {
+    e.preventDefault();
+  });
+
+  // $("#send").click(function () {
+  //   sendName();
+  // });
+  // $("#sendtouser").click(function () {
+  //   sendToUser();
+  // });
+});
+
 $(document).ready(function () {
   var div = document.getElementById('lobby');
   div.scrollTop = div.scrollHeight;
