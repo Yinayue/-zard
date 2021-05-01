@@ -54,58 +54,7 @@
 		============================================ -->
     <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script>
-        window.onload= function () {
 
-            Swal.mixin({
-                input: 'select',
-                confirmButtonText: 'Next &rarr;',
-                showCancelButton: true,
-                progressSteps: ['1', '2', '3'],
-                inputOptions: {
-                    bungalow: 'Bungalow',
-                    villa: 'Villa',
-                    apartment: 'Apartment'
-                },
-            }).queue([
-                {
-                    title: 'Question 1',
-                    text:'Type'
-
-                },
-                {title:'Question 2',
-                    text:'Decoration',
-                    inputOptions: {
-                        Ordinary: 'Ordinary decoration',
-                        Refined: 'Refined decoration',
-                        Luxurious: 'Luxurious decoration',
-                    },
-                },
-                {title:'Question 3',
-                    text:'Age',
-                    inputOptions: {
-                        2: 'in 2 years',
-                        5: '2-5 years',
-                        10: 'more than 5 years',
-                    },
-
-                }
-            ]).then((result) => {
-                if (result.value) {
-                    const answers = JSON.stringify(result.value)
-                    Swal.fire({
-                        title: 'All done!',
-                        html: `
-        Your answers:
-        <pre><code>${answers}</code></pre>
-      `,
-                        confirmButtonText: 'Lovely!'
-                    })
-                }
-            })
-        }
-
-    </script>
 </head>
 
 <body>
@@ -199,7 +148,7 @@
                     </div>
                     <div id="Houses" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="data.html">Starred</a>
+                            <li><a href="Starred.html">Starred</a>
                             </li>
                             <li><a href="data-map.html">Bought</a>
                             </li>
@@ -299,87 +248,88 @@
 <!-- End Status area-->
 <!-- Start Email Statistic area-->
 <div class="notika-email-post-area">
-    <div class="container">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                <div class="blog-img">
-                    <img src="../images/wimages/work-1.jpg"  />
-                </div>
-                <div class="blog-ctn">
-                    <div class="blog-hd-sw">
-                        <h2> Beijing Lingxiu</h2>
-                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>
-                    </div>
-                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>
-                    <a class="vw-at" href="house-image.html">View Details...</a>
-                </div>
+    <div class="container" id="container">
 
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                <div class="blog-img">
-                    <img src="../images/wimages/work-1.jpg"  />
-                </div>
-                <div class="blog-ctn">
-                    <div class="blog-hd-sw">
-                        <h2> Beijing Lingxiu</h2>
-                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>
-                    </div>
-                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>
-                    <a class="vw-at" href="house-image.html">View Details...</a>
-                </div>
+<!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+<!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+<!--                <div class="blog-img">-->
+<!--                    <img src="../images/wimages/work-1.jpg"  />-->
+<!--                </div>-->
+<!--                <div class="blog-ctn">-->
+<!--                    <div class="blog-hd-sw">-->
+<!--                        <h2> Beijing Lingxiu</h2>-->
+<!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+<!--                    </div>-->
+<!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+<!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+<!--                </div>-->
 
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                <div class="blog-img">
-                    <img src="../images/wimages/work-1.jpg"  />
-                </div>
-                <div class="blog-ctn">
-                    <div class="blog-hd-sw">
-                        <h2> Beijing Lingxiu</h2>
-                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>
-                    </div>
-                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>
-                    <a class="vw-at" href="house-image.html">View Details...</a>
-                </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+<!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+<!--                <div class="blog-img">-->
+<!--                    <img src="../images/wimages/work-1.jpg"  />-->
+<!--                </div>-->
+<!--                <div class="blog-ctn">-->
+<!--                    <div class="blog-hd-sw">-->
+<!--                        <h2> Beijing Lingxiu</h2>-->
+<!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+<!--                    </div>-->
+<!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+<!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+<!--                </div>-->
 
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                <div class="blog-img">
-                    <img src="../images/wimages/work-1.jpg"  />
-                </div>
-                <div class="blog-ctn">
-                    <div class="blog-hd-sw">
-                        <h2> Beijing Lingxiu</h2>
-                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>
-                    </div>
-                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>
-                    <a class="vw-at" href="house-image.html">View Details...</a>
-                </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+<!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+<!--                <div class="blog-img">-->
+<!--                    <img src="../images/wimages/work-1.jpg"  />-->
+<!--                </div>-->
+<!--                <div class="blog-ctn">-->
+<!--                    <div class="blog-hd-sw">-->
+<!--                        <h2> Beijing Lingxiu</h2>-->
+<!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+<!--                    </div>-->
+<!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+<!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+<!--                </div>-->
 
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">
-                <div class="blog-img">
-                    <img src="../images/wimages/work-1.jpg"  />
-                </div>
-                <div class="blog-ctn">
-                    <div class="blog-hd-sw">
-                        <h2> Beijing Lingxiu</h2>
-                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>
-                    </div>
-                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>
-                    <a class="vw-at" href="house-image.html">View Details...</a>
-                </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+<!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+<!--                <div class="blog-img">-->
+<!--                    <img src="../images/wimages/work-1.jpg"  />-->
+<!--                </div>-->
+<!--                <div class="blog-ctn">-->
+<!--                    <div class="blog-hd-sw">-->
+<!--                        <h2> Beijing Lingxiu</h2>-->
+<!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+<!--                    </div>-->
+<!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+<!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+<!--                </div>-->
 
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">-->
+<!--            <div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">-->
+<!--                <div class="blog-img">-->
+<!--                    <img src="../images/wimages/work-1.jpg"  />-->
+<!--                </div>-->
+<!--                <div class="blog-ctn">-->
+<!--                    <div class="blog-hd-sw">-->
+<!--                        <h2> Beijing Lingxiu</h2>-->
+<!--                        <a class="bg-au" href="#">By Malinda on 9th June 2018</a>-->
+<!--                    </div>-->
+<!--                    <p>Convenient transportation, near the subway, surrounded by three parks, located in six universities, strong humanistic atmosphere.</p>-->
+<!--                    <a class="vw-at" href="house-image.html">View Details...</a>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
     </div>
 </div>
 <!-- End Email Statistic area-->
@@ -397,86 +347,7 @@
     </div>
 </div>
 <!-- End Footer area-->
-<script>
-    async function t() {
-        const { value: password } =  await swal.fire({
-            text: 'Please input activation code:',
-            input: 'text',
-            inputAttributes: {
-                id: 'myInput',
-            },
-            inputPlaceholder:"0000-0000-0000",
-            didOpen: function(el) {
-                var container = $(el);
-                container.find('#myInput').mask('0000-0000-0000');
-            }
 
-        });
-        if(password) {
-            console.log(password+"password");
-            if (password == "0000-0000-0000") {
-                Swal.fire(
-                    'Successful!',
-                    'Check your points.',
-                    'success'
-                )
-            } else {
-                Swal.fire(
-                    'Unsuccessful!',
-                    'Your problem has been uploaded',
-                    'error'
-                )
-            }
-        }
-    }
-
-</script>
-<script>
-    function unenoughpoints() {
-        Swal.fire({
-            title: 'Not enough points.',
-            width: 600,
-            padding: '3em',
-            showCancelButton: true,
-            // background: '#fff url(/wimages/trees.png)',
-            backdrop: `
-    rgba(0,0,123,0.4)
-    url("img/cat.gif")
-    left top
-    no-repeat
-  `,confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Buy points!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Buy!',
-                    imageUrl: "img/charge.jpg",
-                    showCancelButton: true,
-                    confirmButtonText: 'Ok!',
-                    cancelButtonText: 'Something Wrong!',
-                    reverseButtons: true
-                }).then((result2) => {
-                    if (result2.isConfirmed) {
-                        Swal.fire(
-                            'Success!',
-                            'Check your points.',
-                            'success'
-                        )
-                    } else if (
-                        result2.dismiss === Swal.DismissReason.cancel
-                    ) {
-                        Swal.fire(
-                            'Something Wrong!',
-                            'Your problem has been uploaded',
-                            'error'
-                        )
-                    }
-                });
-            }
-        });
-    }
-</script>
 <!-- jquery
     ============================================ -->
 <script src="../js/vendor/jquery-1.12.4.min.js"></script>
@@ -534,8 +405,286 @@
 <script src="../js/main.js"></script>
 <!-- tawk chat JS
     ============================================ -->
-<script src="../js/tawk-chat.js"></script>
 <script src="../js/myjs/jquery.mask.js"></script>
+<script>
+    var houses=[];
+    function addh() {
+        var loveStr = "";
+        for (let i = 0; i < houses.length; i++) {
+            loveStr =loveStr+
+                '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">'+
+                    '<div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">'+
+                        '<div class="blog-img">'+
+                            '<img src="../images/wimages/work-1.jpg"  />'+
+                        '</div>'+
+                       ' <div class="blog-ctn">'+
+                            '<div class="blog-hd-sw">'+
+                                '<h2>'+ houses[i]['district']+'</h2>'+
+                                '<a class="bg-au" href="#">'+houses[i]['launchTime']+'</a>'+
+                           ' </div>'+
+                            '<p>'+houses[i]['address']+'</p>'+
+                            '<div>'+
+                            '<p hidden>'+houses[i]['id']+'</p>'+
+                            '<a class="vw-at" onclick="housedetailes(this)">View Details...</a>'+
+                            '</div>'+
+                        '</div>'+
+                    '</div>'+
+              '</div>'
+            ;
+        };
+        tool=document.getElementById("container");
+        tool.innerHTML = loveStr;
+        console.log(loveStr)
+    }
+
+    function getpreferencehouses() {
+
+        $.ajax({
+            type: "Post",
+            url: "http://175.24.51.64:8081/houses/select",
+            data: "direction=West&district=Dengshikou",
+            // dataType: "json",
+            success: function (msg) {
+                var data = JSON.parse(msg);
+                if(data['msg']==='failed'){
+                    console.log("qqqqqqqqqq"+data['data'])
+                }
+                else{
+                    console.log("data['data'].length"+data['data'].length);
+                    for(var i=0;i<5;i++){
+                        var single={};
+                        single["id"]=data['data'][i]["id"];
+                        single["price"]=data['data'][i]["price"];
+                        single["size"]=data['data'][i]["size"];
+                        single["address"]=data['data'][i]["address"];
+                        single["launchTime"]=data['data'][i]["launchTime"];
+                        single["district"]=data['data'][i]["district"];
+                        // single["address"]=data['data'][i]["address"];
+                        houses[i]=single;
+                    }
+                    console.log("wwwwwwwwwwww"+houses);
+                    console.log("wwwwwwwwwwww"+data['data'][0]);
+                    addh();
+
+                }
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+        });
+    }
+    function housedetailes(obj){
+        var hid = $(obj).parent().children("p:first-child").text();
+        var url = "house-image.html?h="+hid;
+        window.location.href = url;
+    }
+
+
+
+    $(document).ready(function(){
+        // var uid= getParams("u");
+        var uid=window.sessionStorage.getItem("userid");
+        console.log(uid);
+        $.ajax({
+
+            type: "POST",
+
+            url: "http://175.24.51.64:8081/users/selectUsers",
+
+            data: "id="+uid,
+
+            success: function(msg){
+
+                var data = JSON.parse(msg);
+                let checkone=data['data'][0]['login'];
+                console.log("data['data']"+data['data'][0]['login']);
+                //首次登陆
+                if(checkone==0){
+                    console.log("show")
+                    Swal.mixin({
+                        input: 'select',
+                        confirmButtonText: 'Next &rarr;',
+                        showCancelButton: true,
+                        progressSteps: ['1', '2', '3','4'],
+                        inputOptions: {
+                            bungalow: 'Bungalow',
+                            villa: 'Villa',
+                            apartment: 'Apartment'
+                        },
+                    }).queue([
+                        {
+                            title: 'Question 1',
+                            text:'Type'
+                        },
+                        {
+                            title:'Question 2',
+                            text:'Decoration',
+                            inputOptions: {
+                                Ordinary: 'Ordinary decoration',
+                                Refined: 'Refined decoration',
+                                Luxurious: 'Luxurious decoration',
+                            },
+                        },
+                        {title:'Question 3',
+                            text:'Age',
+                            inputOptions: {
+                                2: 'in 2 years',
+                                5: '2-5 years',
+                                10: 'more than 5 years',
+                            },
+
+                        },
+                        {title:'Question 4',
+                            text:'Elevator',
+                            inputOptions: {
+                                Elevator: 'Elevator',
+                                NoElevator: 'No Elevator',
+                            },
+                        }
+
+                    ]).then((result) => {
+                        if (result.value) {
+                            const answers = JSON.stringify(result.value);
+                            Swal.fire({
+                                title: 'All done!',
+                                html: `Your answers:<pre><code>${answers}</code></pre>`,
+                                confirmButtonText: 'Lovely!'
+                            });
+                            getpreferencehouses();
+                        }
+                    })
+                }
+                //非首次登陆
+                else {
+                    getpreferencehouses();
+                }
+
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+
+        });
+
+    });
+
+</script>
+<!--<script>-->
+
+<!--    $(document).ready(function(){-->
+<!--        $.ajax({-->
+<!--                type: "POST",-->
+<!--                url: "http://175.24.51.64:8081/houses/insert",-->
+<!--                data: "sellerId=" + 1 +"&address=" + address+ "&size="+size+-->
+<!--                    "&price=" + price+"&hasBeenSold="+1+"&currentHolderId=" + 1+"&secondHand=" + 1+"&roomsType=" + roomsType-->
+<!--                    +"&floor=" + floor+"&age=" + age+"&decoration=" + decoration+"&houseType=" + houseType-->
+<!--                    +"&property=" + 1+"&face=" +1+"&remarks=" + 1-->
+<!--                ,-->
+
+<!--                success: function(msg){-->
+<!--                    var data = JSON.parse(msg);-->
+<!--                    if(data['msg']==='failed'){-->
+<!--                        Toast.fire({-->
+<!--                            icon: 'error',-->
+<!--                            title: 'Upload unsuccessfully'-->
+<!--                        })-->
+<!--                    }-->
+<!--                    else{-->
+<!--                        Toast.fire({-->
+<!--                            icon: 'success',-->
+<!--                            title: 'Upload successfully'-->
+<!--                        });-->
+<!--                        window.location.href="home_seller.html";-->
+<!--                    }-->
+
+<!--                },-->
+<!--                error: function (msg) {-->
+<!--                    console.log("Data not Saved: " + msg);-->
+<!--                }-->
+
+<!--            });-->
+<!--    })-->
+<!-- </script>-->
+<!--<script>-->
+<!--    async function t() {-->
+<!--        const { value: password } =  await swal.fire({-->
+<!--            text: 'Please input activation code:',-->
+<!--            input: 'text',-->
+<!--            inputAttributes: {-->
+<!--                id: 'myInput',-->
+<!--            },-->
+<!--            inputPlaceholder:"0000-0000-0000",-->
+<!--            didOpen: function(el) {-->
+<!--                var container = $(el);-->
+<!--                container.find('#myInput').mask('0000-0000-0000');-->
+<!--            }-->
+
+<!--        });-->
+<!--        if(password) {-->
+<!--            console.log(password+"password");-->
+<!--            if (password == "0000-0000-0000") {-->
+<!--                Swal.fire(-->
+<!--                    'Successful!',-->
+<!--                    'Check your points.',-->
+<!--                    'success'-->
+<!--                )-->
+<!--            } else {-->
+<!--                Swal.fire(-->
+<!--                    'Unsuccessful!',-->
+<!--                    'Your problem has been uploaded',-->
+<!--                    'error'-->
+<!--                )-->
+<!--            }-->
+<!--        }-->
+<!--    }-->
+
+<!--</script>-->
+<!--<script>-->
+<!--    function unenoughpoints() {-->
+<!--        Swal.fire({-->
+<!--            title: 'Not enough points.',-->
+<!--            width: 600,-->
+<!--            padding: '3em',-->
+<!--            showCancelButton: true,-->
+<!--            // background: '#fff url(/wimages/trees.png)',-->
+<!--            backdrop: `-->
+<!--    rgba(0,0,123,0.4)-->
+<!--    url("img/cat.gif")-->
+<!--    left top-->
+<!--    no-repeat-->
+<!--  `,confirmButtonColor: '#3085d6',-->
+<!--            cancelButtonColor: '#d33',-->
+<!--            confirmButtonText: 'Buy points!'-->
+<!--        }).then((result) => {-->
+<!--            if (result.isConfirmed) {-->
+<!--                Swal.fire({-->
+<!--                    title: 'Buy!',-->
+<!--                    imageUrl: "img/charge.jpg",-->
+<!--                    showCancelButton: true,-->
+<!--                    confirmButtonText: 'Ok!',-->
+<!--                    cancelButtonText: 'Something Wrong!',-->
+<!--                    reverseButtons: true-->
+<!--                }).then((result2) => {-->
+<!--                    if (result2.isConfirmed) {-->
+<!--                        Swal.fire(-->
+<!--                            'Success!',-->
+<!--                            'Check your points.',-->
+<!--                            'success'-->
+<!--                        )-->
+<!--                    } else if (-->
+<!--                        result2.dismiss === Swal.DismissReason.cancel-->
+<!--                    ) {-->
+<!--                        Swal.fire(-->
+<!--                            'Something Wrong!',-->
+<!--                            'Your problem has been uploaded',-->
+<!--                            'error'-->
+<!--                        )-->
+<!--                    }-->
+<!--                });-->
+<!--            }-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
 </body>
 
 </html>

@@ -487,7 +487,6 @@
                             <tr>
                                 <!--                                <th>Type</th>-->
                                 <th>Address</th>
-                                <th>Age</th>
                                 <th>Start date</th>
                                 <th>Price</th>
                                 <th>Square metres</th>
@@ -639,23 +638,22 @@
             window.location.href = url;
             console.log("ssssssssssss");
         } );
-
     });
 </script>
 <script>
 
     function filtersearch() {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        });
+        // const Toast = Swal.mixin({
+        //     toast: true,
+        //     position: 'top-end',
+        //     showConfirmButton: false,
+        //     timer: 3000,
+        //     timerProgressBar: true,
+        //     didOpen: (toast) => {
+        //         toast.addEventListener('mouseenter', Swal.stopTimer)
+        //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+        //     }
+        // });
         var floorobj = document.getElementById("filterfloor"); //定位id
         var floorindex = floorobj.selectedIndex; // 选中索引
         var floor = floorobj.options[floorindex].value; // 选中值
