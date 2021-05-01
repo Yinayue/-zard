@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.*;
+import com.example.demo.model.User;
 import com.example.demo.service.*;
 import com.example.demo.serviceImpl.TokenService;
 import com.example.demo.util.basic.JsonResult;
@@ -10,6 +11,7 @@ import com.example.demo.util.basic.UserLoginToken;
 import com.example.demo.util.recommend.BuyerSet;
 import com.example.demo.util.recommend.Start;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
@@ -53,10 +55,14 @@ public class UsersController {
     @Autowired
     IOrderService iOrderService;
 
+    @Autowired
+    IHousesEnService iHousesEnService;
+
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
         try{
             user.setDeleteFlag(1);
+            user.setLogin(0);
             return JsonResult.success(iUsersService.insert(user));
         }catch (Exception e){
             e.printStackTrace();
@@ -84,20 +90,6 @@ public class UsersController {
         }
     }
 
-//    @RequestMapping(value="/login",method = RequestMethod.POST)
-//    public String login(String name, String password){
-//        List<Users> login = iUsersService.login(name,password);
-//        try {
-//            if (login.size() > 0) {
-//                return JsonResult.success(login.get(0).getName());
-//            } else {
-//                return JsonResult.error();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return JsonResult.error();
-//        }
-//    }
 
     @RequestMapping(value = "update",method = RequestMethod.POST)
     public String update(Users users){
@@ -129,15 +121,27 @@ public class UsersController {
         }
     }
 
+    @UserLoginToken
     @RequestMapping(value = "reco",method = RequestMethod.POST)
-    public String recommend(String username){
+    public String recommend(){
+
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+
+
         try{
             //获取到用户信息
             Users temp = new Users();
-            temp.setName(username);
+            temp.setId((long)uid);
             List<Users> users = iUsersService.selectUsers(temp);
             if(users.size()==1){
                 Users user = users.get(0);
+                String username = user.getName();
                 List<Users> allUser = iUsersService.selectUsers(new Users());
                 BuyerSet buyerSet = new BuyerSet();
                 //获取每个user的评分
@@ -150,9 +154,9 @@ public class UsersController {
                         if(preferenceList.size()>0){
                             buyerSet.put(users1.getName()).create();
                             for(Preference preference: preferenceList){
-                                Houses t = new Houses();
-                                t.setId(preference.getHouseId());
-                                List<Houses> houses = iHousesService.select(t);
+                                Housesen t = new Housesen();
+                                t.setId((long)preference.getHouseId());
+                                List<Housesen> houses = iHousesEnService.select(t);
                                 buyerSet.getUser(users1.getName()).set(houses.get(0).getAddress(),preference.getScore());
                             }
                         }else{
@@ -162,11 +166,11 @@ public class UsersController {
                 }
                 Start start = new Start();
                 List<String> recoResult = start.start2(buyerSet,username);
-                List<Houses> result = new ArrayList<>();
+                List<Housesen> result = new ArrayList<>();
                 for(String s : recoResult){
-                    Houses tempHouse = new Houses();
+                    Housesen tempHouse = new Housesen();
                     tempHouse.setAddress(s);
-                    result.add(iHousesService.select(tempHouse).get(0));
+                    result.add(iHousesEnService.select(tempHouse).get(0));
                 }
                 return JsonResult.success(result);
                 //return JsonResult.success(buyerSet.getUser("b").list);
@@ -207,7 +211,10 @@ public class UsersController {
                 Cookie cookie = new Cookie("token", token);
                 cookie.setPath("/");
                 response.addCookie(cookie);
-
+                if(temp.getLogin()==0){
+                    temp.setLogin(1);
+                    iUsersService.updateById(temp);
+                }
                 return jsonObject;
 
             }
@@ -218,43 +225,126 @@ public class UsersController {
 
     }
 
-    //@UserLoginToken
-    @RequestMapping(value = "/getUserDetail" ,method = RequestMethod.GET)
-    public String getMessage() {
+    @UserLoginToken
+    @RequestMapping(value = "/sellDetail" ,method = RequestMethod.GET)
+    public String getSell() {
         int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+        Map<String,Object> data = new HashMap<>();
+        //卖过的房子列表
+        Housesen enSjz = new Housesen();
+        enSjz.setSid(uid);
+        List<Housesen> houses = iHousesEnService.select(enSjz);
+        //data.put("sell",houses);
+
+
+
+        return JsonResult.success(houses);
+    }
+
+    @UserLoginToken
+    @RequestMapping(value = "/markDetail", method = RequestMethod.GET)
+    public String getMark(){
+        int uid = -1;
+        try{
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+        Map<String,Object> data = new HashMap<>();
+        //收藏列表
+        Mark mark = new Mark();
+        mark.setUid((long)uid);
+        List<Mark> marks = iMarkService.select(mark);
+        data.put("mark",marks);
+        //获取房子id
+        List<Long> hid = new ArrayList<>();
+        for(Mark m : marks){
+            hid.add(m.getHid());
+        }
+        //获取房子信息
+        List<Housesen> houseList = new ArrayList<>();
+        for(long i: hid){
+            Housesen temp = new Housesen();
+            temp.setId(i);
+            houseList.add(iHousesEnService.select(temp).get(0));
+        }
+        return JsonResult.success(houseList);
+    }
+
+    //@UserLoginToken
+    @RequestMapping(value = "/userCount",method = RequestMethod.GET)
+    public String getUserCount(){
+        //管理员认证
+//        int uid = -1;
 //        try{
 //            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+//            Users temp = new Users();
+//            temp.setId((long)uid);
+//            temp = iUsersService.selectUsers(temp).get(0);
+//            if(temp.getStatus()!=2){
+//                return JsonResult.error("非管理员");
+//            }
 //        }catch (Exception e){
 //            e.printStackTrace();
 //            return JsonResult.error("验证失败");
 //        }
-        Map<String,Object> data = new HashMap<>();
-        //卖过的房子列表
-        EnSjz enSjz = new EnSjz();
-        enSjz.setSellerId(1);
-        List<EnSjz> houses = iEnSjzService.select(enSjz);
-        data.put("sell",houses);
-        //收藏列表
-        Mark mark = new Mark();
-        mark.setUid(1);
-        List<Mark> marks = iMarkService.select(mark);
-        data.put("mark",marks);
-        //购买列表
-        Order order = new Order();
-        order.setBid(1);
-        List<Order> orders = iOrderService.select(order);
-        data.put("buy",orders);
 
 
-        return JsonResult.success(data);
+
+        try {
+            Users user = new Users();
+            user.setDeleteFlag(0);
+            List<Users> users = iUsersService.selectUsers(user);
+            return JsonResult.success(users.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
     }
 
-    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
-    public String test(){
-        Mark mark = new Mark();
-        mark.setUid(1);
-        List<Mark> marks = iMarkService.select(mark);
-        return JsonResult.success(marks);
+   // @UserLoginToken
+    @RequestMapping(value = "/houseCount",method = RequestMethod.GET)
+    public String getHouseCount(){
+//        int uid = -1;
+//        try{
+//            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+//            Users temp = new Users();
+//            temp.setId((long)uid);
+//            temp = iUsersService.selectUsers(temp).get(0);
+//            if(temp.getStatus()!=2){
+//                return JsonResult.error("非管理员");
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return JsonResult.error("验证失败");
+//        }
+
+        try{
+            Housesen house = new Housesen();
+            house.setDeleteFlag(0);
+            List<Housesen> list = iHousesEnService.select(house);
+            return JsonResult.success(list.size());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
     }
+
+
+
+//    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
+//    public String test(){
+//        Mark mark = new Mark();
+//        mark.setUid((long)1);
+//        List<Mark> marks = iMarkService.select(mark);
+//        return JsonResult.success(marks);
+//    }
 
 }

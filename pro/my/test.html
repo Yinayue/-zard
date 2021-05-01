@@ -231,14 +231,15 @@
   //       }
 
 
-function f() {
-
-
+function f(obj) {
+    var hid = $(obj).text();
+    console.log(hid+"hid")
 }
     </script>
 </head>
 <body>
-<div id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+<div id="myDiv" onclick="f()"><h2 id="nn">使用 AJAX 修改该文本内容</h2></div>
+<a class="vw-at" onclick="f(this)">View Details...</a>
 <button data-swal-template="#my-template">
     Trigger modal
 </button>

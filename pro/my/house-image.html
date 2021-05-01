@@ -358,60 +358,52 @@
                                                 <h3 class="head">Give a Review</h3>
                                                 <div class="wrap">
                                                     <p class="star">
-									   				<span>
+									   				<a onclick=alert("5")>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					(98%)
-								   					</span>
+								   					</a>
                                                         <span>20 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<span>
-									   					<i class="fa fa-star"></i>
+									   				<a>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					(85%)
-								   					</span>
+								   					</a>
                                                         <span>10 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<span>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
+									   				<a>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					(70%)
-								   					</span>
+								   					</a>
                                                         <span>5 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<span>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
+									   				<a>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					(10%)
-								   					</span>
+								   					</a>
                                                         <span>0 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<span>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
-									   					<i class="fa fa-star"></i>
+									   				<a>
 									   					<i class="fa fa-star"></i>
 									   					(0%)
-								   					</span>
+								   					</a>
                                                         <span>0 Reviews</span>
                                                     </p>
+                                                        <button onclick="starhouse()">Star
+                                                        </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -449,35 +441,11 @@
 <!-- bootstrap JS
     ============================================ -->
 <script src="../js/bootstrap.min.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    var index= getParams("index");
-    console.log(index);
-    $.ajax({
-
-        type: "POST",
-
-        url: "http://175.24.51.64:8081/houses/select",
-
-        data: "id="+index,
-
-        success: function(msg){
-
-            var data = JSON.parse(msg);
-            if(data['msg']==='failed'){
-                console.log("qqqqqqqqqq"+data['data'])
-            }
-            else{
-                console.log(data);
-                console.log("wwwwwwwwwwww"+data['data'][0]["launchDate"])
-            }
-
-        },
-        error: function (msg) {
-            console.log("Data not Saved: " + msg);
-        }
-
-    });
     //获取传过来的值
+
     function getParams(key) {
         var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -485,8 +453,68 @@
             return unescape(r[2]);
         }
         return null;
-    };
+    }
+    function starhouse(){
+        var hid= getParams("h");
+        var uid= window.sessionStorage.getItem("userid");
+        console.log('hid'+hid+"uid"+uid)
+        $.ajax({
 
+            type: "POST",
+
+            url: "http://175.24.51.64:8081/houses/mark",
+
+            data: "uid="+uid+"&hid="+hid,
+
+            success: function(msg){
+
+                var data = JSON.parse(msg);
+                if(data['msg']==='验证失败'){
+                    Swal.fire('Saved!', value, 'unsuccess')
+                }
+                else{
+                    Swal.fire('Saved!','success')
+                }
+
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+
+        });
+    }
+    $(document).ready(function(){
+        var hid= getParams("h");
+        var uid= window.sessionStorage.getItem("userid");
+
+        console.log(hid);
+        $.ajax({
+
+            type: "POST",
+
+            url: "http://175.24.51.64:8081/houses/select",
+
+            data: "id="+hid,
+
+            success: function(msg){
+
+                var data = JSON.parse(msg);
+                if(data['msg']==='failed'){
+                    console.log("qqqqqqqqqq"+data['data'])
+                }
+                else{
+                    console.log(data);
+                    console.log("wwwwwwwwwwww"+data['data'][0]["launchDate"])
+                }
+
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+
+        });
+
+    });
 </script>
 
 </body>

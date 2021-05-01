@@ -58,7 +58,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 }
 
                 Users temp = new Users();
-                temp.setId(Integer.parseInt(userId));
+                temp.setId(Long.parseLong(userId));
 
                 List<Users> user = userService.selectUsers(temp);
                 if (user.size()==0) {

@@ -314,6 +314,7 @@
                 <div class="visitor-sv-tm-int">
                     <div class="contact-hd mg-bt-ant-inner">
                         <h2>Visits by Server Time</h2>
+                        <h2>{{sessionStorage.getItem("uname")}}</h2>
                         <p>Fusce eget dolor id justo luctus commodo vel pharetra nisi. Donec velit libero</p>
                     </div>
                     <div class="visitor-sv-tm-ch">
@@ -447,7 +448,10 @@
 <script src="../js/main.js"></script>
 <!-- tawk chat JS
     ============================================ -->
-<script src="../js/tawk-chat.js"></script>
+<!--<script src="../js/tawk-chat.js"></script>-->
+<script>
+    console.log(sessionStorage.getItem("uname"))
+</script>
 </body>
 
 </html>

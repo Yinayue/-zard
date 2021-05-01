@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.HousesEnMapper">
+
+    <sql id="Base_Column_List">
+        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, delete_flag AS deleteFlag
+    </sql>
+
+    <select id="select" parameterType="com.example.demo.entity.Housesen" resultType="com.example.demo.entity.Housesen">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        housesen
+        <where>
+            <if test="id!=null and id!=''">
+                id = #{id}
+            </if>
+            <if test="sid!=null and sid!=''">
+                AND sid = #{sid}
+            </if>
+            <if test="direction!=null and direction!=''">
+                AND direction = #{direction}
+            </if>
+            <if test="district!=null and district!=''">
+                AND district = #{district}
+            </if>
+            <if test="elevator!=null and elevator!=''">
+                AND elevator = #{elevator}
+            </if>
+            <if test="floor!=null and floor!=''">
+                AND floor = #{floor}
+            </if>
+            <if test="address!=null and address!=''">
+                AND address = #{address}
+            </if>
+            <if test="layout!=null and layout!=''">
+                AND layout = #{layout}
+            </if>
+            <if test="price!=null and price!=''">
+                AND price = #{price}
+            </if>
+            <if test="region!=null and region!=''">
+                AND region = #{region}
+            </if>
+            <if test="renovation!=null and renovation!=''">
+                AND renovation = #{renovation}
+            </if>
+            <if test="size!=null and size!=''">
+                AND size = #{size}
+            </if>
+            <if test="year!=null and year!=''">
+                AND year = #{year}
+            </if>
+            <if test="information!=null and information!=''">
+                AND information = #{information}
+            </if>
+            <if test="launchTime!=null and launchTime!=''">
+                AND launch_time = #{launchTime}
+            </if>
+            <if test="deleteFlag!=null and deleteFlag!=''">
+                AND delete_flag = #{deleteFlag}
+            </if>
+            <if test="startPrice!=null and startPrice!=''">
+                AND price&gt;=#{startPrice}
+            </if>
+            <if test="endPrice!=null and endPrice!=''">
+                AND price&lt;=#{endPrice}
+            </if>
+            <if test="startYear!=null and startYear!=''">
+                AND year&gt;=#{startYear}
+            </if>
+            <if test="endYear!=null and endYear!=''">
+                AND year&lt;=#{endYear}
+            </if>
+        </where>
+    </select>
+
+    <select id="year" resultType="com.example.demo.entity.Housesen" parameterType="com.example.demo.entity.Range">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        housesen
+        <where>
+            <if test="start!=null and start!=''">
+                year&gt;=#{start}
+            </if>
+            <if test="end!=null and end!=''">
+                AND year&lt;=#{end}
+            </if>
+        </where>
+    </select>
+
+    <select id="price" resultType="com.example.demo.entity.Housesen" parameterType="com.example.demo.entity.Range">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM
+        housesen
+        <where>
+            <if test="start!=null and start!=''">
+                price&gt;=#{start}
+            </if>
+            <if test="end!=null and end!=''">
+                price&lt;=#{end}
+            </if>
+        </where>
+    </select>
+
+</mapper>

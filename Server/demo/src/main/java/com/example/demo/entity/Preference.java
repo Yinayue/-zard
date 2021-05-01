@@ -20,37 +20,37 @@ public class Preference extends Model<Preference> {
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
 	@TableField("buyer_id")
-	private Integer buyerId;
+	private Long buyerId;
 	@TableField("house_id")
-	private Integer houseId;
+	private Long houseId;
 	private Integer score;
 
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public Preference setId(Integer id) {
+	public Preference setId(Long id) {
 		this.id = id;
 		return this;
 	}
 
-	public Integer getBuyerId() {
+	public Long getBuyerId() {
 		return buyerId;
 	}
 
-	public Preference setBuyerId(Integer buyerId) {
+	public Preference setBuyerId(Long buyerId) {
 		this.buyerId = buyerId;
 		return this;
 	}
 
-	public Integer getHouseId() {
+	public Long getHouseId() {
 		return houseId;
 	}
 
-	public Preference setHouseId(Integer houseId) {
+	public Preference setHouseId(Long houseId) {
 		this.houseId = houseId;
 		return this;
 	}

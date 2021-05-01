@@ -1,18 +1,348 @@
 <!DOCTYPE html>
-<html>
- <head>
-  <meta charset="UTF-8">
-  <title></title>
-  <!--导入js文件-->
-  <script src="../js/myjs/global.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript">
-   //调用多个存储方法
-   globalData.setUserInfo(1,"张三","123456")
-   //输出测试
-   alert(globalData.getUserUid()+globalData.getUserUName()+globalData.getUserUSex());
-  </script>
- </head>
- <body>
- </body>
-</html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Title</title>
+ <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+ <link rel="shortcut icon" type="image/x-icon" href="../images/img/favicon.ico">
+ <!-- Google Fonts
+     ============================================ -->
+ <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+ <!-- Bootstrap CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/bootstrap.min.css">
+ <!-- font awesome CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/font-awesome.min.css">
+ <!-- owl.carousel CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/owl.carousel.css">
+ <link rel="stylesheet" href="../css/owl.theme.css">
+ <link rel="stylesheet" href="../css/owl.transitions.css">
+ <!-- meanmenu CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/meanmenu/meanmenu.min.css">
+ <!-- animate CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/animate.css">
+ <!-- normalize CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/normalize.css">
+ <!-- wave CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/wave/waves.min.css">
+ <link rel="stylesheet" href="../css/wave/button.css">
+ <!-- mCustomScrollbar CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/scrollbar/jquery.mCustomScrollbar.min.css">
+ <!-- Notika icon CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/notika-custom-icon.css">
+ <!-- Data Table JS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+ <!-- main CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/main.css">
+ <!-- style CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/style.css">
+ <!-- responsive CSS
+     ============================================ -->
+ <link rel="stylesheet" href="../css/responsive.css">
+ <!-- modernizr JS
+     ============================================ -->
+ <script src="../js/vendor/modernizr-2.8.3.min.js"></script>
+ <script type="text/javascript" src="../js/jquery-3.5.1.min.js"> </script>
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+ <script src="../js/data-table/jquery.dataTables.min.js"></script>
+ <script src="../js/data-table/data-table-act.js"></script>
+ <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+
+ <script>
+
+  // $.ajax({
+  //
+  //      type: "POST",
+  //
+  //      url:"http://175.24.51.64:8081/users/register",
+  //
+  //      data: "name=ima&phoneNumber=121233&email=71@qq.com&password=1&status=1&deleteFlag=1",
+  //
+  //      success: function(msg){
+  //
+  //        console.log( "Data Saved: " + msg );
+  //
+  //      },
+  //      error:function (msg) {
+  //       console.log( "Data not Saved: " + msg );
+  //      }
+  //
+  //   });
+  // const Toast = Swal.mixin({
+  //     toast: true,
+  //     position: 'top-end',
+  //     showConfirmButton: false,
+  //     timer: 3000,
+  //     timerProgressBar: true,
+  //     didOpen: (toast) => {
+  //         toast.addEventListener('mouseenter', Swal.stopTimer)
+  //         toast.addEventListener('mouseleave', Swal.resumeTimer)
+  //     }
+  // });
+  // function f() {
+  //     // var username=document.getElementById("regist_user").value;
+  //     // console.log("username"+username);
+  //     $.ajax({
+  //
+  //         type: "POST",
+  //
+  //         url: "http://175.24.51.64:8081/houses/insert",
+  //         //sellerId=1&address=1&size=1&price=1&hasBeenSold=1
+  //         // &currentHolderId=1&secondHand=1&roomsType=1&floor=1
+  //         // &age=1&decoration=1&houseType=1&property=1&face=1&remarks=1
+  //         data: "sellerId=" + 1 +"&address=" + 1+ "&size="+1+
+  //             "&price=" + 1+"&hasBeenSold="+1+"&currentHolderId=" + 1+"&secondHand=" + 1+"&roomsType=" + 1
+  //             +"&floor=" + 1+"&age=" + 1+"&decoration=" + 1+"&houseType=" + 1
+  //             +"&property=" + 1+"&face=" + 1+"&remarks=" + 1
+  //         ,
+  //
+  //         success: function(msg){
+  //             var data = JSON.parse(msg);
+  //             if(data['msg']==='failed'){
+  //                 Toast.fire({
+  //                     icon: 'error',
+  //                     title: 'Upload unsuccessfully'
+  //                 })
+  //             }
+  //             else{
+  //                 Toast.fire({
+  //                     icon: 'success',
+  //                     title: 'Upload successfully'
+  //                 });
+  //             }
+  //
+  //         },
+  //         error: function (msg) {
+  //             console.log("Data not Saved: " + msg);
+  //         }
+  //
+  //     });
+
+
+  // var address = document.getElementById("regist_user").value;
+  //
+  // if(address!=""){
+  //     address="address="+address
+  // }
+  // window.onload=function(ev){
+  //     $.ajax({
+  //
+  //         type: "GET",
+  //         // 175.24.51.64:8081/users/login?name=Pw&password=12
+  //         url:"http://175.24.51.64:8081/houses/selectAll",
+  //
+  //         datatype : "json",
+  //         success: function(msg){
+  //             var data = JSON.parse(msg);
+  //             $.each(data['data'], function(i, item) {
+  //                 var houseType = item.houseType;
+  //                 var address = item.address;
+  //                 var age = item.age;
+  //                 var launchDate = item.launchDate;
+  //                 var price = item.price;
+  //                 var size = item.size;
+  //                 $("#ul").append(
+  //                     "<tr>"+
+  //                     "<td>"
+  //                     + houseType
+  //                     + "<td>"
+  //                     + address
+  //                     + "<td>"
+  //                     + age
+  //                     + "<td>"
+  //                     + launchDate
+  //                     + "<td>"
+  //                     + "$"+price
+  //                     + "<td>"
+  //                     + size
+  //                     + "<td>"
+  //                     + "</tr>"
+  //                 );
+  //             });
+  //
+  //
+  //         },
+  //         error:function (msg) {
+  //
+  //             console.log( );
+  //
+  //         }
+  //
+  //     });
+  // }
+
+
+  //       function f() {
+  //
+  //           Swal.fire({
+  //               title: 'Not enough points.',
+  //               width: 600,
+  //               padding: '3em',
+  //               showCancelButton: true,
+  //               background: '#fff url(/images/trees.png)',
+  //               backdrop: `
+  //   rgba(0,0,123,0.4)
+  //   url("img/cat.gif")
+  //   left top
+  //   no-repeat
+  // `,confirmButtonColor: '#3085d6',
+  //               cancelButtonColor: '#d33',
+  //               confirmButtonText: 'Buy points!'
+  //           }).then((result) => {
+  //               if (result.isConfirmed) {
+  //                   Swal.fire({
+  //                       title: 'Buy!',
+  //                       imageUrl: "img/charge.jpg",
+  //                       showCancelButton: true,
+  //                       confirmButtonText: 'Ok!',
+  //                       cancelButtonText: 'Something Wrong!',
+  //                       reverseButtons: true
+  //                   }).then((result2) => {
+  //                       if (result2.isConfirmed) {
+  //                           Swal.fire(
+  //                               'Success!',
+  //                               'Check your balance.',
+  //                               'success'
+  //                           )
+  //                       } else if (
+  //                           result2.dismiss === Swal.DismissReason.cancel
+  //                       ) {
+  //                           Swal.fire(
+  //                               'Something Wrong!',
+  //                               'Your problem has been uploaded',
+  //                               'error'
+  //                           )
+  //                       }
+  //                   });
+  //               }
+  //       });
+  //       }
+
+
+  function f() {
+      $.ajax({
+       type: "Post",
+       url: "http://175.24.51.64:8081/users/login",
+
+       data: "name=" + "Pw" +"&password=" + 1,
+
+       datatype : "json",
+       success: function(msg){
+
+       sessionStorage.setItem("uname","uname");
+       sessionStorage.setItem("role","upwd");
+       // var url = "house-image.html?index="+tr;
+       window.location.href = "employee.html";
+       },
+       error: function (msg) {
+       console.log("sssssssss")
+       }
+
+
+
+
+      })
+
+  }
+ </script>
+</head>
+<body>
+<div id="myDiv"><h2>使用 AJAX 修改该文本内容</h2></div>
+<button data-swal-template="#my-template">
+ Trigger modal
+</button>
+
+<button data-swal-toast-template="#my-template">
+ Trigger toast
+</button>
+<button type="button" id="but" onclick="f()">修改内容</button>
+<input type="text" class="form-control" id="regist_user" placeholder="Username">
+<table id="ul">
+ <thead>
+ <tr>
+
+  <th>ID</th>
+  <th>Type</th>
+  <th>Address</th>
+  <th>Age</th>
+  <th>Start date</th>
+  <th>Price</th>
+  <th>Square metres</th>
+ </tr>
+ </thead>
+ <tbody>
+</table>
+
+
+
+<script>
+
+
+ $(document).ready(function() {
+  $('#ul').DataTable({
+   ajax : {
+    url:"http://175.24.51.64:8081/houses/selectAll", //访问路径，返回Json数据
+
+    type : "GET"   //设置请求类型
+   },
+   columns : [ //数据渲染，固定格式,下面每一个对应表格一个td
+    {
+     // "name" : "decoration",
+     "data" : "id"
+    },
+    {
+     // "name" : "address", //后台返回json数据 这是名
+     "data" : "houseType"  //这是值，一定要对应
+    },
+    {
+     // "name" : "decoration",
+     "data" : "address"
+    },
+    {
+     // "name" : "floor",
+     "data" : "age"
+    },
+    {
+     // "name" : "houseType",
+     "data" : "launchDate"
+    },
+    {
+     // "name" : "price",
+     "data" : "price"
+
+    },
+    {
+     // "name" : "price",
+     "data" : "size"
+
+    },]
+  });
+  $('#ul').on('click', 'td', function () {
+   var tr = $(this).parent().children("td:first-child").text();
+   // var td = $(this).find("td");
+   // var data = td.eq(0).text();
+   var url = "house-image.html?index="+tr;
+   window.location.href = url;
+   console.log("ssssssssssss");
+  } );
+
+ });
+
+
+</script>
+</body>
+
+
+</html>

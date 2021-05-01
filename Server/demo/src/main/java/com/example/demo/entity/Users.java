@@ -19,7 +19,7 @@ public class Users extends Model<Users> {
     private static final long serialVersionUID = 1L;
 
 	@TableId(value="id", type= IdType.AUTO)
-	private Integer id;
+	private Long id;
 	private String name;
 	@TableField("phone_number")
 	private String phoneNumber;
@@ -29,16 +29,25 @@ public class Users extends Model<Users> {
 	@TableField("delete_flag")
 	private Integer deleteFlag;
 	private Integer score;
+	private int login;
+
+	public int getLogin() {
+		return login;
+	}
+
+	public void setLogin(int login) {
+		this.login = login;
+	}
 
 	public Users(){
 
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public Users setId(Integer id) {
+	public Users setId(Long id) {
 		this.id = id;
 		return this;
 	}
