@@ -63,9 +63,13 @@ public class PreferenceController {
     }
 
     @RequestMapping(value = "delete",method = RequestMethod.POST)
-    public String delete(Preference preference){
+    public String delete(long houseId, long buyerId){
         try{
-            return JsonResult.success(iPreferenceService.deleteById(preference));
+            Preference preference = new Preference();
+            preference.setBuyerId(buyerId);
+            preference.setHouseId(houseId);
+            Preference target = iPreferenceService.select(preference).get(0);
+            return JsonResult.success(iPreferenceService.deleteById(target));
         }catch (Exception e){
             e.printStackTrace();
             return JsonResult.error();

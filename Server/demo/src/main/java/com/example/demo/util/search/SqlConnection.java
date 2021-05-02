@@ -44,14 +44,17 @@ public class SqlConnection {
             Statement stmt = null;
             Connection connection = conn;
 
-            String sql ="select * FROM houses";
+            String sql ="select * FROM housesen";
 
             stmt =connection.createStatement();
             rs=stmt.executeQuery(sql);
 
             //这里只保留要检索的部分就行
             while (rs.next()){
-                String address = rs.getString(4);
+                String address = rs.getString(7);
+                //这里这里1
+//                String remark = rs.getString();
+//                HouseBean houseBean = new HouseBean(address,remark);
                 HouseBean houseBean = new HouseBean(address);
                 houseBeanList.add(houseBean);
             }

@@ -15,7 +15,8 @@ public class Constants {
     static Map<String,String[]> getIOMap()
     {
         Map<String,String[]> IOMap = new HashMap<>();
-        IOMap.put("input",new String[] {"address"});///以address作为输入
+//        IOMap.put("input",new String[] {"address","remark"});///以address, remark作为输入
+        IOMap.put("input",new String[] {"address"});
         return IOMap;
     }
 

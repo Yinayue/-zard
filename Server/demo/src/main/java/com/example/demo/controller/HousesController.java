@@ -180,6 +180,7 @@ public class HousesController {
     @RequestMapping(value = "select",method = RequestMethod.POST)
     public String select(Housesen houses){
         try{
+            List<Housesen> temp = iHousesEnService.select(houses);
             return JsonResult.success(iHousesEnService.select(houses));
         }catch (Exception e){
             e.printStackTrace();
