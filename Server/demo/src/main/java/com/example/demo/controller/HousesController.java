@@ -187,6 +187,11 @@ public class HousesController {
         }
     }
 
+
+    /**
+     * 更新房子信息
+     * @return
+     */
     @RequestMapping(value = "update",method = RequestMethod.POST)
     public String update(Housesen houses){
         try{
@@ -197,6 +202,11 @@ public class HousesController {
         }
     }
 
+
+    /**
+     * 搜索引擎
+     * @return
+     */
     @RequestMapping(value = "search",method = RequestMethod.POST)
     public String search(String queryStr){
         try{
@@ -219,9 +229,17 @@ public class HousesController {
         }
     }
 
+    /**
+     * 新增收藏
+     * @return
+     */
     @RequestMapping(value = "mark", method = RequestMethod.POST)
     public String mark(Mark mark){
         try {
+            //查重
+            if(iMarkService.select(mark).size()>0){
+                return JsonResult.error("已存在");
+            }
             return JsonResult.success(iMarkService.insert(mark));
         }catch (Exception e){
             e.printStackTrace();
@@ -229,9 +247,16 @@ public class HousesController {
         }
     }
 
+    /**
+     * 新增购买
+     * @return
+     */
     @RequestMapping(value = "order",method = RequestMethod.POST)
     public String order(Orders orders){
         try {
+            if(iOrderService.select(orders).size()>0){
+                return JsonResult.error("已存在");
+            }
             return JsonResult.success(iOrderService.insert(orders));
         }catch (Exception e){
             e.printStackTrace();
@@ -239,6 +264,11 @@ public class HousesController {
         }
     }
 
+    /**
+     * 弃用
+     * @param range
+     * @return
+     */
     @RequestMapping(value = "year",method = RequestMethod.POST)
     public String year(Range range){
         try{
@@ -249,6 +279,11 @@ public class HousesController {
         }
     }
 
+    /**
+     * 弃用
+     * @param range
+     * @return
+     */
     @RequestMapping(value = "price",method = RequestMethod.POST)
     public String price(Range range){
         try {
@@ -258,5 +293,18 @@ public class HousesController {
             return JsonResult.error();
         }
 
+    }
+
+    /**
+     * 取消收藏
+     */
+    @RequestMapping(value = "deleteMark",method = RequestMethod.POST)
+    public String deleteMark(Mark mark){
+        try{
+            return JsonResult.success(iMarkService.deleteById(mark));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
     }
 }

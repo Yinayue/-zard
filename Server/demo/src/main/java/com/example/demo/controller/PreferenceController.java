@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * <p>
  *  前端控制器
@@ -28,6 +30,11 @@ public class PreferenceController {
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     public String insert(Preference preference){
         try{
+            //查重
+            List<Preference> exist = iPreferenceService.select(preference);
+            if(exist.size()>0){
+                return JsonResult.error("已存在");
+            }
             return JsonResult.success(iPreferenceService.insert(preference));
         }catch (Exception e){
             e.printStackTrace();
@@ -49,6 +56,16 @@ public class PreferenceController {
     public String update(Preference preference){
         try{
             return JsonResult.success(iPreferenceService.updateById(preference));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @RequestMapping(value = "delete",method = RequestMethod.POST)
+    public String delete(Preference preference){
+        try{
+            return JsonResult.success(iPreferenceService.deleteById(preference));
         }catch (Exception e){
             e.printStackTrace();
             return JsonResult.error();

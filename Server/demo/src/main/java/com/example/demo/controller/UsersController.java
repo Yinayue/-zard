@@ -58,6 +58,9 @@ public class UsersController {
     @Autowired
     IHousesEnService iHousesEnService;
 
+    @Autowired
+    IChatMessageService iChatMessageService;
+
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
         try{
@@ -339,12 +342,9 @@ public class UsersController {
 
 
 
-//    @RequestMapping(value = "/test" ,method = RequestMethod.GET)
-//    public String test(){
-//        Mark mark = new Mark();
-//        mark.setUid((long)1);
-//        List<Mark> marks = iMarkService.select(mark);
-//        return JsonResult.success(marks);
-//    }
+    @RequestMapping(value = "chatMessage",method = RequestMethod.POST)
+    public String chatMessage(Users user){
+        return JsonResult.success(iChatMessageService.selectByUser(user));
+    }
 
 }
