@@ -1,4 +1,6 @@
+
 (function ($) {
+
  "use strict";
 
 		$(".chosen")[0] && $(".chosen").chosen({
