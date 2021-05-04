@@ -22,7 +22,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             //表格初始化
-            var table = $('#myTable').DataTable({
+            var table = $('#s').DataTable({
                 ajax : {
                     url:"http://175.24.51.64:8081/houses/selectAll", //访问路径，返回Json数据
 
@@ -43,7 +43,7 @@
             });
 
             //给每一行添加展开或收起的监听
-            $('#myTable').on('click', 'td', function () {
+            $('#s').on('click', 'td', function () {
                 var tr = $(this).closest('tr');
                 var row = table.row( tr );
 
@@ -81,7 +81,7 @@
     </script>
 </head>
 <body>
-<table id="myTable" class="display">
+<table id="s" class="display">
     <thead>
     <tr>
         <th></th>

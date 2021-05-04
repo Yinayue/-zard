@@ -108,15 +108,13 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li ><a ><i class="notika-icon notika-house"></i> Home</a>
+                    <li ><a href="commend.html"><i class="notika-icon notika-house"></i> Home</a>
                     </li>
                     <li><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
                     </li>
                     <li><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
                     <li><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
-                    </li>
-                    <li><a  onclick="unenoughpoints()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
                     </li>
                     <li><a href="chat.html"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
@@ -127,81 +125,9 @@
                     </div>
                     <div id="Houses" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li><a href="data.html">Stared</a>
+                            <li><a href="Starred.html">Starred</a>
                             </li>
-                            <li><a href="google-map.html">Sold</a>
-                            </li>
-                            <li><a href="data-map.html">Buying</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="flot-charts.html">Flot Charts</a>
-                            </li>
-                            <li><a href="bar-charts.html">Bar Charts</a>
-                            </li>
-                            <li><a href="line-charts.html">Line Charts</a>
-                            </li>
-                            <li><a href="area-charts.html">Area Charts</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="normal-table.html">Normal Table</a>
-                            </li>
-                            <li><a href="data-table.html">Data Table</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="form-elements.html">Form Elements</a>
-                            </li>
-                            <li><a href="form-components.html">Form Components</a>
-                            </li>
-                            <li><a href="form-examples.html">Form Examples</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="notification.html">Notifications</a>
-                            </li>
-                            <li><a href="alert.html">Alerts</a>
-                            </li>
-                            <li><a href="modals.html">Modals</a>
-                            </li>
-                            <li><a href="buttons.html">Buttons</a>
-                            </li>
-                            <li><a href="tabs.html">Tabs</a>
-                            </li>
-                            <li><a href="accordion.html">Accordion</a>
-                            </li>
-                            <li><a href="dialog.html">Dialogs</a>
-                            </li>
-                            <li><a href="popovers.html">Popovers</a>
-                            </li>
-                            <li><a href="tooltips.html">Tooltips</a>
-                            </li>
-                            <li><a href="dropdown.html">Dropdowns</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="contact.html">Contact</a>
-                            </li>
-                            <li><a href="invoice.html">Invoice</a>
-                            </li>
-                            <li><a href="typography.html">Typography</a>
-                            </li>
-                            <li><a href="color.html">Color</a>
-                            </li>
-                            <li><a href="login-register.html">Login Register</a>
-                            </li>
-                            <li><a href="ht/404.html">404 Page</a>
+                            <li><a href="Sold.html">On Sale</a>
                             </li>
                         </ul>
                     </div>
@@ -222,12 +148,12 @@
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="property-details">
-                            <div class="img" style="background-image: url(../images/wimages/work-1.jpg);">
+                            <div class="img" id="bg" style="background-image: url(../images/wimages/work-1.jpg);">
 
                             </div>
                             <div class="text">
-                                <span class="subheading">Oakland</span>
-                                <h2>The Blue Sky Home</h2>
+                                <span class="subheading">Bilizard</span>
+                                <h2 id="address"></h2>
                             </div>
                         </div>
                     </div>
@@ -255,37 +181,34 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <ul class="features">
-                                                <li class="check">Lot Area: 1,250 SQ FT</li>
-                                                <li class="check">Bed Rooms: 4</li>
-                                                <li class="check">Bath Rooms: 4</li>
-                                                <li class="check">Luggage</li>
-                                                <li class="check">Garage: 2</li>
+
+                                                <li class="check">Direction: <span id="direction"></span></li>
+                                                <li class="check">District: <span id="district"></span></li>
+                                                <li class="check">Region: <span id="region"></span></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-4">
                                             <ul class="features">
-                                                <li class="check">Floor Area: 1,300 SQ FT</li>
-                                                <li class="check">Year Build:: 2019</li>
-                                                <li class="check">Water</li>
-                                                <li class="check">Stories: 2</li>
-                                                <li class="check">Roofing: New</li>
+                                                <li class="check">Floor Area: <span id="size"></span></li>
+                                                <li class="check">Floor: <span id="floor"></span></li>
+                                                <li class="check">Room: <span id="room"></span></li>
+                                                <li class="check">Elevator: <span id="elevator"></span></li>
                                             </ul>
                                         </div>
                                         <div class="col-md-4">
                                             <ul class="features">
-                                                <li class="check">Floor Area: 1,300 SQ FT</li>
-                                                <li class="check">Year Build:: 2019</li>
-                                                <li class="check">Water</li>
-                                                <li class="check">Stories: 2</li>
-                                                <li class="check">Roofing: New</li>
+
+                                                <li class="check">Year Build: <span id="year"></span></li>
+                                                <li class="check">Price: <span id="price"></span>million</li>
+                                                <li class="check">Renovation: <span id="renovation"></span></li>
+                                                <li class="check">launchTime: <span id="launchTime"></span></li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="tab-pane fade " id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
-                                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-                                    <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+
                                 </div>
 
                                 <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab">
@@ -358,7 +281,7 @@
                                                 <h3 class="head">Give a Review</h3>
                                                 <div class="wrap">
                                                     <p class="star">
-									   				<a onclick=alert("5")>
+									   				<a onclick="score(5)">
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
@@ -369,7 +292,7 @@
                                                         <span>20 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<a>
+									   				<a onclick="score(4)">
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
@@ -379,7 +302,7 @@
                                                         <span>10 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<a>
+									   				<a onclick="score(3)">
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
@@ -388,7 +311,7 @@
                                                         <span>5 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<a>
+									   				<a onclick="score(2)">
 									   					<i class="fa fa-star"></i>
 									   					<i class="fa fa-star"></i>
 									   					(10%)
@@ -396,14 +319,16 @@
                                                         <span>0 Reviews</span>
                                                     </p>
                                                     <p class="star">
-									   				<a>
+									   				<a onclick="score(1)">
 									   					<i class="fa fa-star"></i>
 									   					(0%)
 								   					</a>
                                                         <span>0 Reviews</span>
                                                     </p>
-                                                        <button onclick="starhouse()">Star
-                                                        </button>
+                                                    <div id="starbutton">
+
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -443,9 +368,39 @@
 <script src="../js/bootstrap.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<!--Start starred and cancel starred-->
 <script>
-    //获取传过来的值
+    function score(x) {
+        var hid= getParams("h");
+        var uid= window.sessionStorage.getItem("userid");
+        // 175.24.51.64:8081/preference/insert?
+        $.ajax({
 
+            type: "POST",
+
+            url: "http://175.24.51.64:8081/preference/insert",
+
+            data: "buyerId="+uid+"&houseId="+hid+"&score="+x,
+
+            success: function(msg){
+
+                var data = JSON.parse(msg);
+                console.log("buyerId="+uid+"&houseId="+hid+"&score="+x);
+                if(data['msg']==='验证失败'){
+                    Swal.fire('Saved!', value, 'unsuccess')
+                }
+                else{
+                    Swal.fire('Saved!','success')
+                }
+
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+
+        });
+    }
+    //获取传过来的值
     function getParams(key) {
         var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
@@ -454,10 +409,39 @@
         }
         return null;
     }
+    function unstarhouse(){
+        var hid= getParams("h");
+        var uid= window.sessionStorage.getItem("userid");
+
+        $.ajax({
+
+            type: "POST",
+
+            url: "http://175.24.51.64:8081/houses/deleteMark",
+
+            data: "uid="+uid+"&hid"+hid,
+
+            success: function(msg){
+
+                var data = JSON.parse(msg);
+                if(data['msg']==='验证失败'){
+                    Swal.fire('Saved!', value, 'unsuccess')
+                }
+                else{
+                    Swal.fire('Saved!','success')
+                }
+
+            },
+            error: function (msg) {
+                console.log("Data not Saved: " + msg);
+            }
+
+        });
+    }
     function starhouse(){
         var hid= getParams("h");
         var uid= window.sessionStorage.getItem("userid");
-        console.log('hid'+hid+"uid"+uid)
+
         $.ajax({
 
             type: "POST",
@@ -484,9 +468,9 @@
         });
     }
     $(document).ready(function(){
+        let houseinfo={};
         var hid= getParams("h");
         var uid= window.sessionStorage.getItem("userid");
-
         console.log(hid);
         $.ajax({
 
@@ -501,10 +485,41 @@
                 var data = JSON.parse(msg);
                 if(data['msg']==='failed'){
                     console.log("qqqqqqqqqq"+data['data'])
+
                 }
                 else{
-                    console.log(data);
-                    console.log("wwwwwwwwwwww"+data['data'][0]["launchDate"])
+                    let str="Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar."
+                    houseinfo["elevator"]=data['data'][0]["elevator"];
+                    houseinfo["price"]=data['data'][0]["price"];
+                    houseinfo["size"]=data['data'][0]["size"];
+                    houseinfo["address"]=data['data'][0]["address"];
+                    houseinfo["launchTime"]=data['data'][0]["launchTime"];
+                    houseinfo["district"]=data['data'][0]["district"];
+                    houseinfo["direction"]=data['data'][0]["direction"];
+                    houseinfo["renovation"]=data['data'][0]["renovation"];
+                    houseinfo["floor"]=data['data'][0]["floor"];
+                    houseinfo["layout"]=data['data'][0]["layout"];
+                    houseinfo["region"]=data['data'][0]["region"];
+                    houseinfo["year"]=data['data'][0]["year"];
+                    houseinfo["id"]=data['data'][0]["id"];
+                    houseinfo["information"]=data['data'][0]["information"]+str;
+                    console.log("data接收成功");
+                    document.getElementById("elevator").innerHTML = houseinfo["elevator"];
+                    document.getElementById("price").innerHTML = houseinfo["price"];
+                    document.getElementById("size").innerHTML = houseinfo["size"];
+                    document.getElementById("address").innerHTML = houseinfo["address"];
+                    document.getElementById("launchTime").innerHTML = houseinfo["launchTime"];
+                    document.getElementById("district").innerHTML = houseinfo["district"];
+                    document.getElementById("direction").innerHTML = houseinfo["direction"];
+                    document.getElementById("floor").innerHTML = houseinfo["floor"];
+                    document.getElementById("year").innerHTML = houseinfo["year"];
+                    document.getElementById("renovation").innerHTML = houseinfo["renovation"];
+                    document.getElementById("region").innerHTML = houseinfo["region"];
+                    document.getElementById("room").innerHTML = houseinfo["layout"];
+                    document.getElementById("pills-manufacturer").innerHTML = houseinfo["information"];
+                    let tool=houseinfo["id"]%9;
+                    document.getElementById("bg").style.backgroundImage="url(../images/wimages/work-"+tool+".jpg)";
+
                 }
 
             },
@@ -513,9 +528,57 @@
             }
 
         });
+        var single=[];
+        let starflag=0;
+        console.log("nnnnnnnnnnnnnnnnnnnnnnn")
+        let str='<button onclick="starhouse()">Star</button>';
+        var token= window.sessionStorage.getItem("token");
+        //判断是否在收藏中
+        $.ajax({
+            headers: {
+                'token': token //此处放置请求到的用户token
+            },
+            type: "GET",
+            url: "http://175.24.51.64:8081/users/markDetail",
+            // dataType: "json",
+            success: function (msg) {
+                var data = JSON.parse(msg);
+                if(data['msg']==='验证失败'){
+                    console.log("qqqqqqqqqq"+data['data'])
+                }
+                else{
+                    console.log("data['data'].length"+data['data'].length);
+                    for(var i=0;i<data['data'].length;i++){
+                        single[i]=data['data'][i]["id"];
+                    }
+                    console.log("bbbbbb" + single.length);
+                    for(var j=0;j<single.length;j++){
+                        // console.log("bbbbbb" + single[j]);
+                        if(hid==single[j]){
+                            console.log("jjjjjjjjjjjjjjj");
+                            str='<button onclick="unstarhouse()">Unstar</button>';
+                        }
+                        else{
+                            console.log("不在收藏中")
+                        }
+                    }
+                    tool=document.getElementById("starbutton");
+                    console.log("strvstrstr not Saved: " + str);
+                    tool.innerHTML = str;
+                }
+            },
+            error: function (msg) {
+                console.log("??????????? " + msg);
+            }
+        });
+
+
+
 
     });
 </script>
+<!--Start starred and cancel starred-->
+
 
 </body>
 
