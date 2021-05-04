@@ -300,8 +300,12 @@ public class HousesController {
      * 取消收藏
      */
     @RequestMapping(value = "deleteMark",method = RequestMethod.POST)
-    public String deleteMark(Mark mark){
+    public String deleteMark(long userId,long houseId){
         try{
+            Mark mark = new Mark();
+            mark.setUid(userId);
+            mark.setHid(houseId);
+            mark = iMarkService.select(mark).get(0);
             return JsonResult.success(iMarkService.deleteById(mark));
         }catch (Exception e){
             e.printStackTrace();

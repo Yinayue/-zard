@@ -31,7 +31,10 @@ public class PreferenceController {
     public String insert(Preference preference){
         try{
             //查重
-            List<Preference> exist = iPreferenceService.select(preference);
+            Preference temp = new Preference();
+            temp.setHouseId(preference.getHouseId());
+            temp.setBuyerId(preference.getBuyerId());
+            List<Preference> exist = iPreferenceService.select(temp);
             if(exist.size()>0){
                 return JsonResult.error("已存在");
             }
