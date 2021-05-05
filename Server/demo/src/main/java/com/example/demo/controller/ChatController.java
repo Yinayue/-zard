@@ -128,7 +128,7 @@ public class ChatController {
     String contents =date+" 你对【"+ touser +"】说："+ ctx;
 
     //Send message to sender(Yourself)
-    template.convertAndSendToUser(userid,"/topic/private",new ChatMessage(touser,contents,touser,date));
+    template.convertAndSendToUser(userid,"/topic/private",new ChatMessage(userid,contents,touser,date));
     //Save message history
     //Implementation:
 
@@ -154,7 +154,7 @@ public class ChatController {
     }
 
     //Send message to receiver
-    template.convertAndSendToUser(touser,"/topic/private",new ChatMessage(userid,content,userid,date));
+    template.convertAndSendToUser(touser,"/topic/private",new ChatMessage(userid,content,touser,date));
   }
 
   @RequestMapping("/load_hist")
