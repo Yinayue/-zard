@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.activerecord.Model;
 import com.example.demo.config.WebSocketConfig;
+import com.example.demo.entity.Chat;
 import com.example.demo.model.ChatMessage;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -13,8 +15,12 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -31,7 +37,10 @@ public class ChatController {
   //Fake data from database
   private Set<String> all_users = new HashSet<String>(){{add("Tom");add("Kobe");add("James");}};
   private Set<String> online_users = new HashSet();
-  private List<ChatMessage> hist_messages = new ArrayList();
+  private List<ChatMessage> hist_messages = new ArrayList(){{
+      add(new ChatMessage("Kobe", "Hi James, I am Kobe!", "James", "05-02 05:41"));
+      add(new ChatMessage("James", "Hi Kobe, I am James!", "Kobe", "05-02 05:42"));
+  }};
 
   @Autowired
   private SimpMessagingTemplate template;
@@ -148,10 +157,37 @@ public class ChatController {
     template.convertAndSendToUser(touser,"/topic/private",new ChatMessage(userid,content,userid,date));
   }
 
+  @RequestMapping("/load_hist")
+  public boolean loadHist(HttpServletRequest request) throws Exception {
+      System.out.println("Loading......................");
+      String userName = request.getParameter("username");
+      //Read message from data
+      // ...
+      //Get hist_messages
+      loadUserHistory(userName, hist_messages);
+      return true;
+  }
   //Load all a user history message from database and show on the page
-  public void loadUserHistory(String userName, List<ChatMessage> messages){
+  public void loadUserHistory(String userName, List<ChatMessage> messages) throws Exception{
       for(ChatMessage m: messages){
-
+          String ctx = m.getContent();
+          String userid = m.getName();
+          String touser = m.getReceiver();
+          String date = m.getDate();
+          String content =date+"【"+userid+"】对你说：" + ctx;
+          String contents =date+" 你对【"+ touser +"】说："+ ctx;
+          //Send message to sender(Yourself)
+          //sender = user
+          if (userName.equals(touser)){
+              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
+              //这行就运行不了了奇怪
+              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(userid,content,touser,date));
+          }
+          else{
+              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
+              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(touser,contents,userid,date));
+          }
+          Thread.sleep(200);
       }
 
   }
