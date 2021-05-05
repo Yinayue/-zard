@@ -25,6 +25,11 @@ public class HouseBean {
     int delete_flag;
 
 
+    public HouseBean(String address, String remarks){
+        this.address = address;
+        this.remarks = remarks;
+    }
+
     public HouseBean(String address){
         this.address = address;
     }

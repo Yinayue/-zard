@@ -129,15 +129,13 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                    <li ><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                    <li ><a href="commend.html"><i class="notika-icon notika-house"></i> Home</a>
                     </li>
-                    <li class="active"><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
+                    <li><a data-toggle="tab" href="#Houses"><i class="notika-icon notika-edit"></i> My Houses</a>
                     </li>
                     <li><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
                     <li><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
-                    </li>
-                    <li><a  onclick="t()" data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i>Settings</a>
                     </li>
                     <li><a href="chat.html"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
@@ -146,52 +144,11 @@
                     <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
 
                     </div>
-                    <div id="Houses" >
+                    <div id="Houses" class="tab-pane notika-tab-menu-bg animated flipInX">
                         <ul class="notika-main-menu-dropdown">
-                            <li class="active"><a href="data.html">Starred</a>
+                            <li><a href="Starred.html">Starred</a>
                             </li>
-                            <li><a href="data-map.html">Bought</a>
-                            </li>
-                            <li><a href="data-map.html">On Sale</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="flot-charts.html">Flot Charts</a>
-                            </li>
-                            <li><a href="bar-charts.html">Bar Charts</a>
-                            </li>
-                            <li><a href="line-charts.html">Line Charts</a>
-                            </li>
-                            <li><a href="area-charts.html">Area Charts</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="normal-table.html">Normal Table</a>
-                            </li>
-                            <li><a href="data-table.html">Data Table</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="form-elements.html">Form Elements</a>
-                            </li>
-                            <li><a href="form-components.html">Form Components</a>
-                            </li>
-                            <li><a href="form-examples.html">Form Examples</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
-                        <ul class="notika-main-menu-dropdown">
-                            <li><a href="contact.html">Contact</a>
-                            </li>
-                            <li><a href="ht/404.html">404 Page</a>
+                            <li><a href="Sold.html">On Sale</a>
                             </li>
                         </ul>
                     </div>
@@ -415,7 +372,7 @@
                 '<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">'+
                 '<div class="blog-inner-list notika-shadow mg-t-30 tb-res-ds-n dk-res-ds">'+
                 '<div class="blog-img">'+
-                '<img src="../images/wimages/work-1.jpg"  />'+
+                '<img src="../images/wimages/work-'+houses[i]['img']+'.jpg"  />'+
                 '</div>'+
                 ' <div class="blog-ctn">'+
                 '<div class="blog-hd-sw">'+
@@ -437,42 +394,7 @@
         console.log(loveStr)
     }
 
-    function getpreferencehouses() {
 
-        $.ajax({
-            type: "Post",
-            url: "http://175.24.51.64:8081/houses/select",
-            data: "direction=West&district=Dengshikou",
-            // dataType: "json",
-            success: function (msg) {
-                var data = JSON.parse(msg);
-                if(data['msg']==='failed'){
-                    console.log("qqqqqqqqqq"+data['data'])
-                }
-                else{
-                    console.log("data['data'].length"+data['data'].length);
-                    for(var i=0;i<5;i++){
-                        var single={};
-                        single["id"]=data['data'][i]["id"];
-                        single["price"]=data['data'][i]["price"];
-                        single["size"]=data['data'][i]["size"];
-                        single["address"]=data['data'][i]["address"];
-                        single["launchTime"]=data['data'][i]["launchTime"];
-                        single["district"]=data['data'][i]["district"];
-                        // single["address"]=data['data'][i]["address"];
-                        houses[i]=single;
-                    }
-                    console.log("wwwwwwwwwwww"+houses);
-                    console.log("wwwwwwwwwwww"+data['data'][0]);
-                    addh();
-
-                }
-            },
-            error: function (msg) {
-                console.log("Data not Saved: " + msg);
-            }
-        });
-    }
     function housedetailes(obj){
         var hid = $(obj).parent().children("p:first-child").text();
         var url = "house-image.html?h="+hid;
@@ -507,6 +429,7 @@
                         single["launchTime"]=data['data'][i]["launchTime"];
                         single["district"]=data['data'][i]["district"];
                         // single["address"]=data['data'][i]["address"];
+                        single["img"]=data['data'][i]["id"]%9;
                         houses[i]=single;
                     }
                     addh();

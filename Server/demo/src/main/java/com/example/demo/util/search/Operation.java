@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -56,7 +54,9 @@ public class Operation {
 //            System.out.println("address:"+house.getAddress());
             try {
                 Field address = new Field("address", house.getAddress(), TextField.TYPE_STORED);
+//                Field remark = new Field("remark", house.getRemarks(), TextField.TYPE_STORED);
                 doc.add(address);
+//                doc.add(remark);
                 writer.addDocument(doc);
 
             } catch (IOException e) {
@@ -73,7 +73,7 @@ public class Operation {
 
     }
 
-    public Map<String,String> search(String[] query){
+    public void search(String[] query){
         FSDirectory directory = null;
         try {
             directory = FSDirectory.open(FileSystems.getDefault().getPath(Constants.MODEL_PATH));
@@ -95,27 +95,27 @@ public class Operation {
             System.out.println(docs.scoreDocs.length);
 //            System.out.println("查询总记录数为:"+docs.totalHits);
 
-            System.out.println("query:"+query[0]);
-            Map<String,String> result = new HashMap<>();
+            System.out.println("address: "+query[0]);
+//            System.out.println("description: "+query[1]);
+            System.out.println("******* Results: ********");
             for (ScoreDoc scoreDoc : docs.scoreDocs) {
                 Float score = scoreDoc.score;
                 //得到文档
                 int id = scoreDoc.doc;
                 Document doc = indexSearcher.doc(id);
-                System.out.println("address:"+doc.get("address") + " score " +score);
-                result.put(doc.get("address"),score+"");
+
+                System.out.println("address:"+doc.get("address") + " + \nscore:" +score);
             }
             // 7.  关闭IndexReader对象
             indexReader.close();
-            return result;
 
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         } catch (ParseException e) {
             e.printStackTrace();
-            return null;
         }
+
+
     }
 
     public List<String> getAddresses(String[] query){
@@ -140,14 +140,17 @@ public class Operation {
             System.out.println(docs.scoreDocs.length);
 //            System.out.println("查询总记录数为:"+docs.totalHits);
 
-            System.out.println("query:"+query[0]);
+            System.out.println("address: "+query[0]);
             List<String> result = new ArrayList<>();
+//            System.out.println("description: "+query[1]);
+            System.out.println("******* Results: ********");
             for (ScoreDoc scoreDoc : docs.scoreDocs) {
                 Float score = scoreDoc.score;
                 //得到文档
                 int id = scoreDoc.doc;
                 Document doc = indexSearcher.doc(id);
-                System.out.println("address:"+doc.get("address") + " score " +score);
+
+                System.out.println("address:"+doc.get("address") + " + \nscore:" +score);
                 result.add(doc.get("address"));
             }
             // 7.  关闭IndexReader对象
@@ -161,6 +164,8 @@ public class Operation {
             e.printStackTrace();
             return null;
         }
+
+
     }
 
 
