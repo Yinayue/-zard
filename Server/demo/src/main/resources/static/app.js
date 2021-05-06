@@ -64,6 +64,7 @@ function connect() {
         removeUser(parse.id);
       }
     });
+    load_hist();
   });
 }
 
@@ -74,6 +75,22 @@ function disconnect() {
   //removeUser(sessionId);
   setConnected(false);
   console.log("Disconnected");
+}
+
+function load_hist() {
+    $.ajax({
+        type: "POST",
+        url: "/load_hist",
+        data: {username:$("#username").val().trim()},
+        success: function (result) {
+            //pass
+            if(result)
+                console.log("Load History Successfully!")
+            else{
+                console.log("Load History Fails!")
+            }
+        }
+    });
 }
 
 function sendName() {
@@ -100,7 +117,7 @@ function sendToUser() {
 
 //点击列表发生事件
 function touser(message) {
-  console.log("Message\n" + message);
+  console.log("Message\n" + message.textContent);
   $("#" + message.id + " span").html('');
   if ($("#privateuser").html() === '私信聊天') {
     $("#privateuser").html("私信聊天 与 【" + message.textContent + "】");
@@ -115,6 +132,7 @@ function touser(message) {
   $(".msg-" + tousername).prop("hidden", true);
   $("#privateuser").html("私信聊天 与 【" + message.textContent + "】");
   $(".msg-" + message.textContent).prop("hidden", false);
+
 }
 
 function hidetlobby(){
@@ -151,21 +169,28 @@ function showGreeting(message) {
 function showMessage(message, touser) {
   var patt1 = new RegExp(/【(.*?)】/g);
   var tousername='';
+  console.log('Touser: ' + touser + " Username: " + $("#username").val()) ;
   if($("#privateuser").html()!=='私信聊天'){
     tousername = patt1.exec($("#privateuser").html())[1];
   }
   if (touser === $("#username").val()) {
-    $("#private").append("<tr class='msg-" + touser + "'><td>" + message + "</td></tr>");
+    $("#private").append("<tr class='msg-" + touser + "'><td class='cright cmsg'>" +
+        "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/bili.png\" /><span class=\"content\">"
+        + message + "</span>"+ "</td></tr>");
   }
   if (touser === tousername) {
-    $("#private").append("<tr class='msg-" + touser + "'><td>" + message + "</td></tr>");
+    $("#private").append("<tr class='msg-" + touser + "'><td class='cleft cmsg'>" +
+        "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
+        + message + "</span>"+ "</td></tr>");png
   } else {
     var i = $("." + touser + " span").html();
     if (i === '') {
       i = 0;
     }
     $("." + touser + " span").html(++i);
-    $("#private").append("<tr class='msg-" + touser + "' hidden><td>" + message + "</td></tr>");
+    $("#private").append("<tr class='msg-" + touser + "' hidden><td class='cleft cmsg'>" +
+        "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
+        + message + "</span>"+ "</td></tr>");
   }
 
   var div = document.getElementById('private');
