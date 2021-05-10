@@ -4,8 +4,8 @@ import java.util.*;
 
 
 public class Recommend {
-	 
-    
+
+    // Reference: https://www.pianshen.com/article/8269129173/
     private Map<Double, String> getNeighbourTree(String userEmail, BuyerSet set) {
         Map<Double, String> disTree = new TreeMap<>();// TreeMap can order automatically
  
