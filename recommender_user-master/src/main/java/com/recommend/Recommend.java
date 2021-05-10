@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Recommend {
 	 
+<<<<<<< Updated upstream
     /**
      * 在给定username的情况下，计算其他用户和它的距离并排序
      * @param username
@@ -22,10 +23,25 @@ public class Recommend {
             if (!u2.username.equals(username)) {
                 double distance = pearson_dis(u2.list, u1.list);
                 distances.put(distance, u2.username);
+=======
+    
+    private Map<Double, String> getNeighbourTree(String userEmail, BuyerSet set) {
+        Map<Double, String> disTree = new TreeMap<>();// TreeMap can order automatically
+ 
+        BuyerSet.Buyer u1 = set.getBuyer(userEmail);
+
+        for (int i = 0; i < set.buyers.size(); i++) {
+            BuyerSet.Buyer u2 = set.getBuyer(i);
+
+            if (!u2.buyerEmail.equals(userEmail)) {
+                double dis = pearson_dis(u2.list, u1.list);
+                disTree.put(dis, u2.buyerEmail);
+>>>>>>> Stashed changes
             }
 
         }
 
+<<<<<<< Updated upstream
 //        System.out.println("distance => " + distances);
         return distances;
     }
@@ -39,6 +55,14 @@ public class Recommend {
      * @return
      */
     private double pearson_dis(List<UserSet.Set> rating1, List<UserSet.Set> rating2) {
+=======
+        return disTree;
+    }
+ 
+ 
+    // Reference: https://www.pianshen.com/article/8269129173/
+    private double pearson_dis(List<BuyerSet.HouseSet> rating1, List<BuyerSet.HouseSet> rating2) {
+>>>>>>> Stashed changes
         int sum_xy = 0;
         int sum_x = 0;
         int sum_y = 0;
@@ -46,10 +70,17 @@ public class Recommend {
         double sum_y2 = 0;
         int n = 0;
         for (int i = 0; i < rating1.size(); i++) {
+<<<<<<< Updated upstream
             UserSet.Set key1 = rating1.get(i);
             for (int j = 0; j < rating2.size(); j++) {
                 UserSet.Set key2 = rating2.get(j);
                 if (key1.houseName.equals(key2.houseName)) {
+=======
+            BuyerSet.HouseSet key1 = rating1.get(i);
+            for (int j = 0; j < rating2.size(); j++) {
+                BuyerSet.HouseSet key2 = rating2.get(j);
+                if (key1.houseId.equals(key2.houseId)) {
+>>>>>>> Stashed changes
                     n += 1;
                     int x = key1.score;
                     int y = key2.score;
@@ -69,6 +100,7 @@ public class Recommend {
             return (sum_xy - (sum_x * sum_y) / n) / denominator;
         }
     }
+<<<<<<< Updated upstream
  
  
     public List<UserSet.Set> recommend(String username, UserSet set) {
@@ -94,6 +126,29 @@ public class Recommend {
         }
         Collections.sort(recommendations);
 //        System.out.println("recommendations -> " + recommendations.toString());
+=======
+
+
+    // Reference: https://www.pianshen.com/article/8269129173/
+    public List<BuyerSet.HouseSet> recommend(String userEmail, BuyerSet set) {
+
+        Map<Double, String> disTree = getNeighbourTree(userEmail, set);
+        String nearest = disTree.values().iterator().next();
+
+        List<BuyerSet.HouseSet> recommendations = new ArrayList<>();
+
+        BuyerSet.Buyer neighborRatings = set.getBuyer(nearest);
+
+        BuyerSet.Buyer buyerRatings = set.getBuyer(userEmail);
+ 
+        for (BuyerSet.HouseSet house : neighborRatings.list) {
+            if (buyerRatings.find(house.houseId) == null) {
+                recommendations.add(house);
+            }
+        }
+        Collections.sort(recommendations);
+
+>>>>>>> Stashed changes
         return recommendations;
     }
 
