@@ -57,6 +57,9 @@ public class ChatController {
     //Read all users(including offline users) from database
     for (Object online_u: users.values()){
       online_users.add(String.valueOf(online_u));
+      if (all_users.contains(String.valueOf(online_u))){
+            all_users.remove(String.valueOf(online_u));
+        }
     }
     System.out.println("-----------------------Online Users:-----------------------");
     System.out.println(online_users);
@@ -168,6 +171,13 @@ public class ChatController {
       // ...
       //Get hist_messages
       loadUserHistory(userName, hist_messages);
+      return true;
+  }
+
+  @RequestMapping("/rm_ol_usr")
+  public boolean removeOnlineUser(HttpServletRequest request) throws Exception{
+      String userName = request.getParameter("username");
+      all_users.add(userName);
       return true;
   }
   //Load all a user history message from database and show on the page

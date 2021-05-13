@@ -53,15 +53,32 @@ function connect() {
     });
     stompClient.subscribe('/user/topic/private', function (greeting) {
       var parse = JSON.parse(greeting.body);
-      console.log(parse)
+      console.log(parse);
       showMessage(parse.content, parse.receiver, parse.name);
     });
     stompClient.subscribe('/topic/userlist', function (greeting) {
       var parse = JSON.parse(greeting.body);
+
       if (parse.online) {
-        showUser(parse.name, parse.id);
+
+        var exist = false;
+        var usr_table = document.getElementById("user");
+        var all_users = usr_table.getElementsByTagName("td");
+        //防止一个用户重复出现
+        for(var i = 0; i < all_users.length; i++){
+            if(all_users.item(i).textContent === parse.name){
+              exist = true;
+            }
+        }
+        if(!exist){
+            showUser(parse.name, parse.id);
+        }
       } else {
-        removeUser(parse.id);
+        //前端移除该user不应该写在这
+
+        // removeUser(parse.id);
+        //后端移除该user
+        removeOnlineUser(parse.name);
       }
     });
     load_hist();
@@ -69,6 +86,7 @@ function connect() {
 }
 
 function disconnect() {
+  clearUserMessage();
   if (stompClient !== null) {
     stompClient.disconnect();
   }
@@ -171,13 +189,14 @@ function showGreeting(message) {
 function showMessage(message, touser, sender) {
   var patt1 = new RegExp(/【(.*?)】/g);
 
+
   //当前前端channel的聊天用户
   var tousername='';
   console.log('Touser: ' + touser + " Username: " + $("#username").val()) ;
   if($("#privateuser").html()!=='PrivateChat'){
     tousername = patt1.exec($("#privateuser").html())[1];
   }
-  console.log("username: " + $("#username").val() + "  touser: " + touser + " tousername: " + tousername)
+  // console.log("username: " + $("#username").val() + "  touser: " + touser + " tousername: " + tousername)
   if (touser === $("#username").val()) {
     console.log("Sender: "+ sender + "Receiver: " + touser)
     tail = sender;
@@ -213,14 +232,38 @@ function showMessage(message, touser, sender) {
         + message + "</span>"+ "</td></tr>");
   }
 
+  if(tousername != sender ){
+    $(".msg-" + sender).prop("hidden", true);
+  }
+
+  if(tousername != touser){
+    $(".msg-" + touser).prop("hidden", true);
+  }
+
   var div = document.getElementById('private');
   div.scrollTop = div.scrollHeight;
 }
 function showUser(user, id) {
   $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
 }
+
+//防止message重复出现
+function clearUserMessage() {
+   $("#private").empty();
+}
 function removeUser(id) {
   $("tr").remove("#" + id);
+}
+
+function removeOnlineUser(usr){
+  $.ajax({
+    type: "GET",
+    url: "/rm_ol_usr",
+    dataType:{username:usr},
+    success: function (res) {
+    console.log("从后台移除在线用户成功");
+  }
+  });
 }
 
 $(function () {
