@@ -124,8 +124,11 @@ public class ChatController {
     String touser = message.getReceiver();
 
     String date = simpleDateFormat.format(new Date());
-    String content =date+"【"+userid+"】对你说：" + ctx;
-    String contents =date+" 你对【"+ touser +"】说："+ ctx;
+//    String content =date+"【"+userid+"】对你说：" + ctx;
+    String content = ctx;
+
+//    String contents =date+" 你对【"+ touser +"】说："+ ctx;
+    String contents = ctx;
 
     //Send message to sender(Yourself)
     template.convertAndSendToUser(userid,"/topic/private",new ChatMessage(userid,contents,touser,date));
@@ -170,23 +173,24 @@ public class ChatController {
   //Load all a user history message from database and show on the page
   public void loadUserHistory(String userName, List<ChatMessage> messages) throws Exception{
       for(ChatMessage m: messages){
-          String ctx = m.getContent();
+          String content = m.getContent();
           String userid = m.getName();
           String touser = m.getReceiver();
           String date = m.getDate();
-          String content =date+"【"+userid+"】对你说：" + ctx;
-          String contents =date+" 你对【"+ touser +"】说："+ ctx;
+//          String content =date+"【"+userid+"】对你说：" + ctx;
+//          String contents =date+" 你对【"+ touser +"】说："+ ctx;
           //Send message to sender(Yourself)
           //sender = user
-          if (userName.equals(touser)){
-              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
-              //这行就运行不了了奇怪
-              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(userid,content,touser,date));
-          }
-          else{
-              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
-              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(touser,contents,userid,date));
-          }
+          template.convertAndSendToUser(userName, "/topic/private", new ChatMessage(userid,content,touser,date));
+//          if (userName.equals(touser)){
+//              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
+//              //这行就运行不了了奇怪
+//              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(userid,content,touser,date));
+//          }
+//          else{
+//              System.out.println("Username: "+ userName+ " ==================== touser: " + touser);
+//              template.convertAndSendToUser(userid,"/topic/private", new ChatMessage(,content,touser,date));
+//          }
           Thread.sleep(200);
       }
 
