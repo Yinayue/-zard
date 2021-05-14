@@ -7,10 +7,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.example.demo.config.WebSocketConfig;
 import com.example.demo.entity.Chat;
+import com.example.demo.entity.Friends;
 import com.example.demo.entity.Users;
 import com.example.demo.model.ChatMessage;
 import com.example.demo.model.User;
 import com.example.demo.service.IChatMessageService;
+import com.example.demo.service.IFriendsService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,9 @@ public class ChatController {
   @Autowired
   IChatMessageService iChatMessageService;
 
+  @Autowired
+  IFriendsService iFriendsService;
+
   //Fake data from database
   private Set<String> all_users = new HashSet<String>(){{add("Tom");add("Kobe");add("James");}};
   private Set<String> online_users = new HashSet();
@@ -61,14 +66,22 @@ public class ChatController {
     //users is an json object of all online user
     //key is session id (unique), value is name(Also id in DB)
     //Read all users(including offline users) from database
+
     for (Object online_u: users.values()){
       online_users.add(String.valueOf(online_u));
       if (all_users.contains(String.valueOf(online_u))){
             all_users.remove(String.valueOf(online_u));
         }
     }
+
     System.out.println("-----------------------Online Users:-----------------------");
     System.out.println(online_users);
+    //Test code
+//    Users kobe = new Users();
+//    kobe.setName("Kobe");
+//    List<Friends> friendsList =  iFriendsService.selectByUser(kobe);
+//    System.out.println(friendsList);
+
     return users;
   }
 
@@ -175,6 +188,34 @@ public class ChatController {
 
     iChatMessageService.insert(msg_in_db);
 
+  }
+
+  //返回该用户所有好友的JSON Object
+  @RequestMapping("/get_friends_set")
+  public JSONObject getFriendsSet(String username){
+//    Set<String> friendSet = new HashSet<>();
+    Users usr = new Users();
+    usr.setName(username);
+    List<Friends> friendsList =  iFriendsService.selectByUser(usr);
+    JSONObject friends = new JSONObject();
+
+    for(Friends f : friendsList){
+      System.out.println("username: " + username + "Friend user1: "+ f.getUser1() + " Friend user2:" + f.getUser2());
+      if(f.getUser1().equals(username)){
+        friends.put(f.getUser2() +"666",f.getUser2());
+      }else {
+        friends.put(f.getUser1() +"666",f.getUser1());
+      }
+    }
+    return friends;
+  }
+
+  //A user disconnect then add it into offline user set
+  @RequestMapping("/disconnect")
+  public boolean userDisconnect(HttpServletRequest request) throws Exception{
+    String userName = request.getParameter("username");
+    all_users.add(userName);
+    return true;
   }
 
   @RequestMapping("/load_hist")

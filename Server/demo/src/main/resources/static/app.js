@@ -31,6 +31,8 @@ function login() {
       //初始化一下用户的Message
       //
       connect();
+      //获取friend_list并显示
+      getFriends(name);
     },
     error: function () {
       $("#username").val('重名了');
@@ -58,9 +60,18 @@ function connect() {
     });
     stompClient.subscribe('/topic/userlist', function (greeting) {
       var parse = JSON.parse(greeting.body);
-
+      var friends = getFriends($("#username").val());
+      console.log("FriendArray: " + friends);
+      //Verify if the new user is in the list
+      var isFriend = false;
+      for(var j = 0; j < friends.length; j++){
+        console.log("Friend at " + j + " is " + friends[j]);
+        if(friends[j] === parse.name){
+          isFriend = true;
+        }
+      }
+      console.log("IS Friend" + isFriend);
       if (parse.online) {
-
         var exist = false;
         var usr_table = document.getElementById("user");
         var all_users = usr_table.getElementsByTagName("td");
@@ -71,20 +82,27 @@ function connect() {
             }
         }
         if(!exist){
+            if(isFriend){
             showUser(parse.name, parse.id);
+            }
         }
-        //整个上线提醒
-        $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
-            "<span class=\"tips-success\">"
-            + parse.name + " is online!" + "</span>"+ "</td></tr>");
+        if(isFriend){
+          //整个上线提醒
+          $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+              "<span class=\"tips-success\">"
+              + parse.name + " is online!" + "</span>"+ "</td></tr>");
+        }
       } else {
-        //前端移除该user不应该写在这
-        $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
-            "<span>"
-            + parse.name + " is offline!" + "</span>"+ "</td></tr>");
-        // removeUser(parse.id);
-        //后端移除该user
-        removeOnlineUser(parse.name);
+        if (isFriend){
+          //前端移除该user不应该写在这
+          $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+              "<span>"
+              + parse.name + " is offline!" + "</span>"+ "</td></tr>");
+          // removeUser(parse.id);
+          //后端移除该user
+          removeOnlineUser(parse.name);
+        }
+
       }
     });
     load_hist();
@@ -93,12 +111,32 @@ function connect() {
 
 function disconnect() {
   clearUserMessage();
+  clearUserFriends();
   if (stompClient !== null) {
     stompClient.disconnect();
   }
   //removeUser(sessionId);
   setConnected(false);
   console.log("Disconnected");
+  backend_disconnect();
+}
+
+//A user disconnect then add it into offline user set
+//这个请求好像现在没用了
+function backend_disconnect() {
+    $.ajax({
+      type: "POST",
+      url: "/disconnect",
+      data: {username:$("#username").val().trim()},
+      success: function (result) {
+        //pass
+        if(result)
+          console.log("Disconnect Successfully!");
+        else{
+          console.log("Disconnect Fails!");
+        }
+      }
+    });
 }
 
 function load_hist() {
@@ -250,9 +288,18 @@ function showMessage(message, touser, sender) {
   div.scrollTop = div.scrollHeight;
 }
 function showUser(user, id) {
-  $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
+  console.log("Fucklength" + $("#"+id).length);
+  if($("#" + id).length > 0){
+      // console.log("Fuck" + $("#"+id));
+  }else{
+      $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
+  }
 }
 
+//防止friend重复出现
+function clearUserFriends(){
+  $("#user").empty();
+}
 //防止message重复出现
 function clearUserMessage() {
    $("#private").empty();
@@ -272,17 +319,40 @@ function removeOnlineUser(usr){
   });
 }
 
-$(function () {
+function getFriends(username){
+  var friends_arr = new Array();
+  var friends_string = ''
   $.ajax({
-    type: "GET",
-    url: "/userlist",
-    dataType: "json",
-    success: function (json) {
-      for (var p in json) {//遍历json对象的每个key/value对,p为key
-        showUser(json[p], p);
-      }
+    type:"GET",
+    url:"/get_friends_set",
+    dataType:"json",
+    async: false,
+    data: {username:username},
+    success:function (json) {
+        var i = 0;
+        for(var p in json){
+          friends_arr[i] = json[p];
+          showUser(json[p], p);
+          i++
+        }
     }
+
   });
+  return friends_arr;
+}
+
+$(function () {
+  // $.ajax({
+  //   type: "GET",
+  //   url: "/userlist",
+  //   dataType: "json",
+  //   success: function (json) {
+  //     for (var p in json) {//遍历json对象的每个key/value对,p为key
+  //       showUser(json[p], p);
+  //     }
+  //   }
+  // });
+
   $("form").on('submit', function (e) {
     e.preventDefault();
   });
@@ -302,20 +372,20 @@ $(function () {
 
 //Offline user
 $(function () {
-  $.ajax({
-    type: "GET",
-    url: "/offline_userlist",
-    dataType: "json",
-    success: function (json) {
-      for (var p in json) {//遍历json对象的每个key/value对,p为key
-        showUser(json[p], p);
-      }
-    }
-  });
-  $("form").on('submit', function (e) {
-    e.preventDefault();
-  });
-
+  // $.ajax({
+  //   type: "GET",
+  //   url: "/offline_userlist",
+  //   dataType: "json",
+  //   success: function (json) {
+  //     for (var p in json) {//遍历json对象的每个key/value对,p为key
+  //       showUser(json[p], p);
+  //     }
+  //   }
+  // });
+  // $("form").on('submit', function (e) {
+  //   e.preventDefault();
+  // });
+  //do nothing
   // $("#send").click(function () {
   //   sendName();
   // });
