@@ -7,7 +7,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.example.demo.config.WebSocketConfig;
 import com.example.demo.entity.Chat;
+import com.example.demo.entity.Users;
 import com.example.demo.model.ChatMessage;
+import com.example.demo.model.User;
+import com.example.demo.service.IChatMessageService;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +37,16 @@ public class ChatController {
 
   private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd HH:mm");
 
+  @Autowired
+  IChatMessageService iChatMessageService;
+
   //Fake data from database
   private Set<String> all_users = new HashSet<String>(){{add("Tom");add("Kobe");add("James");}};
   private Set<String> online_users = new HashSet();
-  private List<ChatMessage> hist_messages = new ArrayList(){{
-      add(new ChatMessage("Kobe", "Hi James, I am Kobe!", "James", "05-02 05:41"));
-      add(new ChatMessage("James", "Hi Kobe, I am James!", "Kobe", "05-02 05:42"));
-  }};
+//  private List<ChatMessage> hist_messages = new ArrayList(){{
+//      add(new ChatMessage("Kobe", "Hi James, I am Kobe!", "James", "05-02 05:41"));
+//      add(new ChatMessage("James", "Hi Kobe, I am James!", "Kobe", "05-02 05:42"));
+//  }};
 
   @Autowired
   private SimpMessagingTemplate template;
@@ -161,6 +167,14 @@ public class ChatController {
 
     //Send message to receiver
     template.convertAndSendToUser(touser,"/topic/private",new ChatMessage(userid,content,touser,date));
+    com.example.demo.entity.ChatMessage msg_in_db = new com.example.demo.entity.ChatMessage();
+    msg_in_db.setSender(userid);
+    msg_in_db.setReceiver(touser);
+    msg_in_db.setContent(content);
+    msg_in_db.setSendTime(date);
+
+    iChatMessageService.insert(msg_in_db);
+
   }
 
   @RequestMapping("/load_hist")
@@ -169,8 +183,25 @@ public class ChatController {
       String userName = request.getParameter("username");
       //Read message from data
       // ...
+      Users usr = new Users();
+      usr.setName(userName);
+      List<com.example.demo.entity.ChatMessage> messages_from_db = iChatMessageService.selectByUser(usr);
+      //将entity中chatmessage类型转换为model中的
+      List<ChatMessage> hist_message = new ArrayList<>();
+      if (messages_from_db.size() > 0) {
+        for (com.example.demo.entity.ChatMessage m : messages_from_db) {
+          ChatMessage msg = new ChatMessage();
+          msg.setName(m.getSender());
+          msg.setReceiver(m.getReceiver());
+          msg.setContent(m.getContent());
+          msg.setDate(m.getSendTime());
+          hist_message.add(msg);
+        }
+      }
       //Get hist_messages
-      loadUserHistory(userName, hist_messages);
+      if(hist_message.size() > 0) {
+          loadUserHistory(userName, hist_message);
+      }
       return true;
   }
 

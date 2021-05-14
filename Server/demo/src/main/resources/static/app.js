@@ -73,9 +73,15 @@ function connect() {
         if(!exist){
             showUser(parse.name, parse.id);
         }
+        //整个上线提醒
+        $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+            "<span class=\"tips-success\">"
+            + parse.name + " is online!" + "</span>"+ "</td></tr>");
       } else {
         //前端移除该user不应该写在这
-
+        $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+            "<span>"
+            + parse.name + " is offline!" + "</span>"+ "</td></tr>");
         // removeUser(parse.id);
         //后端移除该user
         removeOnlineUser(parse.name);
