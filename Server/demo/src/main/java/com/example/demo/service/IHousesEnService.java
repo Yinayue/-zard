@@ -18,4 +18,6 @@ public interface IHousesEnService extends IService<Housesen> {
     public List<Housesen> price(Range range);
 
     public Pager<Housesen> findByPager(int page, int size);
+
+    public void insertNew(Housesen housesen);
 }

@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.HousesEnMapper">
 
     <sql id="Base_Column_List">
-        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, delete_flag AS deleteFlag
+        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, path, delete_flag AS deleteFlag
     </sql>
 
     <select id="select" parameterType="com.example.demo.entity.Housesen" resultType="com.example.demo.entity.Housesen" fetchSize="50000">
@@ -71,6 +71,9 @@
             </if>
             <if test="endYear!=null and endYear!=''">
                 AND year&lt;=#{endYear}
+            </if>
+            <if test="path!=null and path!=''">
+                AND path = #{path}
             </if>
         </where>
     </select>
@@ -184,5 +187,6 @@
     <select id="count" resultType="long">
         select count(1) from housesen
     </select>
+
 
 </mapper>

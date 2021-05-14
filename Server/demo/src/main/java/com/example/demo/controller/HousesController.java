@@ -3,15 +3,17 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
+import com.example.demo.util.basic.FileUtil;
 import com.example.demo.util.predict.PMMLDemo;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.search.Operation;
 import com.google.gson.JsonArray;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -152,13 +154,12 @@ public class HousesController {
      * @return
      */
     @RequestMapping(value="/insert",method = RequestMethod.POST)
-    public String insert(Housesen houses){
+    public String insert(Housesen houses,@RequestParam("image") MultipartFile image){
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(System.currentTimeMillis());
 //            houses.setLaunchDate(formatter.format(date));
             houses.setDeleteFlag(0);
-
             //get seller
             Users temp = new Users();
             temp.setId((long)houses.getSid());
@@ -169,8 +170,14 @@ public class HousesController {
             }else{
                 return JsonResult.error("积分不足");
             }
+            String fileName = image.getOriginalFilename();
+            //设置文件上传路径
+            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+            houses.setPath(filePath+fileName);
+            uploadImg(image);
             iHousesEnService.insert(houses);
             iUsersService.updateById(seller);
+
             return JsonResult.success("success");
         }catch (Exception e){
             e.printStackTrace();
@@ -319,5 +326,22 @@ public class HousesController {
     public String test(Housesen housesen){
         return JsonResult.success(iHousesEnService.findByPager(1,1000));
     }
+
+
+    @RequestMapping(value="/testuploadimg", method = RequestMethod.POST)
+    public @ResponseBody String uploadImg(@RequestParam("file") MultipartFile file)  {
+        String fileName = file.getOriginalFilename();
+        //设置文件上传路径
+        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+        //String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
+        try {
+            FileUtil.uploadFile(file.getBytes(), filePath, fileName);
+            return "上传成功";
+        } catch (Exception e) {
+            return "上传失败";
+        }
+    }
+
+
 
 }

@@ -19,7 +19,7 @@ public interface HousesEnMapper extends BaseMapper<Housesen> {
 
     public List<Housesen> price(Range range);
 
-
+    public void insertNew(Housesen housesen);
 
     public List<Housesen> findByPager(Map<String, Object> params);
     public long count();

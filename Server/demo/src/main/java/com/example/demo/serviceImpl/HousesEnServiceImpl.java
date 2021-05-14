@@ -60,4 +60,8 @@ public class HousesEnServiceImpl extends ServiceImpl<HousesEnMapper, Housesen> i
         return pager;
     }
 
+    @Override
+    public void insertNew(Housesen housesen) {
+        housesEnMapper.insertNew(housesen);
+    }
 }

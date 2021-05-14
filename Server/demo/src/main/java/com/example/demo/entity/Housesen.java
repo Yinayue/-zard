@@ -37,11 +37,24 @@ public class Housesen extends Model<Housesen> {
     @TableField("launch_time")
     private String launchTime;
     private String information;
+    private String path;
 
+    @TableField(exist = false)
     private int startYear;
+    @TableField(exist = false)
     private int endYear;
+    @TableField(exist = false)
     private int startPrice;
+    @TableField(exist = false)
     private int endPrice;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 
     public int getEndPrice() {
         return endPrice;
