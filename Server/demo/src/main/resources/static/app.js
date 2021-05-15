@@ -6,7 +6,7 @@ var sessionId = null;
 function setConnected(connected) {
   $("#connect").html('连接');
   if (connected) {
-    $("#connect").html('成功');
+    $("#connect").html('Successful');
   }
   $("#connect").prop("disabled", connected);
   $("#disconnect").prop("disabled", !connected);
@@ -29,9 +29,10 @@ function login() {
     data: {username: name},
     success: function () {
       //初始化一下用户的Message
-
       //
       connect();
+      //获取friend_list并显示
+      getFriends(name);
     },
     error: function () {
       $("#username").val('重名了');
@@ -54,14 +55,54 @@ function connect() {
     });
     stompClient.subscribe('/user/topic/private', function (greeting) {
       var parse = JSON.parse(greeting.body);
-      showMessage(parse.content, parse.name);
+      console.log(parse);
+      showMessage(parse.content, parse.receiver, parse.name);
     });
     stompClient.subscribe('/topic/userlist', function (greeting) {
       var parse = JSON.parse(greeting.body);
+      var friends = getFriends($("#username").val());
+      console.log("FriendArray: " + friends);
+      //Verify if the new user is in the list
+      var isFriend = false;
+      for(var j = 0; j < friends.length; j++){
+        console.log("Friend at " + j + " is " + friends[j]);
+        if(friends[j] === parse.name){
+          isFriend = true;
+        }
+      }
+      console.log("IS Friend" + isFriend);
       if (parse.online) {
-        showUser(parse.name, parse.id);
+        var exist = false;
+        var usr_table = document.getElementById("user");
+        var all_users = usr_table.getElementsByTagName("td");
+        //防止一个用户重复出现
+        for(var i = 0; i < all_users.length; i++){
+            if(all_users.item(i).textContent === parse.name){
+              exist = true;
+            }
+        }
+        if(!exist){
+            if(isFriend){
+            showUser(parse.name, parse.id);
+            }
+        }
+        if(isFriend){
+          //整个上线提醒
+          $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+              "<span class=\"tips-success\">"
+              + parse.name + " is online!" + "</span>"+ "</td></tr>");
+        }
       } else {
-        removeUser(parse.id);
+        if (isFriend){
+          //前端移除该user不应该写在这
+          $("#private").append("<tr class='msg-" + parse.name + "' ><td class='tips' >" +
+              "<span>"
+              + parse.name + " is offline!" + "</span>"+ "</td></tr>");
+          // removeUser(parse.id);
+          //后端移除该user
+          removeOnlineUser(parse.name);
+        }
+
       }
     });
     load_hist();
@@ -69,12 +110,33 @@ function connect() {
 }
 
 function disconnect() {
+  clearUserMessage();
+  clearUserFriends();
   if (stompClient !== null) {
     stompClient.disconnect();
   }
   //removeUser(sessionId);
   setConnected(false);
   console.log("Disconnected");
+  backend_disconnect();
+}
+
+//A user disconnect then add it into offline user set
+//这个请求好像现在没用了
+function backend_disconnect() {
+    $.ajax({
+      type: "POST",
+      url: "/disconnect",
+      data: {username:$("#username").val().trim()},
+      success: function (result) {
+        //pass
+        if(result)
+          console.log("Disconnect Successfully!");
+        else{
+          console.log("Disconnect Fails!");
+        }
+      }
+    });
 }
 
 function load_hist() {
@@ -117,20 +179,21 @@ function sendToUser() {
 
 //点击列表发生事件
 function touser(message) {
-  console.log("Message\n" + message.textContent);
   $("#" + message.id + " span").html('');
-  if ($("#privateuser").html() === '私信聊天') {
-    $("#privateuser").html("私信聊天 与 【" + message.textContent + "】");
+  if ($("#privateuser").html() === 'PrivateChat') {
+    $("#privateuser").html("Private Chat with 【" + message.textContent + "】");
     $(".msg-" + message.textContent).prop("hidden", false);
     return;
   }
   var patt1 = new RegExp(/【(.*?)】/g);
+  //当签窗口的user名
   var tousername = patt1.exec($("#privateuser").html())[1];
+  console.log( "Message\n" + message.textContent + "Tousername: " + tousername);
   if(message.class===tousername){
     return;
   }
   $(".msg-" + tousername).prop("hidden", true);
-  $("#privateuser").html("私信聊天 与 【" + message.textContent + "】");
+  $("#privateuser").html("Private Chat with 【" + message.textContent + "】");
   $(".msg-" + message.textContent).prop("hidden", false);
 
 }
@@ -166,54 +229,130 @@ function showGreeting(message) {
   div.scrollTop = div.scrollHeight;
 }
 
-function showMessage(message, touser) {
+//to user = receiver
+function showMessage(message, touser, sender) {
   var patt1 = new RegExp(/【(.*?)】/g);
+
+
+  //当前前端channel的聊天用户
   var tousername='';
   console.log('Touser: ' + touser + " Username: " + $("#username").val()) ;
-  if($("#privateuser").html()!=='私信聊天'){
+  if($("#privateuser").html()!=='PrivateChat'){
     tousername = patt1.exec($("#privateuser").html())[1];
   }
+  // console.log("username: " + $("#username").val() + "  touser: " + touser + " tousername: " + tousername)
   if (touser === $("#username").val()) {
-    $("#private").append("<tr class='msg-" + touser + "'><td class='cright cmsg'>" +
-        "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/bili.png\" /><span class=\"content\">"
-        + message + "</span>"+ "</td></tr>");
+    console.log("Sender: "+ sender + "Receiver: " + touser)
+    tail = sender;
+    if(touser === "Buyer_Kory"){
+      $("#private").append("<tr class='msg-" + tail + "' ><td class='cleft cmsg' >" +
+          "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/bili.png\" /><span class=\"content\">"
+          + message + "</span>"+ "</td></tr>");
+    }else{
+      $("#private").append("<tr class='msg-" + tail + " ' style='width: 300px;'><td class='cleft cmsg' >" +
+          "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
+          + message + "</span>"+ "</td></tr>");
+    }
   }
-  if (touser === tousername) {
-    $("#private").append("<tr class='msg-" + touser + "'><td class='cleft cmsg'>" +
-        "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
-        + message + "</span>"+ "</td></tr>");png
+  else if (sender === $("#username").val()) {
+    if(touser ==="Buyer_Kory"){
+      $("#private").append("<tr class='msg-" + touser + "' ><td class='cright cmsg' style='float: right'>" +
+          "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/bili.png\" /><span class=\"content\">"
+          + message + "</span>"+ "</td></tr>");
+    }else{
+      $("#private").append("<tr class='msg-" + touser + "'><td class='cright cmsg' style='float: right'>" +
+          "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
+          + message + "</span>"+ "</td></tr>");
+    }
   } else {
     var i = $("." + touser + " span").html();
     if (i === '') {
       i = 0;
     }
     $("." + touser + " span").html(++i);
+    //这部分是干嘛的？？？？？？
     $("#private").append("<tr class='msg-" + touser + "' hidden><td class='cleft cmsg'>" +
         "<img class=\"headIcon radius\" ondragstart=\"return false;\"  oncontextmenu=\"return false;\" src=\"./img/pw.png\" /><span class=\"content\">"
         + message + "</span>"+ "</td></tr>");
+  }
+
+  if(tousername != sender ){
+    $(".msg-" + sender).prop("hidden", true);
+  }
+
+  if(tousername != touser){
+    $(".msg-" + touser).prop("hidden", true);
   }
 
   var div = document.getElementById('private');
   div.scrollTop = div.scrollHeight;
 }
 function showUser(user, id) {
-  $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
+  console.log("Fucklength" + $("#"+id).length);
+  if($("#" + id).length > 0){
+      // console.log("Fuck" + $("#"+id));
+  }else{
+      $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
+  }
+}
+
+//防止friend重复出现
+function clearUserFriends(){
+  $("#user").empty();
+}
+//防止message重复出现
+function clearUserMessage() {
+   $("#private").empty();
 }
 function removeUser(id) {
   $("tr").remove("#" + id);
 }
 
-$(function () {
+function removeOnlineUser(usr){
   $.ajax({
     type: "GET",
-    url: "/userlist",
-    dataType: "json",
-    success: function (json) {
-      for (var p in json) {//遍历json对象的每个key/value对,p为key
-        showUser(json[p], p);
-      }
-    }
+    url: "/rm_ol_usr",
+    dataType:{username:usr},
+    success: function (res) {
+    console.log("从后台移除在线用户成功");
+  }
   });
+}
+
+function getFriends(username){
+  var friends_arr = new Array();
+  var friends_string = ''
+  $.ajax({
+    type:"GET",
+    url:"/get_friends_set",
+    dataType:"json",
+    async: false,
+    data: {username:username},
+    success:function (json) {
+        var i = 0;
+        for(var p in json){
+          friends_arr[i] = json[p];
+          showUser(json[p], p);
+          i++
+        }
+    }
+
+  });
+  return friends_arr;
+}
+
+$(function () {
+  // $.ajax({
+  //   type: "GET",
+  //   url: "/userlist",
+  //   dataType: "json",
+  //   success: function (json) {
+  //     for (var p in json) {//遍历json对象的每个key/value对,p为key
+  //       showUser(json[p], p);
+  //     }
+  //   }
+  // });
+
   $("form").on('submit', function (e) {
     e.preventDefault();
   });
@@ -233,20 +372,20 @@ $(function () {
 
 //Offline user
 $(function () {
-  $.ajax({
-    type: "GET",
-    url: "/offline_userlist",
-    dataType: "json",
-    success: function (json) {
-      for (var p in json) {//遍历json对象的每个key/value对,p为key
-        showUser(json[p], p);
-      }
-    }
-  });
-  $("form").on('submit', function (e) {
-    e.preventDefault();
-  });
-
+  // $.ajax({
+  //   type: "GET",
+  //   url: "/offline_userlist",
+  //   dataType: "json",
+  //   success: function (json) {
+  //     for (var p in json) {//遍历json对象的每个key/value对,p为key
+  //       showUser(json[p], p);
+  //     }
+  //   }
+  // });
+  // $("form").on('submit', function (e) {
+  //   e.preventDefault();
+  // });
+  //do nothing
   // $("#send").click(function () {
   //   sendName();
   // });
