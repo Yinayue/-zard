@@ -26,10 +26,18 @@ public class Preference extends Model<Preference> {
 	@TableField("house_id")
 	private Long houseId;
 	private Integer score;
-
+	private String review;
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
 	}
 
 	public Preference setId(Long id) {

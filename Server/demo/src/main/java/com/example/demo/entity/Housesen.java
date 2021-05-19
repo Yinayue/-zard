@@ -48,6 +48,48 @@ public class Housesen extends Model<Housesen> {
     @TableField(exist = false)
     private int endPrice;
 
+    @TableField(exist = false)
+    private int startFloor;
+    @TableField(exist = false)
+    private int endFloor;
+    @TableField(exist = false)
+    private int startRoom;
+    @TableField(exist = false)
+    private int endRoom;
+
+    public void setEndFloor(int endFloor) {
+        this.endFloor = endFloor;
+    }
+
+    public void setEndRoom(int endRoom) {
+        this.endRoom = endRoom;
+    }
+
+    public void setStartFloor(int startFloor) {
+        this.startFloor = startFloor;
+    }
+
+    public void setStartRoom(int startRoom) {
+        this.startRoom = startRoom;
+    }
+
+    public int getEndFloor() {
+        return endFloor;
+    }
+
+    public int getEndRoom() {
+        return endRoom;
+    }
+
+    public int getStartFloor() {
+        return startFloor;
+    }
+
+    public int getStartRoom() {
+        return startRoom;
+    }
+
+
     public String getPath() {
         return path;
     }

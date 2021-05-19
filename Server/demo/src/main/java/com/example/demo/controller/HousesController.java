@@ -105,14 +105,14 @@ public class HousesController {
 
 
             HashMap<String, Integer> renovationMap = new HashMap<>();
-            regionMap.put("Simple",0);
-            regionMap.put("High-Grade",1);
-            regionMap.put("Medium",2);
+            renovationMap.put("Simple",0);
+            renovationMap.put("High-Grade",1);
+            renovationMap.put("Medium",2);
 
 
             HashMap<String, Integer> elevatorMap = new HashMap<>();
-            regionMap.put("Yes",1);
-            regionMap.put("No",0);
+            elevatorMap.put("Yes",1);
+            elevatorMap.put("No",0);
 
             try {
 

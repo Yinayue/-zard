@@ -9,9 +9,9 @@ public class Demo {
         Start start = new Start();
 
         BuyerSet buyerSet = getHouses.getHouses();
-        buyerSet.getUser("小明").set("测试",5);
-        List<BuyerSet.Set> temp =  buyerSet.getUser("小明").list;
-        start.start(buyerSet,"小明");
+//        buyerSet.getUser("小明").set("测试",5);
+//        List<BuyerSet.Set> temp =  buyerSet.getUser("小明").list;
+//        start.start(buyerSet,"小明");
     }
 
 }

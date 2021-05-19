@@ -10,6 +10,7 @@ import com.example.demo.util.basic.TokenUtil;
 import com.example.demo.util.basic.UserLoginToken;
 import com.example.demo.util.recommend.BuyerSet;
 import com.example.demo.util.recommend.Start;
+import org.python.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,9 @@ public class UsersController {
 
     @Autowired
     IChatMessageService iChatMessageService;
+
+    @Autowired
+    IFriendsService iFriendsService;
 
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
@@ -160,7 +164,7 @@ public class UsersController {
                                 Housesen t = new Housesen();
                                 t.setId((long)preference.getHouseId());
                                 List<Housesen> houses = iHousesEnService.select(t);
-                                buyerSet.getUser(users1.getName()).set(houses.get(0).getAddress(),preference.getScore());
+                                buyerSet.getBuyer(users1.getName()).set(houses.get(0).getAddress(),preference.getScore());
                             }
                         }else{
                             continue;
@@ -215,6 +219,7 @@ public class UsersController {
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 if(temp.getLogin()==0){
+                    jsonObject.put("status",0);
                     temp.setLogin(1);
                     iUsersService.updateById(temp);
                 }
@@ -345,6 +350,28 @@ public class UsersController {
     @RequestMapping(value = "chatMessage",method = RequestMethod.POST)
     public String chatMessage(Users user){
         return JsonResult.success(iChatMessageService.selectByUser(user));
+    }
+
+    @RequestMapping(value = "addFriend",method = RequestMethod.POST)
+    public String addFriend(String user1, String user2){
+        try {
+            //查询用户是否存在
+            Users query1 = new Users();
+            Users query2 = new Users();
+            query1.setName(user1);
+            query2.setName(user2);
+            if (iUsersService.selectUsers(query1).size() == 0 || iUsersService.selectUsers(query2).size() == 0) {
+                return JsonResult.error("用户不存在");
+            } else {
+                Friends friends = new Friends();
+                friends.setUser1(user1);
+                friends.setUser2(user2);
+                return JsonResult.success(iFriendsService.insert(friends));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error();
+        }
     }
 
 }

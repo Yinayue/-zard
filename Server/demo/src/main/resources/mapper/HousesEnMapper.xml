@@ -75,6 +75,18 @@
             <if test="path!=null and path!=''">
                 AND path = #{path}
             </if>
+            <if test="startFloor!=null and startFloor!=''">
+                AND floor&gt;=#{startFloor}
+            </if>
+            <if test="endFloor!=null and endFloor!=''">
+                AND floor&lt;=#{endFloor}
+            </if>
+            <if test="startRoom!=null and startRoom!=''">
+                AND layout&gt;=#{startRoom}
+            </if>
+            <if test="endRoom!=null and endRoom!=''">
+                AND layout&lt;=#{endRoom}
+            </if>
         </where>
     </select>
 
@@ -173,6 +185,18 @@
             </if>
             <if test="endYear!=null and endYear!=''">
                 AND year&lt;=#{endYear}
+            </if>
+            <if test="startFloor!=null and startFloor!=''">
+                AND floor&gt;=#{startFloor}
+            </if>
+            <if test="endFloor!=null and endFloor!=''">
+                AND floor&lt;=#{endFloor}
+            </if>
+            <if test="startRoom!=null and startRoom!=''">
+                AND room&gt;=#{startRoom}
+            </if>
+            <if test="endRoom!=null and endRoom!=''">
+                AND room&lt;=#{endRoom}
             </if>
         </where>
     </select>
