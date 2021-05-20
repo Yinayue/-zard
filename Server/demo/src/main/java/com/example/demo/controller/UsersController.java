@@ -65,6 +65,9 @@ public class UsersController {
     @Autowired
     IFriendsService iFriendsService;
 
+    @Autowired
+    IQuestionService iQuestionService;
+
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
         try{
@@ -153,7 +156,7 @@ public class UsersController {
                 BuyerSet buyerSet = new BuyerSet();
                 //获取每个user的评分
                 for(Users users1 : allUser){
-                    if(users1.getStatus()==1){
+                    //if(users1.getStatus()==1){
                         Preference preferenceTemp = new Preference();
                         preferenceTemp.setBuyerId(users1.getId());
                         List<Preference> preferenceList = iPreferenceService.select(preferenceTemp);
@@ -169,7 +172,7 @@ public class UsersController {
                         }else{
                             continue;
                         }
-                    }
+                    //}
                 }
                 Start start = new Start();
                 List<String> recoResult = start.start2(buyerSet,username);
@@ -233,6 +236,7 @@ public class UsersController {
 
     }
 
+
     @UserLoginToken
     @RequestMapping(value = "/sellDetail" ,method = RequestMethod.GET)
     public String getSell() {
@@ -281,7 +285,10 @@ public class UsersController {
         for(long i: hid){
             Housesen temp = new Housesen();
             temp.setId(i);
-            houseList.add(iHousesEnService.select(temp).get(0));
+            List<Housesen> result = iHousesEnService.select(temp);
+            if(result.size()!=0) {
+                houseList.add(iHousesEnService.select(temp).get(0));
+            }
         }
         return JsonResult.success(houseList);
     }
@@ -345,6 +352,28 @@ public class UsersController {
         }
     }
 
+    @RequestMapping(value = "getQuestion",method = RequestMethod.POST)
+    public String getQuestion(long uid){
+        try {
+            Question query = new Question();
+            query.setUid(uid);
+            return JsonResult.success(iQuestionService.selectByUid(query));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("操作失败");
+        }
+    }
+
+    @RequestMapping(value = "saveQuestion",method = RequestMethod.POST)
+    public String saveQuestion(Question question){
+        try{
+            return JsonResult.success(iQuestionService.insert(question));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("操作失败");
+        }
+    }
+
 
 
     @RequestMapping(value = "chatMessage",method = RequestMethod.POST)
@@ -366,6 +395,15 @@ public class UsersController {
                 Friends friends = new Friends();
                 friends.setUser1(user1);
                 friends.setUser2(user2);
+                //get seller
+                Users seller = iUsersService.selectUsers(query1).get(0);
+                //check score
+                if(seller.getScore()>=10){//have enough score
+                    seller.setScore(seller.getScore()-10);
+                }else{
+                    return JsonResult.error("积分不足");
+                }
+                iUsersService.updateById(seller);
                 return JsonResult.success(iFriendsService.insert(friends));
             }
         }catch (Exception e){
@@ -373,5 +411,10 @@ public class UsersController {
             return JsonResult.error();
         }
     }
+
+//    @RequestMapping(value = "test",method = RequestMethod.POST)
+//    public String test(){
+//
+//    }
 
 }

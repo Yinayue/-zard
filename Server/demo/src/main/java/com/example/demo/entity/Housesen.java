@@ -56,6 +56,15 @@ public class Housesen extends Model<Housesen> {
     private int startRoom;
     @TableField(exist = false)
     private int endRoom;
+    private int sold;
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
+    public int getSold() {
+        return sold;
+    }
 
     public void setEndFloor(int endFloor) {
         this.endFloor = endFloor;

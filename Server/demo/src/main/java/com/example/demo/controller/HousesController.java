@@ -4,6 +4,8 @@ package com.example.demo.controller;
 import com.example.demo.entity.*;
 import com.example.demo.service.*;
 import com.example.demo.util.basic.FileUtil;
+import com.example.demo.util.basic.TokenUtil;
+import com.example.demo.util.basic.UserLoginToken;
 import com.example.demo.util.predict.PMMLDemo;
 import com.example.demo.util.basic.JsonResult;
 import com.example.demo.util.search.Operation;
@@ -56,7 +58,6 @@ public class HousesController {
             e.printStackTrace();
             return JsonResult.error();
         }
-
     }
 
 
@@ -165,8 +166,8 @@ public class HousesController {
             temp.setId((long)houses.getSid());
             Users seller = iUsersService.selectUsers(temp).get(0);
             //check score
-            if(seller.getScore()>=5){//have enough score
-                seller.setScore(seller.getScore()-5);
+            if(seller.getScore()>=20){//have enough score
+                seller.setScore(seller.getScore()-20);
             }else{
                 return JsonResult.error("积分不足");
             }
@@ -216,21 +217,46 @@ public class HousesController {
      * 搜索引擎
      * @return
      */
+    @UserLoginToken
     @RequestMapping(value = "search",method = RequestMethod.POST)
     public String search(String queryStr){
+        int uid = -1;
         try{
-            Operation operation = new Operation();
-            operation.buildIndex();
-            String[] query=queryStr.split(",");
-            List<String> addresses = operation.getAddresses(query);
-            List<List<Housesen>> result = new ArrayList<>();
-            for(String address : addresses){
-                Housesen temp = new Housesen();
-                temp.setAddress(address);
-                result.add(iHousesEnService.select(temp));
+            uid = Integer.parseInt(TokenUtil.getTokenUserId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("验证失败");
+        }
+
+        try{
+            //get seller
+            Users t = new Users();
+            t.setId((long)uid);
+            if (iUsersService.selectUsers(t).size()>0) {
+                Users seller = iUsersService.selectUsers(t).get(0);
+                //check score
+                if (seller.getScore() >= 10) {//have enough score
+                    seller.setScore(seller.getScore() - 10);
+                } else {
+                    return JsonResult.error("积分不足");
+                }
+
+
+                Operation operation = new Operation();
+                operation.buildIndex();
+                String[] query = queryStr.split(",");
+                List<String> addresses = operation.getAddresses(query);
+                List<List<Housesen>> result = new ArrayList<>();
+                for (String address : addresses) {
+                    Housesen temp = new Housesen();
+                    temp.setAddress(address);
+                    result.add(iHousesEnService.select(temp));
+                }
+                //在这里定义一下要search的query，数组形式
+                return JsonResult.success(result);
+            }else {
+                return JsonResult.error("未查询到用户");
             }
-            //在这里定义一下要search的query，数组形式
-            return JsonResult.success(result);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -344,4 +370,15 @@ public class HousesController {
 
 
 
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public String delete(long houseId){
+        try{
+            Housesen housesen = new Housesen();
+            housesen.setId(houseId);
+            return JsonResult.success(iHousesEnService.deleteById(housesen));
+        }catch (Exception e){
+            e.printStackTrace();
+            return JsonResult.error("操作失败");
+        }
+    }
 }

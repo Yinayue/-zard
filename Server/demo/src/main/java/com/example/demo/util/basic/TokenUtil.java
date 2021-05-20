@@ -25,6 +25,12 @@ public class TokenUtil {
                 .getRequestAttributes();
         return requestAttributes == null ? null : requestAttributes.getRequest();
     }
+
+    public static String getToken(){
+        return getRequest().getHeader("token");
+    }
+
+
 }
 
 

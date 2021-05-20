@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mapper.HousesEnMapper">
 
     <sql id="Base_Column_List">
-        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, path, delete_flag AS deleteFlag
+        id,sid,direction,district,elevator,floor,address,layout,price,region,renovation,size,year,information,launch_time AS launchTime, path,sold, delete_flag AS deleteFlag
     </sql>
 
     <select id="select" parameterType="com.example.demo.entity.Housesen" resultType="com.example.demo.entity.Housesen" fetchSize="50000">
@@ -13,7 +13,7 @@
         housesen
         <where>
             <if test="id!=null and id!=''">
-                id = #{id}
+                AND id = #{id}
             </if>
             <if test="sid!=null and sid!=''">
                 AND sid = #{sid}
@@ -86,6 +86,9 @@
             </if>
             <if test="endRoom!=null and endRoom!=''">
                 AND layout&lt;=#{endRoom}
+            </if>
+            <if test="sold!=null and sold!=''">
+                AND sold=#{sold}
             </if>
         </where>
     </select>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.QuestionMapper">
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, uid, direction,region,elevator,renovation
+    </sql>
+
+    <select id="selectByUid" parameterType="com.example.demo.entity.Question" resultType="com.example.demo.entity.Question">
+
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM question
+        <where>
+            <if test="uid!='' and uid!=null">
+                uid = #{uid}
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

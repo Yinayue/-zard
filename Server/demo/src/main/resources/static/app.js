@@ -17,12 +17,12 @@ function setConnected(connected) {
 }
 
 function login() {
-  var name = $("#username").val().trim();
-  if (name === '') {
-    $("#username").val('用户名不能为空');
-    return;
-  }
-
+  var name = window.sessionStorage.getItem("username");
+  // if (name === '') {
+  //   $("#username").val('用户名不能为空');
+  //   return;
+  // }
+  $("#username").val(name);
   $.ajax({
     type: "POST",
     url: "/login",

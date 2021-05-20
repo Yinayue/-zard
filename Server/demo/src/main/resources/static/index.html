@@ -79,6 +79,7 @@
   <script src="/app.js"></script>
 </head>
 <body>
+
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
   enabled. Please enable
   Javascript and reload this page!</h2></noscript>
@@ -190,11 +191,12 @@
         <div class="form-group">
           <label for="connect">Online User：</label>
           <div class="input-group">
-          <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''">
+          <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''" disabled="disabled">
           <span class="input-group-btn">
           <button id="connect" class="btn btn-default" type="submit">Connect</button>
-          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
-          </button></span> </div>
+          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Invisible
+          </button>
+          </span> </div>
         </div>
       </form>
     </div>
@@ -254,7 +256,9 @@
 
 
 <br/>
-</body>
+
+
+    </body>
 <!--&lt;!&ndash; wow JS-->
 <!--    ============================================ &ndash;&gt;-->
 <!--<script src="../js/wow.min.js"></script>-->
@@ -344,4 +348,6 @@
 <!--&lt;!&ndash; Data Table JS-->
 <!--       ============================================ &ndash;&gt;-->
 <!--<script src="../js/data-table/jquery.dataTables.min.js"></script>-->
+
+
 </html>
