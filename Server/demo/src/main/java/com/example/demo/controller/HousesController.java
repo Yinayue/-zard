@@ -173,7 +173,8 @@ public class HousesController {
             }
             String fileName = image.getOriginalFilename();
             //设置文件上传路径
-            String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+            //String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+            String filePath = "E:\\Test\\";
             houses.setPath(filePath+fileName);
             uploadImg(image);
             iHousesEnService.insert(houses);
@@ -253,6 +254,7 @@ public class HousesController {
                     result.add(iHousesEnService.select(temp));
                 }
                 //在这里定义一下要search的query，数组形式
+                iUsersService.updateById(seller);
                 return JsonResult.success(result);
             }else {
                 return JsonResult.error("未查询到用户");
@@ -358,7 +360,8 @@ public class HousesController {
     public @ResponseBody String uploadImg(@RequestParam("file") MultipartFile file)  {
         String fileName = file.getOriginalFilename();
         //设置文件上传路径
-        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+        //String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\image\\";
+        String filePath = "C:\\Tomcat\\apache-tomcat-8.5.63\\webapps\\pro\\images\\upload\\";
         //String filePath = request.getSession().getServletContext().getRealPath("imgupload/");
         try {
             FileUtil.uploadFile(file.getBytes(), filePath, fileName);

@@ -71,6 +71,12 @@ public class UsersController {
     @RequestMapping(value="/register", method= RequestMethod.POST)
 	public String insertUser(Users user){
         try{
+            //获取用户名
+            Users query = new Users();
+            query.setName(user.getName());
+            if(iUsersService.selectUsers(query).size()>0){
+                return JsonResult.error("用户已存在");
+            }
             user.setDeleteFlag(1);
             user.setLogin(0);
             return JsonResult.success(iUsersService.insert(user));
