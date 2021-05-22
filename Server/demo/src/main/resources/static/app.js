@@ -16,20 +16,22 @@ function setConnected(connected) {
 
 }
 
+login();
+
 function login() {
-  var name = window.sessionStorage.getItem("username");
   // if (name === '') {
   //   $("#username").val('用户名不能为空');
   //   return;
   // }
-  $("#username").val(name);
+  var name = getParams("u");
   $.ajax({
     type: "POST",
     url: "/login",
     data: {username: name},
     success: function () {
       //初始化一下用户的Message
-      //
+      console.log("Session name " + name);
+      $("#username").val(name);
       connect();
       //获取friend_list并显示
       getFriends(name);
@@ -49,7 +51,7 @@ function connect() {
   stompClient.connect({}, function (frame) {
     setConnected(true);
     sessionId = /\/([^\/]+)\/websocket/.exec(socket._transport.url)[1];
-   // showUser($("#username").val(), sessionId);
+    // showUser($("#username").val(), sessionId);
     stompClient.subscribe('/topic/greetings', function (greeting) {
       showGreeting(JSON.parse(greeting.body).content);
     });
@@ -77,14 +79,14 @@ function connect() {
         var all_users = usr_table.getElementsByTagName("td");
         //防止一个用户重复出现
         for(var i = 0; i < all_users.length; i++){
-            if(all_users.item(i).textContent === parse.name){
-              exist = true;
-            }
+          if(all_users.item(i).textContent === parse.name){
+            exist = true;
+          }
         }
         if(!exist){
-            if(isFriend){
+          if(isFriend){
             showUser(parse.name, parse.id);
-            }
+          }
         }
         if(isFriend){
           //整个上线提醒
@@ -124,35 +126,35 @@ function disconnect() {
 //A user disconnect then add it into offline user set
 //这个请求好像现在没用了
 function backend_disconnect() {
-    $.ajax({
-      type: "POST",
-      url: "/disconnect",
-      data: {username:$("#username").val().trim()},
-      success: function (result) {
-        //pass
-        if(result)
-          console.log("Disconnect Successfully!");
-        else{
-          console.log("Disconnect Fails!");
-        }
+  $.ajax({
+    type: "POST",
+    url: "/disconnect",
+    data: {username:$("#username").val().trim()},
+    success: function (result) {
+      //pass
+      if(result)
+        console.log("Disconnect Successfully!");
+      else{
+        console.log("Disconnect Fails!");
       }
-    });
+    }
+  });
 }
 
 function load_hist() {
-    $.ajax({
-        type: "POST",
-        url: "/load_hist",
-        data: {username:$("#username").val().trim()},
-        success: function (result) {
-            //pass
-            if(result)
-                console.log("Load History Successfully!")
-            else{
-                console.log("Load History Fails!")
-            }
-        }
-    });
+  $.ajax({
+    type: "POST",
+    url: "/load_hist",
+    data: {username:$("#username").val().trim()},
+    success: function (result) {
+      //pass
+      if(result)
+        console.log("Load History Successfully!")
+      else{
+        console.log("Load History Fails!")
+      }
+    }
+  });
 }
 
 function sendName() {
@@ -290,9 +292,9 @@ function showMessage(message, touser, sender) {
 function showUser(user, id) {
   console.log("Fucklength" + $("#"+id).length);
   if($("#" + id).length > 0){
-      // console.log("Fuck" + $("#"+id));
+    // console.log("Fuck" + $("#"+id));
   }else{
-      $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
+    $("#user").append("<tr id='" + id + "' onclick='javascript:touser(this)' class='" + user + "'><td>" + user + "<span class='badge pull-right'></span></td></tr>");
   }
 }
 
@@ -302,7 +304,7 @@ function clearUserFriends(){
 }
 //防止message重复出现
 function clearUserMessage() {
-   $("#private").empty();
+  $("#private").empty();
 }
 function removeUser(id) {
   $("tr").remove("#" + id);
@@ -314,8 +316,8 @@ function removeOnlineUser(usr){
     url: "/rm_ol_usr",
     dataType:{username:usr},
     success: function (res) {
-    console.log("从后台移除在线用户成功");
-  }
+      console.log("从后台移除在线用户成功");
+    }
   });
 }
 
@@ -329,12 +331,12 @@ function getFriends(username){
     async: false,
     data: {username:username},
     success:function (json) {
-        var i = 0;
-        for(var p in json){
-          friends_arr[i] = json[p];
-          showUser(json[p], p);
-          i++
-        }
+      var i = 0;
+      for(var p in json){
+        friends_arr[i] = json[p];
+        showUser(json[p], p);
+        i++
+      }
     }
 
   });
@@ -369,6 +371,15 @@ $(function () {
     sendToUser();
   });
 });
+
+function getParams(key) {
+    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
 
 //Offline user
 $(function () {

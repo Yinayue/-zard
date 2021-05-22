@@ -108,10 +108,8 @@ public class Recommend {
         BuyerSet.Buyer buyerRatings = set.getBuyer(userEmail);
 
         for (BuyerSet.HouseSet house : neighborRatings.list) {
-            if (buyerRatings.find(house.houseId) == null) {
-                if(house.score==5) {
+            if (buyerRatings.find(house.houseId) == null&&house.score==5) {
                     recommendations.add(house);
-                }
             }
         }
         Collections.sort(recommendations);

@@ -79,7 +79,6 @@
   <script src="/app.js"></script>
 </head>
 <body>
-
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
   enabled. Please enable
   Javascript and reload this page!</h2></noscript>
@@ -158,7 +157,7 @@
                     </li>
                     <li><a  href="filtertable.html"><i class="notika-icon notika-windows"></i> Filter lookup</a>
                     </li>
-                    <li><a href="upload_house.html"><i class="notika-icon notika-form"></i> Selling houses</a>
+                    <li><a onclick="window.location.href='http://175.24.51.64:8080/pro/my/commend.html'"><i class="notika-icon notika-form"></i> Selling houses</a>
                     </li>
                     <li class="active"><a href="chat.html"><i class="notika-icon notika-support"></i>Chatbox</a>
                     </li>
@@ -191,12 +190,11 @@
         <div class="form-group">
           <label for="connect">Online User：</label>
           <div class="input-group">
-          <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''" disabled="disabled">
+          <input type="text" name="username" id="username" class="form-control" placeholder="取个独特的名字吧" onfocus="this.value=''">
           <span class="input-group-btn">
           <button id="connect" class="btn btn-default" type="submit">Connect</button>
-          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Invisible
-          </button>
-          </span> </div>
+          <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+          </button></span> </div>
         </div>
       </form>
     </div>
@@ -256,9 +254,7 @@
 
 
 <br/>
-
-
-    </body>
+</body>
 <!--&lt;!&ndash; wow JS-->
 <!--    ============================================ &ndash;&gt;-->
 <!--<script src="../js/wow.min.js"></script>-->
@@ -348,6 +344,4 @@
 <!--&lt;!&ndash; Data Table JS-->
 <!--       ============================================ &ndash;&gt;-->
 <!--<script src="../js/data-table/jquery.dataTables.min.js"></script>-->
-
-
 </html>
